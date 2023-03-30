@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Contains find_checkin.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Implements hook_page_attachments().
+ */
+function find_checkin_page_attachments(array &$attachments) {
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 'find_checkin/find-checkin-styling';
+  }
+}
+
+/**
+ * Implements hook_node_access().
+ */
+// function find_checkin_node_access($node, $op, $account) {
+//   // Check if the operation is "view" and the node bundle has a Geofield field.
+//   if ($node->bundle() == 'article') {
+//     // Check if the Geofield field exists.
+//     //$geofield_field = FieldStorageConfig::loadByName('node', 'field_geofield');
+//     $geofield_field = FieldConfig::loadByName('node', $node->bundle(), 'field_geofield');
+
+//     if ($geofield_field) {
+//       // Load the Geofield value for the node.
+//       $geofield = $node->get('field_geofield');
+//       if ($geofield) {
+//         $geofield_value = $geofield->getValue();
+//         // Get the latitude and longitude values from the Geofield.
+//         $latitude = $geofield_value[0]['lat'];
+//         $longitude = $geofield_value[0]['lon'];
+//         // Do something with the latitude and longitude values, such as checking if they are within a certain distance from the user's location.
+//         // Return the access result based on your custom logic.
+       
+//       }
+//     }
+//   }
+ 
+// }
+ 
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+// function find_checkin_node_view(array &$build, Drupal\Core\Entity\EntityInterface $entity, Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+//   // Check if the entity has a geofield.
+//   if ($entity->hasField('field_geofield_basic')) {
+//     // Get the geofield object.
+//     $geofield = $entity->get('field_geofield_basic')->getValue()[0];
+
+//     // Get the latitude and longitude values.
+//     $lat = $geofield['lat'];
+//     $lng = $geofield['lng'];
+
+//     // Add the latitude and longitude values to the render array.
+//     $build['my_geofield']['#markup'] = 'Latitude: ' . $lat . ', Longitude: ' . $lng;
+//   }
+// }

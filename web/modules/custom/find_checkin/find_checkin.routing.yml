@@ -1,0 +1,7 @@
+find_checkin.pva_evaluation:
+  path: '/location'
+  defaults:
+    _controller: '\Drupal\find_checkin\Controller\NearLocation::queryNearLocation'
+    _title: 'My Module Backend'
+  requirements:
+    _permission: 'access content'
