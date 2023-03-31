@@ -1,0 +1,22 @@
+uuid: 317c9c5e-6895-46be-b90d-a20f0b6207eb
+langcode: en
+status: true
+dependencies:
+  theme:
+    - yes_pet_app
+_core:
+  default_config_hash: ydSxdq7R66I8UMC460rOzlfzvlUL4VRbdwc6z9DWaUI
+id: yes_pet_app_secondary_local_tasks
+theme: yes_pet_app
+region: highlighted
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

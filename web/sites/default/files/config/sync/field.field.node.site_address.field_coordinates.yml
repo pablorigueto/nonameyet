@@ -1,0 +1,19 @@
+uuid: 333e6e59-53e6-4e65-92c6-533abb9c43c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coordinates
+    - node.type.site_address
+id: node.site_address.field_coordinates
+field_name: field_coordinates
+entity_type: node
+bundle: site_address
+label: Coordinates
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

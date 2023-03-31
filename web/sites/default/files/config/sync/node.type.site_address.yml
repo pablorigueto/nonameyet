@@ -1,0 +1,18 @@
+uuid: 9e3bd76d-214a-458e-95a2-78e38b853845
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Site Address'
+type: site_address
+description: 'Provides details about the local that accept pets.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

@@ -1,0 +1,19 @@
+uuid: a90b2160-b45e-42ce-b8e7-a8c7041c7e00
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_simple_gmaps
+    - node.type.page
+id: node.page.field_simple_gmaps
+field_name: field_simple_gmaps
+entity_type: node
+bundle: page
+label: 'Simple Gmaps'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: dc4dafe6-725a-4761-8a91-562838bc7218
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - yes_pet_app
+_core:
+  default_config_hash: imMyHD6LYci0gtXq56qr9ZKGHzbEG9uFydrN5EhKtSU
+id: yes_pet_app_search_form_wide
+theme: yes_pet_app
+region: secondary_menu
+weight: -5
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (wide)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

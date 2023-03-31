@@ -1,0 +1,69 @@
+uuid: 21e238d6-ed43-4e84-891a-6276fcf92ee0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.site_address.body
+    - field.field.node.site_address.field_address
+    - field.field.node.site_address.field_complete_address
+    - field.field.node.site_address.field_coordinates
+    - node.type.site_address
+  module:
+    - address
+    - simple_gmap
+    - text
+    - user
+id: node.site_address.default
+targetEntityType: node
+bundle: site_address
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_address:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_complete_address:
+    type: simple_gmap
+    label: above
+    settings:
+      include_map: true
+      include_static_map: false
+      include_link: false
+      include_text: false
+      iframe_height: '200'
+      iframe_width: '200'
+      iframe_title: ''
+      static_scale: 1
+      zoom_level: 14
+      link_text: 'View larger map'
+      map_type: m
+      langcode: en
+      apikey: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_coordinates:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true

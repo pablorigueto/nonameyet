@@ -1,0 +1,40 @@
+$test  = "Av. Brg. Faria Lima, 2232, São Paulo - SP, 01451-000, BR";
+$url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($test);
+$response = file_get_contents($url);
+$data = json_decode($response);
+
+// Get the latitude and longitude of the original location
+$lat = $data[0]->lat;
+$lon = $data[0]->lon;
+
+// Calculate the distance in miles for a radius of 50 miles
+$radius = 50;
+$distance = $radius / 69.0; // 1 degree of latitude or longitude is approximately 69 miles
+
+// Modify the search query to include the bounding box for the 50-mile radius
+$bbox = ($lon - $distance) . "," . ($lat - $distance) . "," . ($lon + $distance) . "," . ($lat + $distance);
+$search_url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($test) . '&bounded=1&viewbox=' . $bbox;
+
+$search_response = file_get_contents($search_url);
+$search_data = json_decode($search_response);
+
+// Loop through the search results and output the coordinates for each location within the radius
+foreach ($search_data as $result) {
+    $result_lat = $result->lat;
+    $result_lon = $result->lon;
+    $result_distance = haversine($lat, $lon, $result_lat, $result_lon);
+    if ($result_distance <= $radius) {
+        echo "Location within 50-mile radius: " . $result_lat . ", " . $result_lon . "\n";
+    }
+}
+
+// Haversine formula to calculate distance between two sets of coordinates
+function haversine($lat1, $lon1, $lat2, $lon2) {
+    $r = 6371; // Earth's radius in km
+    $dLat = deg2rad($lat2 - $lat1);
+    $dLon = deg2rad($lon2 - $lon1);
+    $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon/2) * sin($dLon/2);
+    $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+    $d = $r * $c;
+    return $d * 0.621371; // Convert km to miles
+}

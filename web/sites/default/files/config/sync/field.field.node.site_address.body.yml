@@ -1,0 +1,23 @@
+uuid: fa1dcad2-9574-489f-8d8d-fd183d058ec3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.site_address
+  module:
+    - text
+id: node.site_address.body
+field_name: body
+entity_type: node
+bundle: site_address
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

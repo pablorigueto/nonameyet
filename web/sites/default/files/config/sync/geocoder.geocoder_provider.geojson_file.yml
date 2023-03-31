@@ -1,0 +1,10 @@
+uuid: 7298977c-b0ce-49d0-bec2-d65625f0cfb8
+langcode: en
+status: true
+dependencies:
+  module:
+    - geocoder_geofield
+id: geojson_file
+label: 'GeoJson File'
+plugin: geojsonfile
+configuration: {  }

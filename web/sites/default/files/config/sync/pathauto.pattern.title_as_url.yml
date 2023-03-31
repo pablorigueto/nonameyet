@@ -1,0 +1,26 @@
+uuid: 2e255e66-c1c7-4c14-aefb-342f163c400b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: title_as_url
+label: 'Title as URL'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  3ad8bb72-fd2c-483c-8a39-c855cde03d91:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 3ad8bb72-fd2c-483c-8a39-c855cde03d91
+    context_mapping:
+      node: node
+    bundles:
+      article: article
+      page: page
+      site_address: site_address
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

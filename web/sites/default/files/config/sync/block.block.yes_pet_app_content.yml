@@ -1,0 +1,22 @@
+uuid: f6e51508-d646-45f7-a3ba-d0b4b69a54c3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - yes_pet_app
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: yes_pet_app_content
+theme: yes_pet_app
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

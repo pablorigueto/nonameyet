@@ -1,0 +1,39 @@
+uuid: 8bae076c-f13a-45ed-9137-07b7f7895c9a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.page.body
+    - field.field.node.page.field_geocode
+    - field.field.node.page.field_geofield_basic
+    - field.field.node.page.field_geolocation_basic
+    - field.field.node.page.field_simple_gmaps
+    - node.type.page
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: 8BgdRtLbtQ0F__o0FHSH0Mx5fvXOra9tfT1GmNKbRYw
+id: node.page.teaser
+targetEntityType: node
+bundle: page
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  links:
+    weight: 101
+    region: content
+hidden:
+  field_geocode: true
+  field_geofield_basic: true
+  field_geolocation_basic: true
+  field_simple_gmaps: true
+  langcode: true

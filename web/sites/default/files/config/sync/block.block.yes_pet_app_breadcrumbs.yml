@@ -1,0 +1,22 @@
+uuid: bf0dc3a9-f931-4d56-894c-e4f614c588c2
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - yes_pet_app
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: yes_pet_app_breadcrumbs
+theme: yes_pet_app
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

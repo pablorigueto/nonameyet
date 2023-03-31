@@ -4,60 +4,68 @@
  * @file
  * Contains find_checkin.
  */
-
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\field\Entity\FieldConfig;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_page_attachments().
  */
-function find_checkin_page_attachments(array &$attachments) {
-  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
-    $attachments['#attached']['library'][] = 'find_checkin/find-checkin-styling';
+// function find_checkin_page_attachments(array &$attachments) {
+//   if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+//     $attachments['#attached']['library'][] = 'find_checkin/find-checkin-styling';
+//   }
+// }
+
+/**
+ * Set summary and title using the others fields.
+ * Fillout automatically the full address and coordinate fields.
+ */
+function find_checkin_node_presave(NodeInterface $node) {
+  // && $node->isNew()
+  if ($node->getType() == 'site_address') {
+    $node->getType();
+    $field_address = $node->get('field_address')[0];
+
+    $full_address = $field_address->address_line1; //address
+    $full_address .= ', ' . $field_address->address_line2; // number address
+    //$full_address .= ', ' . $field_address->organization;  // local name
+    $full_address .= ' - ' . $field_address->dependent_locality;  // Neighborhood
+    $full_address .= ', ' . $field_address->locality; // city
+    $full_address .= ' - ' . $field_address->administrative_area; // state
+    $full_address .= ', ' . $field_address->postal_code; // cep
+    $full_address .= ', ' . $field_address->country_code; // country
+
+    // Set the full address on map field.
+    $node->get('field_complete_address')->value = $full_address;
+
+    $address_to_get_coordinates = $field_address->address_line1; //address
+    $address_to_get_coordinates .= ', ' . $field_address->address_line2; // number address
+    $address_to_get_coordinates .= ', ' . $field_address->locality; // city
+    $address_to_get_coordinates .= ' - ' . $field_address->administrative_area; // state
+    $address_to_get_coordinates .= ', ' . $field_address->postal_code; // cep
+    $address_to_get_coordinates .= ', ' . $field_address->country_code; // country
+
+    $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($address_to_get_coordinates);
+
+    $opts = array(
+      'http'=>array(
+          'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+      )
+    );
+    $context = stream_context_create($opts);
+    $response = file_get_contents($url, false, $context);
+    $data = json_decode($response);
+    
+    if ($data === null) {
+      echo "Error decoding JSON response: ";
+    } else {
+      var_dump($data);
+    }
+
+    // Extract the latitude and longitude coordinates from the response
+    $lat = $data[0]->lat;
+    $lng = $data[0]->lon;
+
+    $node->get('field_coordinates')->value = $lat . ' , ' . $lng;    
+
   }
 }
-
-/**
- * Implements hook_node_access().
- */
-// function find_checkin_node_access($node, $op, $account) {
-//   // Check if the operation is "view" and the node bundle has a Geofield field.
-//   if ($node->bundle() == 'article') {
-//     // Check if the Geofield field exists.
-//     //$geofield_field = FieldStorageConfig::loadByName('node', 'field_geofield');
-//     $geofield_field = FieldConfig::loadByName('node', $node->bundle(), 'field_geofield');
-
-//     if ($geofield_field) {
-//       // Load the Geofield value for the node.
-//       $geofield = $node->get('field_geofield');
-//       if ($geofield) {
-//         $geofield_value = $geofield->getValue();
-//         // Get the latitude and longitude values from the Geofield.
-//         $latitude = $geofield_value[0]['lat'];
-//         $longitude = $geofield_value[0]['lon'];
-//         // Do something with the latitude and longitude values, such as checking if they are within a certain distance from the user's location.
-//         // Return the access result based on your custom logic.
-       
-//       }
-//     }
-//   }
- 
-// }
- 
-/**
- * Implements hook_ENTITY_TYPE_view().
- */
-// function find_checkin_node_view(array &$build, Drupal\Core\Entity\EntityInterface $entity, Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
-//   // Check if the entity has a geofield.
-//   if ($entity->hasField('field_geofield_basic')) {
-//     // Get the geofield object.
-//     $geofield = $entity->get('field_geofield_basic')->getValue()[0];
-
-//     // Get the latitude and longitude values.
-//     $lat = $geofield['lat'];
-//     $lng = $geofield['lng'];
-
-//     // Add the latitude and longitude values to the render array.
-//     $build['my_geofield']['#markup'] = 'Latitude: ' . $lat . ', Longitude: ' . $lng;
-//   }
-// }
