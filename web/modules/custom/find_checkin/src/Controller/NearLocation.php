@@ -56,8 +56,8 @@ class NearLocation extends ControllerBase {
     $currentLongitude = $currentRequest->request->get('longitude');
     if (!empty($currentLatitude) && !empty($currentLongitude)) {
       return [
-        'la_latitude' => $currentLatitude,
-        'lo_longitude' => $currentLongitude,
+        'la_latitude' => 'Back end Latitude:' . $currentLatitude,
+        'lo_longitude' => 'Back end Longitude:' .$currentLongitude,
       ];
     }
   }
