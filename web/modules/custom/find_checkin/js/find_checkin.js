@@ -1,5 +1,6 @@
 (function ($, once) {
   var intervalId; // Declare a variable to hold the interval ID
+  var gpsDisabled = false; // Declare a flag variable to keep track of whether the GPS is disabled
 
   Drupal.behaviors.getCoordinates = {
     attach: function () {
@@ -22,7 +23,10 @@
         clearInterval(intervalId);
       }, function (error) {
         // GPS is disabled, handle the error
-        console.log("GPS is disabled");
+        if (!gpsDisabled) {
+          alert("GPS is disabled");
+          gpsDisabled = true;
+        }
       });
     } else {
       // Geolocation is not supported in this browser
