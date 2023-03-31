@@ -34,12 +34,6 @@
   function checkGeolocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
-      // navigator.geolocation.getCurrentPosition(function(position) {
-      // // Get the latitude and longitude from the position object
-      //   let latitude = position.coords.latitude;
-      //   let longitude = position.coords.longitude;
-      // });
-
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
@@ -59,15 +53,15 @@
         // Update the DOM with the response data
         jQuery(document).ready(function(){
 
-          console.log(response[0]);
-
+          console.log(response['la_latitude']);
+          console.log(response['lo_longitude']);
           // let jsonResponse = JSON.parse(response);
-          // // Get the field value from the response
-          // let fieldValue = jsonResponse.field_value;
+
           // Create a new field element
-          let fieldElement = '<input type="text" name="new_field" value="' + fieldValue + '">';
+          let fieldElement = '<input type="text" name="new_field" value="' + response['la_latitude'] + '">';
+          fieldElement += '<input type="text" name="new_field" value="' + response['lo_longitude'] + '">';
           // Add the new field element to the form
-          jQuery('#my-form').append(fieldElement);
+          jQuery('.node__content').append(fieldElement);
 
         });
       },
@@ -76,9 +70,6 @@
       }
     });
 
-
-    // console.log("Latitude: " + position.coords.latitude +
-    // "<br>Longitude: " + position.coords.longitude);
   }
 
 }(jQuery, once));
