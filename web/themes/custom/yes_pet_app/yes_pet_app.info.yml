@@ -1,0 +1,8 @@
+name: Yes Pet APP
+type: theme
+description: 'A clean theme to Yes Pet APP.'
+package: Custom
+core_version_requirement: ^8.0 || ^9.0 || ^10.0
+base theme: false
+libraries:
+  - yes_pet_app/yespetapp-styling

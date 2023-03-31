@@ -1,14 +1,16 @@
 (function ($, once) {
-  var intervalId; // Declare a variable to hold the interval ID
-  var gpsDisabled = false; // Declare a flag variable to keep track of whether the GPS is disabled
+  // Declare a variable to hold the interval ID.
+  var intervalId;
+  // Declare a flag variable to keep track of whether the GPS is disabled.
+  var gpsDisabled = false;
 
   Drupal.behaviors.getCoordinates = {
     attach: function () {
       if (!drupalSettings.getCoordinates) {
         // Call the checkLocationStatus() function initially
         checkLocationStatus();
-        // Set an interval to check for changes in GPS status every 5 seconds
-        intervalId = setInterval(checkLocationStatus, 5000);
+        // Set an interval to check for changes in GPS status every 1 seconds.
+        intervalId = setInterval(checkLocationStatus, 1000);
         drupalSettings.getCoordinates = true;
       }
     }
@@ -30,7 +32,7 @@
       });
     } else {
       // Geolocation is not supported in this browser
-      console.log("Geolocation is not supported");
+      alert("Geolocation is not supported");
     }
   }
 

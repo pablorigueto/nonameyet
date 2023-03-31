@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Yes Pet App theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Adds body classes if certain regions have content.
+ */
+function yes_pet_app_preprocess_html(&$variables) {
+
+  // So fonts can be preloaded from base theme in the event Yes Pet App is used as a subtheme.
+  $variables['yes_pet_app_path'] = \Drupal::request()->getBasePath() . '/' . \Drupal::service('extension.list.theme')->getPath('yes_pet_app');
+
+  $query_string = \Drupal::state()->get('system.css_js_query_string') ?: '0';
+
+  // Create render array with noscript tag to output non-JavaScript
+  // stylesheet for primary menu.
+  $variables['noscript_styles'] = [
+    '#type' => 'html_tag',
+    '#noscript' => TRUE,
+    '#tag' => 'link',
+    '#attributes' => [
+      'rel' => 'stylesheet',
+      'href' => $variables['yes_pet_app_path'] . '/css/components/navigation/nav-primary-no-js.css?' . $query_string,
+    ],
+  ];
+}
