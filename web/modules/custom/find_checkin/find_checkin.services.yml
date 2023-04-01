@@ -1,0 +1,5 @@
+services:
+  find_checkin.event_subscriber:
+    class: Drupal\find_checkin\EventSubscriber\RedirectSubscriber
+    tags:
+      - { name: event_subscriber }

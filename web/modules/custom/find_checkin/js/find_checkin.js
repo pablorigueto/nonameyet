@@ -39,7 +39,6 @@
   function showPosition(position) {
     let data = {latitude: position.coords.latitude, longitude: position.coords.longitude};
     let url = Drupal.url('location');
-
     jQuery.ajax({
       url: url,
       type: "POST",
@@ -51,11 +50,14 @@
           console.log(response['lo_longitude']);
           // let jsonResponse = JSON.parse(response);
 
-          // Create a new field element
-          let fieldElement = '<input type="text" name="new_field" value="' + response['la_latitude'] + '">';
-          fieldElement += '<input type="text" name="new_field" value="' + response['lo_longitude'] + '">';
+          // Generate the field elements dynamically
+          let fieldElement = '';
+          for (let i = 0; i < response.length; i++) {
+            fieldElement += '<input type="text" name="new_field" value="' + response[i]['title'] + '">';
+          }
+
           // Add the new field element to the form
-          jQuery('.main-content').append(fieldElement);
+          jQuery('.menu--level-1').append(fieldElement);
         });
       },
       error: function(xhr, status, error) {

@@ -4,16 +4,18 @@
  * @file
  * Contains find_checkin.
  */
+
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_page_attachments().
  */
-// function find_checkin_page_attachments(array &$attachments) {
-//   if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
-//     $attachments['#attached']['library'][] = 'find_checkin/find-checkin-styling';
-//   }
-// }
+function find_checkin_page_attachments(array &$attachments) {
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 'find_checkin/find-checkin-styling';
+  }
+}
 
 /**
  * Set summary and title using the others fields.
@@ -69,3 +71,22 @@ function find_checkin_node_presave(NodeInterface $node) {
 
   }
 }
+
+/**
+ * Implements hook_node_access().
+ */
+// function find_checkin_node_access(NodeInterface $node, $op, AccountInterface $account) {
+
+//   // $current_url = \Drupal::request()->getRequestUri();
+//   // $current_url;
+//   // // Block access if the user is not authenticated.
+//   // if (!$account->isAuthenticated()
+//   //   && $current_url != 'user/login'
+//   //   && $current_url != '/user/register'
+//   //   && $current_url != '/user/password'
+//   // ) {
+//   //   // Redirect the user to login.
+//   //   $response = new RedirectResponse('/user/login');
+//   //   $response->send();
+//   // }
+// }

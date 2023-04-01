@@ -1,7 +1,16 @@
-find_checkin.pva_evaluation:
+find_checkin.query_near_location:
   path: '/location'
   defaults:
     _controller: '\Drupal\find_checkin\Controller\NearLocation::queryNearLocation'
     _title: 'Get the locations near of user'
   requirements:
     _permission: 'access content'
+
+find_checkin.homepage_form:
+  path: '/home'
+  defaults:
+    _form: '\Drupal\find_checkin\Form\HomepageForm'
+    _title: ''
+  requirements:
+    _permission: 'access content'
+    # _role: 'authenticated'
