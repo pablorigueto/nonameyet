@@ -11,6 +11,7 @@ use Drupal\node\Entity\Node;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Url;
 use Drupal\find_checkin\Haversine;
+use Symfony\Component\HttpFoundation\Request;
 
 class NearLocation extends ControllerBase {
 
@@ -60,22 +61,27 @@ class NearLocation extends ControllerBase {
         );
     }
   
-    public function queryNearLocation(): JsonResponse
-    {
+    public function queryNearLocation(Request $request): JsonResponse {
         // Get the querys from url and check if have something near.
-        $near_location = $this->getRequestUrl();
+        $near_location = $this->getRequestUrl($request);
         return new JsonResponse($near_location);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRequestUrl(): array
-    {
-        $currentRequest = $this->requestStack->getCurrentRequest();
-        $currentLatitude = $currentRequest->request->get('latitude');
-        $currentLongitude = $currentRequest->request->get('longitude');
-        $currentRange = $currentRequest->request->get('range');
+    protected function getRequestUrl($request): mixed {
+     
+        $user_query = json_decode($request->getContent());
+
+        $currentLatitude = $user_query->data->latitude;
+        $currentLongitude = $user_query->data->longitude;
+        $currentRange = $user_query->data->range;
+
+        // $currentRequest = $this->requestStack->getCurrentRequest();
+        // $currentLatitude = $currentRequest->request->get('latitude');
+        // $currentLongitude = $currentRequest->request->get('longitude');
+        // $currentRange = $currentRequest->request->get('range');
         if (!empty($currentLatitude) && !empty($currentLongitude)) {
 
             return $this->dbNearLocation($currentLatitude, $currentLongitude, $currentRange);
@@ -131,6 +137,7 @@ class NearLocation extends ControllerBase {
                     'state' => $field_address->administrative_area,
                     'distance' => intval($result_distance)
                 ];
+                
             }
         }
         return $all_init_results;

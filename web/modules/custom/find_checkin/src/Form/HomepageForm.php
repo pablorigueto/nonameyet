@@ -139,32 +139,32 @@ class HomepageForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state): array|bool {
+  public function buildForm(array $form, FormStateInterface $form_state) {
 
     // Add a text above the rendered nodes.
-    $form['select_field'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Range'),
-      '#options' => [
-        50 => '50 km',
-        100 => '100 km',
-        150 => '150 km',
-        200 => '200 km',
-        250 => '250 km',
-        300 => '300 km',
-      ],
-      '#attributes' => [
-        'class' => ['range'],
-      ]
-      // '#ajax' => [
-      //   'callback' => [$this, 'getNewRange'],
-      //   'event' => 'change',
-      // ],
-    ];
+    // $form['select_field'] = [
+    //   '#type' => 'select',
+    //   '#title' => $this->t('Range'),
+    //   '#options' => [
+    //     50 => '50 km',
+    //     100 => '100 km',
+    //     150 => '150 km',
+    //     200 => '200 km',
+    //     250 => '250 km',
+    //     300 => '300 km',
+    //   ],
+    //   '#attributes' => [
+    //     'class' => ['range'],
+    //   ]
+    //   // '#ajax' => [
+    //   //   'callback' => [$this, 'getNewRange'],
+    //   //   'event' => 'change',
+    //   // ],
+    // ];
 
 
 
-    return $form;
+    //return $form;
   }
 
   /**

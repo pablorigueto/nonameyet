@@ -92,7 +92,6 @@
     <div id="main-wrapper" class="layout-main-wrapper layout-container">
       <div id="main" class="layout-main">
         <div class="main-content">
-          <a id="main-content" tabindex="-1"></a>
           {{ page.hero }}
           <div class="main-content__container container">
             {{ page.highlighted }}
@@ -103,6 +102,7 @@
                 <main role="main" class="site-main">
                   {{ page.content_above }}
                   {{ page.content }}
+                  <div id="main-react"></div>
                 </main>
 
                 {{ page.sidebar }}
@@ -111,6 +111,7 @@
               <main role="main">
                 {{ page.content_above }}
                 {{ page.content }}
+                <div id="main-react"></div>
               </main>
             {% endif %}
             {{ page.content_below }}

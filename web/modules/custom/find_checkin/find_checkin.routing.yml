@@ -2,6 +2,7 @@ find_checkin.query_near_location:
   path: '/location'
   defaults:
     _controller: '\Drupal\find_checkin\Controller\NearLocation::queryNearLocation'
+    _format: 'json'
     _title: 'Get the locations near of user'
   requirements:
     _permission: 'access content'
