@@ -47,3 +47,7 @@
 /robots.txt
 /update.php
 /web.config
+
+web/themes/README.txt
+web/themes/custom/yes_pet_app/js/dist_dev
+web/themes/custom/yes_pet_app/node_modules
