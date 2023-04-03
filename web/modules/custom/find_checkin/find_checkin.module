@@ -40,7 +40,8 @@ function find_checkin_node_presave(NodeInterface $node) {
     $node->get('field_complete_address')->value = $full_address;
 
     $address_to_get_coordinates = $field_address->address_line1; //address
-    $address_to_get_coordinates .= ', ' . $field_address->address_line2; // number address
+    $address_to_get_coordinates .= ' ' . $field_address->address_line2; // number address
+    //$address_to_get_coordinates .= ', ' . $field_address->dependent_locality;  // Neighborhood
     $address_to_get_coordinates .= ', ' . $field_address->locality; // city
     $address_to_get_coordinates .= ' - ' . $field_address->administrative_area; // state
     $address_to_get_coordinates .= ', ' . $field_address->postal_code; // cep

@@ -9,9 +9,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Url;
+use Drupal\find_checkin\Haversine;
 
-class NearLocation extends ControllerBase
-{
+class NearLocation extends ControllerBase {
 
     /**
      * The Request Stack service.
@@ -74,9 +75,10 @@ class NearLocation extends ControllerBase
         $currentRequest = $this->requestStack->getCurrentRequest();
         $currentLatitude = $currentRequest->request->get('latitude');
         $currentLongitude = $currentRequest->request->get('longitude');
+        $currentRange = $currentRequest->request->get('range');
         if (!empty($currentLatitude) && !empty($currentLongitude)) {
 
-            return $this->dbNearLocation($currentLatitude, $currentLongitude);
+            return $this->dbNearLocation($currentLatitude, $currentLongitude, $currentRange);
 
         }
     }
@@ -84,19 +86,19 @@ class NearLocation extends ControllerBase
     /**
      * {@inheritdoc}
      */
-    protected function dbNearLocation(float $currentLatitude, float $currentLongitude)
+    protected function dbNearLocation(float $currentLatitude, float $currentLongitude, int $currentRange)
     {
 
         $nodes = $this->getAllNodes();
         // Early return to nodes.
         if (empty($nodes)) {
-            return false;
+          return false;
         }
 
         $langcode = $this->currentLanguage();
 
-        // Calculate the distance in 50 km.
-        $radius = 50;
+        // Calculate the distance in km.
+        $radius = $currentRange;
 
         $all_init_results = [];
         // To store all the value published.
@@ -112,28 +114,29 @@ class NearLocation extends ControllerBase
 
             $field_coordinates = explode(',', $field_coordinates);
 
-            $result_distance = $this->haversine($currentLatitude, $currentLongitude, trim($field_coordinates[0]), trim($field_coordinates[1]));
+            $result_distance = Haversine::distance($currentLatitude, $currentLongitude, trim($field_coordinates[0]), trim($field_coordinates[1]));
+
+            $field_address = $node->get('field_address')[0];
+
+            $pathAlias = $this->getPathAlias($node->id());
+
             if ($result_distance <= $radius) {
                 $all_init_results[] = [
-                'title' => $node->getTitle(),
+                    'pathAlias' => $pathAlias,
+                    'title' => $node->getTitle(),
+                    'address' => $field_address->address_line1,
+                    'number' => $field_address->address_line2,
+                    'neighborhood' => $field_address->dependent_locality,
+                    'city' => $field_address->locality,
+                    'state' => $field_address->administrative_area,
+                    'distance' => intval($result_distance)
                 ];
-        
             }
         }
         return $all_init_results;
     }
 
-    // Haversine formula to calculate distance between two sets of coordinates
-    public function haversine($lat1, $lon1, $lat2, $lon2)
-    {
-        $r = 6371; // Earth's radius in km
-        $dLat = deg2rad($lat2 - $lat1);
-        $dLon = deg2rad($lon2 - $lon1);
-        $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon/2) * sin($dLon/2);
-        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
-        $d = $r * $c;
-        return $d;
-    }
+
 
     /**
      * {@inheritdoc}
@@ -175,6 +178,16 @@ class NearLocation extends ControllerBase
             'status' => 1,
             ]
         );
+    }
+
+    /**
+     * Get the path alias through the node id.
+     */
+    public function getPathAlias(int $node_id): string {
+        // Get the URL object for the node using its ID.
+        $url = Url::fromRoute('entity.node.canonical', ['node' => $node_id]);
+        // Get the path alias from the URL object.
+        return $url->toString();
     }
 
 }
