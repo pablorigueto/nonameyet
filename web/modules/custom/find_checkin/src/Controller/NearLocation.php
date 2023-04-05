@@ -74,9 +74,9 @@ class NearLocation extends ControllerBase {
      
         $user_query = json_decode($request->getContent());
 
-        $currentLatitude = $user_query->data->latitude;
-        $currentLongitude = $user_query->data->longitude;
-        $currentRange = $user_query->data->range;
+        $currentLatitude = $user_query->latitude;
+        $currentLongitude = $user_query->longitude;
+        $currentRange = $user_query->range;
 
         // $currentRequest = $this->requestStack->getCurrentRequest();
         // $currentLatitude = $currentRequest->request->get('latitude');
