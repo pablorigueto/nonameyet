@@ -11,6 +11,7 @@ class AutoDom extends React.Component {
       error: null,
       range: 50,
       fieldElements: null, // initialize fieldElements as null
+      currentRangeValue: 50 // new property
     };
   }
 
@@ -134,24 +135,26 @@ class AutoDom extends React.Component {
 
   handleRangeChange = (event) => {
     const range = event.target.value;
-    this.setState({ range }, () => {
+    this.setState({ range, currentRangeValue: range }, () => {
       const { latitude, longitude, range } = this.state;
       this.sendLocationDataToBackend(latitude, longitude, range);
     });
   };
 
   render() {
-    const { fieldElements } = this.state; 
-  
+    const { fieldElements, currentRangeValue } = this.state; 
+    
     return (
       <div>
         <input
           type="range"
           min="0"
           max="500"
+          value={currentRangeValue} // add value attribute
           onChange={this.handleRangeChange}
         />
         <div id="output">{fieldElements}</div>
+        <div>Current range value: {currentRangeValue}</div>
       </div>
     );
   }
