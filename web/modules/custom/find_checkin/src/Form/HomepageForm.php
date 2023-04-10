@@ -141,30 +141,29 @@ class HomepageForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    // Add a text above the rendered nodes.
-    // $form['select_field'] = [
-    //   '#type' => 'select',
-    //   '#title' => $this->t('Range'),
-    //   '#options' => [
-    //     50 => '50 km',
-    //     100 => '100 km',
-    //     150 => '150 km',
-    //     200 => '200 km',
-    //     250 => '250 km',
-    //     300 => '300 km',
-    //   ],
-    //   '#attributes' => [
-    //     'class' => ['range'],
-    //   ]
-    //   // '#ajax' => [
-    //   //   'callback' => [$this, 'getNewRange'],
-    //   //   'event' => 'change',
-    //   // ],
-    // ];
+    $form = [
+      'intro_container' => [
+        '#type' => 'container',
+        '#attributes' => [
+          'class' => 'intro-container',
+          'id' => 'content-main-react'
+        ],
+        'intro_label' => [
+          '#type' => 'item',
+          '#markup' => 'markup label',
+        ],
+        'intro' => [
+          '#type' => 'markup',
+          '#markup' => 'markup intro',
+          '#attributes' => [
+            'data-id' => 'data id'
+          ],
+        ],
+      ],
+    ];
 
+    return $form;
 
-
-    //return $form;
   }
 
   /**
