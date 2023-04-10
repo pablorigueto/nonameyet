@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import _ from 'lodash';
 import RangeButton from './buttons/RangeButton';
 import FieldElements from './buttons/FieldElements';
+import { sendLocationDataToBackend } from './api/Fetch';
 
 class AutoDom extends React.Component {
   constructor(props) {
@@ -92,34 +93,12 @@ class AutoDom extends React.Component {
 
   // A function to send location data to the backend API
   sendLocationDataToBackend = (latitude, longitude, range) => {
-    // Replace the URL with your backend API endpoint
-    const apiUrl = 'location';
-
-    // Define the data to be sent in the request body
-    const data = {
-      latitude: latitude,
-      longitude: longitude,
-      range: range,
-    };
-
-    // Send a POST request to the backend with the location data
-    fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
+    sendLocationDataToBackend(latitude, longitude, range)
       .then((response) => {
         console.log(response);
         // Map the response data to field elements and set the state with the new fieldElements
         this.setState({ fieldElements: <FieldElements data={response} /> });
-    })
-    .catch(error => {
-      // Handle error
-      console.log(error);
-    });
+      });
   };
 
   handleRangeChange = (event) => {
