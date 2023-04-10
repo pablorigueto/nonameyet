@@ -4,6 +4,7 @@ import _ from 'lodash';
 import RangeButton from './buttons/RangeButton';
 import FieldElements from './buttons/FieldElements';
 import { sendLocationDataToBackend } from './api/Fetch';
+import { getLocation } from './location/LocationUtils';
 
 class AutoDom extends React.Component {
   constructor(props) {
@@ -21,35 +22,17 @@ class AutoDom extends React.Component {
   }
 
   componentDidMount() {
-    // Call the function to retrieve location and set an interval to call it every 1.7 seconds
-    this.getLocation();
-    this.intervalId = setInterval(this.getLocation, 1700);
+    getLocation(this.handleSuccess, this.handleError, this.handleStatusChange);
+    this.intervalId = setInterval(() => {
+      getLocation(this.handleSuccess, this.handleError, this.handleStatusChange);
+    }, 1700);
+
   }
 
   componentWillUnmount() {
     // Clear the interval when the component is unmounted
     clearInterval(this.intervalId);
   }
-
-  // A function to retrieve the user's location and handle status changes
-  getLocation = () => {
-    if (navigator.geolocation) {
-      // Call the getCurrentPosition method to retrieve the location and pass in success and error handlers
-      navigator.geolocation.getCurrentPosition(
-        this.handleSuccess,
-        this.handleError
-      );
-      // Add an event listener for changes in GPS status and call the handleStatusChange function
-      navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-        result.onchange = () => {
-          this.handleStatusChange(result.state);
-        };
-      });
-    } else {
-      // If geolocation is not supported, set the error message in the state
-      this.setState({ error: 'Geolocation is not supported' });
-    }
-  };
 
   // A function to handle successful retrieval of the user's location
   handleSuccess = (position) => {
@@ -86,8 +69,7 @@ class AutoDom extends React.Component {
   // A function to handle changes in the GPS status
   handleStatusChange = (status) => {
     if (status === 'granted') {
-      // Call the getLocation function again if the status changes to granted
-      this.getLocation();
+      getLocation(this.handleSuccess, this.handleError, this.handleStatusChange);
     }
   };
 
