@@ -13,7 +13,6 @@ class AutoDom extends React.Component {
       error: null,
       range: 50,
       fieldElements: null, // initialize fieldElements as null
-      currentRangeValue: 50 // new property
     };
     // Create a debounced version of the sendLocationDataToBackend function
     this.debouncedSendLocationDataToBackend = _.debounce(this.sendLocationDataToBackend, 400);
@@ -139,7 +138,7 @@ class AutoDom extends React.Component {
 
   handleRangeChange = (event) => {
     const range = event.target.value;
-    this.setState({ range, currentRangeValue: range }, () => {
+    this.setState({ range }, () => {
       const { latitude, longitude, range } = this.state;
       // Call the debounced function instead of the original sendLocationDataToBackend function
       this.debouncedSendLocationDataToBackend(latitude, longitude, range);
