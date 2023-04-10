@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import _ from 'lodash';
+import RangeButton from './buttons/RangeButton';
 
 class AutoDom extends React.Component {
   constructor(props) {
@@ -146,19 +147,12 @@ class AutoDom extends React.Component {
   };
 
   render() {
-    const { fieldElements, currentRangeValue } = this.state; 
-    
+    const { fieldElements, range } = this.state;
+  
     return (
       <div>
-        <input
-          type="range"
-          min="0"
-          max="400"
-          value={currentRangeValue} // add value attribute
-          onChange={this.handleRangeChange}
-        />
-        <div id="output">{fieldElements}</div>
-        <div>Current range value: {currentRangeValue}</div>
+        <RangeButton range={range} onChange={this.handleRangeChange} />
+        {fieldElements}
       </div>
     );
   }
@@ -166,7 +160,7 @@ class AutoDom extends React.Component {
 
 export default AutoDom;
 
-const rootElement = document.getElementById('main-react');
+const rootElement = document.getElementById('content-main-react');
 
 // Using createRoot from react-dom/client to render the app
 const root = createRoot(rootElement);
