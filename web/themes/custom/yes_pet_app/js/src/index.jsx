@@ -1,5 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import _ from 'lodash';
 
 class AutoDom extends React.Component {
   constructor(props) {
@@ -13,6 +14,8 @@ class AutoDom extends React.Component {
       fieldElements: null, // initialize fieldElements as null
       currentRangeValue: 50 // new property
     };
+    // Create a debounced version of the sendLocationDataToBackend function
+    this.debouncedSendLocationDataToBackend = _.debounce(this.sendLocationDataToBackend, 400);
   }
 
   componentDidMount() {
@@ -137,7 +140,8 @@ class AutoDom extends React.Component {
     const range = event.target.value;
     this.setState({ range, currentRangeValue: range }, () => {
       const { latitude, longitude, range } = this.state;
-      this.sendLocationDataToBackend(latitude, longitude, range);
+      // Call the debounced function instead of the original sendLocationDataToBackend function
+      this.debouncedSendLocationDataToBackend(latitude, longitude, range);
     });
   };
 
@@ -149,7 +153,7 @@ class AutoDom extends React.Component {
         <input
           type="range"
           min="0"
-          max="500"
+          max="400"
           value={currentRangeValue} // add value attribute
           onChange={this.handleRangeChange}
         />
