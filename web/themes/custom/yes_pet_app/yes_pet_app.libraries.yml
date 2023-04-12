@@ -20,3 +20,20 @@ yespetapp-styling:
     - core/drupal
     - core/drupalSettings
     - core/once
+
+owl-carousel-lib:
+  version: VERSION
+  css:
+    theme:
+      css/owl/owl.carousel.min.css: {}
+      css/owl/owl.theme.default.min.css: {}
+      css/custom/carousel.css: {}
+  js:
+    js/owl/owl.carousel.min.js: {}
+    js/custom/carousel.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupal.ajax
+    - core/drupalSettings
+    - core/jquery
+    - core/once

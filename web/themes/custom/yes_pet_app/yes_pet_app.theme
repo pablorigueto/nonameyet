@@ -39,4 +39,8 @@ function yes_pet_app_page_attachments_alter(array &$attachments) {
     $index = array_search('yes_pet_app/react_app', $attachments['#attached']['library']);
     $attachments['#attached']['library'][$index] = 'yes_pet_app/react_app_dev';
   }
+
+  $attachments['#attached']['library'][] = 'yes_pet_app/owl-carousel-lib';
+  $attachments['#attached']['library'][] = 'yes_pet_app/yespetapp-styling';
+
 }

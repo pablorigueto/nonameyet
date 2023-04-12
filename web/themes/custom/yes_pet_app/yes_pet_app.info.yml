@@ -8,4 +8,4 @@ libraries:
   - yes_pet_app/yespetapp-styling
   - yes_pet_app/react_app_dev
   - yes_pet_app/react_app
-
+  - owl-carousel-lib

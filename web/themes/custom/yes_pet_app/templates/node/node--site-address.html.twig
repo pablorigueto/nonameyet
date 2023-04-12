@@ -1,0 +1,15 @@
+<div class="owl-carousel owl-theme">
+  {% for item in content.field_image_location['#items'] %}
+    {% set image_url = file_url(item.entity.uri.value) %}
+    <div class="owl__field-item">
+      <img class="owl__image" src="{{ image_url }}">
+      {# <div class="image-caption">{{ item.alt }}</div> #}
+    </div>
+  {% endfor %}
+</div>
+
+{{ content.body }}
+
+{{ content.field_complete_address }}
+
+{{ content.field_comments }}
