@@ -9,6 +9,7 @@ import { getLocation } from './location/LocationUtils';
 const rootElement = document.getElementById('content-main-react');
 
 if (rootElement) {
+
   class AutoDom extends React.Component {
     constructor(props) {
       super(props);
@@ -19,6 +20,8 @@ if (rootElement) {
         error: null,
         range: 50,
         fieldElements: null, // initialize fieldElements as null
+        gpsDisabled: false, // initialize the gpsDisabled flag as false
+        isLoading: false, // add isLoading state
       };
       // Create a debounced version of the sendLocationDataToBackend function
       this.debouncedSendLocationDataToBackend = _.debounce(this.sendLocationDataToBackend, 400);
@@ -43,7 +46,7 @@ if (rootElement) {
       this.setState({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
-        error: null,
+        error: false,
       });
 
       // Send the location data to the backend
@@ -52,7 +55,6 @@ if (rootElement) {
         position.coords.longitude,
         this.state.range
       );
-
       // Clear the interval after the first successful call to getCurrentPosition
       clearInterval(this.intervalId);
     };
@@ -62,50 +64,70 @@ if (rootElement) {
       // Check if the error is due to GPS being disabled and set the error message accordingly
       if (error.code === error.PERMISSION_DENIED) {
         this.setState({
-          error: 'Please enable GPS to retrieve location data',
+          error: true,
+          gpsDisabled: true, // set the gpsDisabled flag to true
         });
       } else {
-        this.setState({ error: error.message });
+        this.setState({ error: error.message, gpsDisabled: false });
       }
     };
 
     // A function to handle changes in the GPS status
     handleStatusChange = (status) => {
       if (status === 'granted') {
+        this.resetGPSDisabled(); // reset the gpsDisabled flag
         getLocation(this.handleSuccess, this.handleError, this.handleStatusChange);
       }
     };
 
+    resetGPSDisabled = () => {
+      this.setState({ gpsDisabled: false });
+    };
+    
     // A function to send location data to the backend API
     sendLocationDataToBackend = (latitude, longitude, range) => {
+      this.setState({ isLoading: true, fieldElements: null }); // set isLoading and fieldElements state
       sendLocationDataToBackend(latitude, longitude, range)
         .then((response) => {
           console.log(response);
           // Map the response data to field elements and set the state with the new fieldElements
-          this.setState({ fieldElements: <FieldElements data={response} /> });
+          this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
         });
     };
 
     handleRangeChange = (event) => {
       const range = event.target.value;
-      this.setState({ range }, () => {
-        const { latitude, longitude, range } = this.state;
-        // Call the debounced function instead of the original sendLocationDataToBackend function
-        this.debouncedSendLocationDataToBackend(latitude, longitude, range);
-      });
+      console.log(this.state);
+      const { latitude, longitude } = this.state;
+      if (latitude && longitude) {
+        this.setState({ range }, () => {
+          const { latitude, longitude, range } = this.state;
+          // Call the debounced function instead of the original sendLocationDataToBackend function
+          this.debouncedSendLocationDataToBackend(latitude, longitude, range);
+        });
+      } else {
+        event.preventDefault();
+      }
     };
 
     render() {
-      const { fieldElements, range } = this.state;
-    
+      const { fieldElements, range, gpsDisabled, error, isLoading} = this.state;
+ 
       return (
         <div>
           <RangeButton range={range} onChange={this.handleRangeChange} />
+ 
+          {error && !isLoading && gpsDisabled ? (
+            <div id="gps-error">Please enable GPS to use this feature.</div>
+          ) : null}
+
           {fieldElements}
         </div>
       );
     }
+ 
   }
+
 
   const root = createRoot(rootElement);
   root.render(<AutoDom />);
