@@ -28,6 +28,11 @@ function yes_pet_app_preprocess_html(&$variables) {
       'href' => $variables['yes_pet_app_path'] . '/css/components/navigation/nav-primary-no-js.css?' . $query_string,
     ],
   ];
+ 
+  // Translations to React JS of locale core module.
+  $variables['#attached']['drupalSettings']['increase_range_msg'] = t('No data found, increase the Range');
+  $variables['#attached']['drupalSettings']['enable_gps_msg'] = t('Please enable GPS to use this feature.');
+
 }
 
 /**

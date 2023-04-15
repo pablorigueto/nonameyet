@@ -96,7 +96,7 @@ if (rootElement) {
         }
         else {
           // If response is null, set the fieldElements state to a default text.
-          this.setState({ isLoading: false, fieldElements: "No data found, increase the Range" });
+          this.setState({ isLoading: false, fieldElements: drupalSettings.increase_range_msg });
         }
       });
     };
@@ -125,7 +125,7 @@ if (rootElement) {
           {fieldElements}
 
           {error && !isLoading && gpsDisabled ? (
-            <div id="gps-error">Please enable GPS to use this feature.</div>
+            <div id="gps-error">{ drupalSettings.enable_gps_msg }</div>
           ) : null}
 
         </div>
@@ -133,7 +133,6 @@ if (rootElement) {
     }
  
   }
-
 
   const root = createRoot(rootElement);
   root.render(<AutoDom />);
