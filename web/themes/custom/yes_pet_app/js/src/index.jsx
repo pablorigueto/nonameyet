@@ -89,7 +89,6 @@ if (rootElement) {
       this.setState({ isLoading: true, fieldElements: null }); // set isLoading and fieldElements state
       sendLocationDataToBackend(latitude, longitude, range)
         .then((response) => {
-          console.log(response);
           // Map the response data to field elements and set the state with the new fieldElements
           this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
         });
@@ -97,7 +96,6 @@ if (rootElement) {
 
     handleRangeChange = (event) => {
       const range = event.target.value;
-      console.log(this.state);
       const { latitude, longitude } = this.state;
       if (latitude && longitude) {
         this.setState({ range }, () => {
