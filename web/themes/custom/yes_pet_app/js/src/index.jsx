@@ -88,10 +88,17 @@ if (rootElement) {
     sendLocationDataToBackend = (latitude, longitude, range) => {
       this.setState({ isLoading: true, fieldElements: null }); // set isLoading and fieldElements state
       sendLocationDataToBackend(latitude, longitude, range)
-        .then((response) => {
+      .then((response) => {
+        // Map the response data to field elements and set the state with the new fieldElements
+        if (response.length > 0) {
           // Map the response data to field elements and set the state with the new fieldElements
           this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
-        });
+        }
+        else {
+          // If response is null, set the fieldElements state to a default text.
+          this.setState({ isLoading: false, fieldElements: "No data found, increase the Range" });
+        }
+      });
     };
 
     handleRangeChange = (event) => {
@@ -110,16 +117,17 @@ if (rootElement) {
 
     render() {
       const { fieldElements, range, gpsDisabled, error, isLoading} = this.state;
- 
+
       return (
         <div>
           <RangeButton range={range} onChange={this.handleRangeChange} />
- 
+
+          {fieldElements}
+
           {error && !isLoading && gpsDisabled ? (
             <div id="gps-error">Please enable GPS to use this feature.</div>
           ) : null}
 
-          {fieldElements}
         </div>
       );
     }

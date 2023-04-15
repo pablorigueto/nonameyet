@@ -16,7 +16,7 @@ function FieldElements(props) {
       </a>
     </div>
   ));
-  
+
   return (
     <div>
       {fieldElements}
