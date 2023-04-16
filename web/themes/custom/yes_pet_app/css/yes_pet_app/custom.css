@@ -1,0 +1,38 @@
+/* Align the rating and like */
+.group-rating {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Remove label of vote and rating. */
+.group-rating .field__label, .group-rating .voted-how {
+  display: none;
+}
+
+/* Remove only text Points: */
+.group-rating .vote-current-score {
+  font-size: 0;
+}
+.group-rating .vote-current-score strong {
+  font-size: 16px; /* adjust the font size as needed */
+}
+
+/* Align text of votes */
+.group-rating .vote-current-score {
+  text-align: center;
+}
+
+/* To align votes with thumbs icon */
+.group-rating .vud-widget-thumbs .up-score {
+  padding: 0;
+  border-right: unset;
+}
+.group-rating .vud-widget-thumbs .down-score {
+  padding-left: 0.5rem;
+}
+
+/* To move score close of thumbs */
+.group-rating .vote-current-score {
+  padding-top: 0;
+}
+

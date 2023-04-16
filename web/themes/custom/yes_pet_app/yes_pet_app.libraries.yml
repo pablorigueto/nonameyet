@@ -17,6 +17,7 @@ yespetapp-styling:
   css:
     theme:
       css/Bootstrap/bootstrap.min.css: {}
+      css/yes_pet_app/custom.css: {}
   js:
     js/Bootstrap/bootstrap.min.js: {}
   dependencies:
@@ -32,6 +33,7 @@ owl-carousel-lib:
       css/owl/owl.carousel.min.css: {}
       css/owl/owl.theme.default.min.css: {}
       css/custom/carousel.css: {}
+
   js:
     js/owl/owl.carousel.min.js: {}
     js/custom/carousel.js: {}
