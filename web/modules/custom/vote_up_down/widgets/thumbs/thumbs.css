@@ -95,34 +95,42 @@
   float: left;
   display: block;
   width: 35px;
-  height: 35px;
+  height: 37px;
   font-weight: bold;
   text-align: center;
   background: url(thumbs.png) 0 0 no-repeat;
 }
 
 .vud-widget-thumbs .up.active {
-  background-position: -94px -8px;
+  background-position: -152px -3px;
 }
 
 .vud-widget-thumbs .down.active {
-  background-position: -27px -0px;
+  background-position: 0px -3px;
 }
 
 .vud-widget-thumbs .up.inactive {
-  background-position: -94px -8px;
+  background-position: -115px -3px;
+}
+
+.vud-widget-thumbs .up.active:hover {
+  background-position: -194px -3px;
 }
 
 .vud-widget-thumbs .down.inactive {
-  background-position: -0px -0px;
+  background-position: -42px -3px;
+}
+
+.vud-widget-thumbs .down.active:hover {
+  background-position: -42px -3px;
 }
 
 .vud-widget-thumbs .up.inactive:hover {
-  background-position: -54px -0px;
+  background-position: -194px -3px;
 }
 
 .vud-widget-thumbs .down.inactive:hover {
-  background-position: -27px -0px;
+  background-position: -42px -3px;
 }
 
 /**
