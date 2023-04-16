@@ -1,0 +1,23 @@
+{
+    "name": "drupal/vote_up_down",
+    "description": "Allows votes on some drupal entities and provides the base for implementing votes on other entities.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Marco Villegas",
+            "homepage": "https://www.drupal.org/u/marvil07",
+            "role": "Maintainer"
+        }
+    ],
+    "homepage": "https://drupal.org/project/vote_up_down",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/vote_up_down",
+        "source": "https://git.drupalcode.org/project/vote_up_down"
+    },
+    "require": {
+        "drupal/core": "^8.7 || ^9 || ^10",
+        "drupal/votingapi": "^3.0@beta"
+    }
+}

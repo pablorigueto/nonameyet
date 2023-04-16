@@ -12,7 +12,8 @@ function FieldElements(props) {
         <label type="text" name="neighborhood_field">{item.neighborhood}</label>
         <label type="text" name="city_field">{item.city}</label>
         <label type="text" name="state_field">{item.state}</label>
-        <label type="text" name="distance_field">Aproximadamente: {item.distance}KM</label>
+        <label type="text" name="distance_field">Aproximadamente: {item.distance}KM </label>
+        <label type="text" name="rating_field">Rating: {item.rating}</label>
       </a>
     </div>
   ));

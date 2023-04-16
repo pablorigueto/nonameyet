@@ -1,0 +1,88 @@
+diff --git a/composer.json b/composer.json
+index 9aec98e..7806e37 100644
+--- a/composer.json
++++ b/composer.json
+@@ -17,7 +17,7 @@
+         "source": "https://git.drupalcode.org/project/vote_up_down"
+     },
+     "require": {
+-        "drupal/core": "^8.7 || ^9",
++        "drupal/core": "^8.7 || ^9 || ^10",
+         "drupal/votingapi": "^3.0@beta"
+     }
+ }
+diff --git a/src/Plugin/VoteUpDownWidgetBase.php b/src/Plugin/VoteUpDownWidgetBase.php
+index a7b059c..8658cca 100644
+--- a/src/Plugin/VoteUpDownWidgetBase.php
++++ b/src/Plugin/VoteUpDownWidgetBase.php
+@@ -65,12 +65,14 @@ abstract class VoteUpDownWidgetBase extends PluginBase implements VoteUpDownWidg
+         ->condition('value', 1)
+         ->condition('entity_type', $entityTypeId)
+         ->condition('entity_id', $entityId)
++        ->accessCheck(FALSE)
+         ->count()
+         ->execute();
+       $down_points = \Drupal::entityQuery('vote')
+         ->condition('value', -1)
+         ->condition('entity_type', $entityTypeId)
+         ->condition('entity_id', $entityId)
++        ->accessCheck(FALSE)
+         ->count()
+         ->execute();
+     }
+diff --git a/tests/src/Unit/VoteUpDownWidgetManagerTest.php b/tests/src/Unit/VoteUpDownWidgetManagerTest.php
+index 6c0e088..fd6c90a 100644
+--- a/tests/src/Unit/VoteUpDownWidgetManagerTest.php
++++ b/tests/src/Unit/VoteUpDownWidgetManagerTest.php
+@@ -2,6 +2,7 @@
+ 
+ namespace Drupal\Tests\vud\Unit;
+ 
++use Prophecy\PhpUnit\ProphecyTrait;
+ use Drupal\Component\Plugin\Discovery\DiscoveryInterface;
+ use Drupal\Core\Cache\CacheBackendInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+@@ -17,6 +18,7 @@ use Drupal\vud\Plugin\VoteUpDownWidgetManager;
+  */
+ class VoteUpDownWidgetManagerTest extends UnitTestCase {
+ 
++  use ProphecyTrait;
+   /**
+    * Plugin Manager for VoteUpDownWidget plugin type under test.
+    */
+@@ -25,7 +27,7 @@ class VoteUpDownWidgetManagerTest extends UnitTestCase {
+   /**
+    * {@inheritdoc}
+    */
+-  protected function setUp() {
++  protected function setUp(): void {
+     parent::setUp();
+ 
+     $cache_backend = $this->prophesize(CacheBackendInterface::class);
+diff --git a/vud.info.yml b/vud.info.yml
+index 7655256..63751b1 100644
+--- a/vud.info.yml
++++ b/vud.info.yml
+@@ -3,7 +3,7 @@ type: module
+ description: 'Provides a configurable up/down voting widget for other modules to use.'
+ package: Voting
+ core: 8.x
+-core_version_requirement: ^8 || ^9
++core_version_requirement: ^8 || ^9 || ^10
+ dependencies:
+   - votingapi:votingapi
+ configure: vud.admin_advanced_settings
+diff --git a/vud.module b/vud.module
+index 37af79c..0a3d377 100644
+--- a/vud.module
++++ b/vud.module
+@@ -6,7 +6,8 @@
+  */
+ 
+ // Include the theme.inc file.
+-module_load_include('inc', 'vud', 'vud.theme');
++//module_load_include('inc', 'vud', 'vud.theme');
++\Drupal::moduleHandler()->loadInclude('inc','vud', 'vud.theme');
+ 
+ /**
+  * Check if the passed user can vote.

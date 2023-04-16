@@ -109,6 +109,11 @@ class NearLocation extends ControllerBase {
         $all_init_results = [];
         // To store all the value published.
         foreach ($nodes as $node) {
+
+            if ($node->bundle() != 'site_address') {
+                continue;
+            }
+
             // If the node didn't have translation, get the default language.
             $field = $this->getTranslationField($node, $langcode);
             if ($field == false) {
@@ -124,6 +129,8 @@ class NearLocation extends ControllerBase {
 
             $field_address = $node->get('field_address')[0];
 
+            $field_rating = $node->get('field_rating')[0]->getValue()['rating'];
+            
             $pathAlias = $this->getPathAlias($node->id());
 
             if ($result_distance <= $radius) {
@@ -135,7 +142,8 @@ class NearLocation extends ControllerBase {
                     'neighborhood' => $field_address->dependent_locality,
                     'city' => $field_address->locality,
                     'state' => $field_address->administrative_area,
-                    'distance' => intval($result_distance)
+                    'distance' => intval($result_distance),
+                    'rating' => $field_rating
                 ];
                 
             }

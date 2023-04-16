@@ -1,0 +1,20 @@
+--- tests/src/Functional/FivestarTest.php
++++ tests/src/Functional/FivestarTest.php
+@@ -104,7 +104,7 @@ class FivestarTest extends BrowserTestBase {
+     $this->submitForm($edit, 'Save');
+ 
+     // Make sure the two-star rating shows on the node view.
+-    $elements = $this->xpath("//div[contains(@class, 'fivestar-widget-static-vote')]//div[contains(@class,'star-first')]/span");
++    $elements = $this->xpath("//div[contains(@class, 'field--name-fivestar-test')]//div[contains(@class,'star-first')]/span");
+     $this->assertEquals('2', $elements[0]->getText(), 'Content authors can rate their own content using the stars widget.');
+   }
+ 
+@@ -142,7 +142,7 @@ class FivestarTest extends BrowserTestBase {
+     // Rate the test_node_type.
+     $this->drupalLogin($this->voterUser);
+     $this->drupalGet('node/' . $node->id());
+-    $this->assertSession()->pageTextContains('No votes yet');
++    $this->assertRaw('No votes yet', 'Fivestar field has no votes.');
+     $this->assertEmpty($this->xpath("//form[contains(@class, 'fivestar-widget')]"));
+ 
+     // Check if node with attached fivestar field can be save.

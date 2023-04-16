@@ -1,0 +1,14 @@
+name: 'Vote Up/Down'
+type: module
+description: 'Provides a configurable up/down voting widget for other modules to use.'
+package: Voting
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - votingapi:votingapi
+configure: vud.admin_advanced_settings
+
+# Information added by Drupal.org packaging script on 2021-10-03
+version: '8.x-1.0-alpha5'
+project: 'vote_up_down'
+datestamp: 1633232572

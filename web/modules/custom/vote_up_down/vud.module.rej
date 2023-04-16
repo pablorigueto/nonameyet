@@ -1,0 +1,12 @@
+--- vud.module
++++ vud.module
+@@ -6,7 +6,8 @@
+  */
+ 
+ // Include the theme.inc file.
+-module_load_include('inc', 'vud', 'vud.theme');
++//module_load_include('inc', 'vud', 'vud.theme');
++\Drupal::moduleHandler()->loadInclude('inc','vud', 'vud.theme');
+ 
+ /**
+  * Check if the passed user can vote.

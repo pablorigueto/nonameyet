@@ -1,0 +1,78 @@
+--- composer.json
++++ composer.json
+@@ -17,7 +17,7 @@
+         "source": "https://git.drupalcode.org/project/vote_up_down"
+     },
+     "require": {
+-        "drupal/core": "^8.7 || ^9",
++        "drupal/core": "^8.7 || ^9 || ^10",
+         "drupal/votingapi": "^3.0@beta"
+     }
+ }
+--- VoteUpDownWidgetBase.php
++++ VoteUpDownWidgetBase.php
+@@ -65,12 +65,14 @@ abstract class VoteUpDownWidgetBase extends PluginBase implements VoteUpDownWidg
+         ->condition('value', 1)
+         ->condition('entity_type', $entityTypeId)
+         ->condition('entity_id', $entityId)
++        ->accessCheck(FALSE)
+         ->count()
+         ->execute();
+       $down_points = \Drupal::entityQuery('vote')
+         ->condition('value', -1)
+         ->condition('entity_type', $entityTypeId)
+         ->condition('entity_id', $entityId)
++        ->accessCheck(FALSE)
+         ->count()
+         ->execute();
+     }
+--- VoteUpDownWidgetManagerTest.php
++++ VoteUpDownWidgetManagerTest.php
+@@ -2,6 +2,7 @@
+ 
+ namespace Drupal\Tests\vud\Unit;
+ 
++use Prophecy\PhpUnit\ProphecyTrait;
+ use Drupal\Component\Plugin\Discovery\DiscoveryInterface;
+ use Drupal\Core\Cache\CacheBackendInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+@@ -17,6 +18,7 @@ use Drupal\vud\Plugin\VoteUpDownWidgetManager;
+  */
+ class VoteUpDownWidgetManagerTest extends UnitTestCase {
+ 
++  use ProphecyTrait;
+   /**
+    * Plugin Manager for VoteUpDownWidget plugin type under test.
+    */
+@@ -25,7 +27,7 @@ class VoteUpDownWidgetManagerTest extends UnitTestCase {
+   /**
+    * {@inheritdoc}
+    */
+-  protected function setUp() {
++  protected function setUp(): void {
+     parent::setUp();
+ 
+     $cache_backend = $this->prophesize(CacheBackendInterface::class);
+--- vud.info.yml
++++ vud.info.yml
+@@ -3,7 +3,7 @@ type: module
+ description: 'Provides a configurable up/down voting widget for other modules to use.'
+ package: Voting
+ core: 8.x
+-core_version_requirement: ^8 || ^9
++core_version_requirement: ^8 || ^9 || ^10
+ dependencies:
+   - votingapi:votingapi
+ configure: vud.admin_advanced_settings
+--- vud.module
++++ vud.module
+@@ -6,7 +6,8 @@
+  */
+ 
+ // Include the theme.inc file.
+-module_load_include('inc', 'vud', 'vud.theme');
++//module_load_include('inc', 'vud', 'vud.theme');
++\Drupal::moduleHandler()->loadInclude('inc','vud', 'vud.theme');
+ 
+ /**
+  * Check if the passed user can vote.
