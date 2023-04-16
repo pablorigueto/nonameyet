@@ -6,7 +6,7 @@
 }
 
 .fivestar-hearts div.fivestar-widget-static .star span.on {
-  background: url(heart.png) no-repeat 0 -36px;
+  background: url(heart.png) no-repeat 0 -74px;
 }
 
 .fivestar-hearts div.fivestar-widget-static .star span.off {
@@ -34,5 +34,5 @@
 }
 .fivestar-hearts div.fivestar-widget div.hover a,
 .fivestar-hearts div.rating div a:hover {
-  background-position: 0 -36px;
+  background-position: 0 -74px;
 }
