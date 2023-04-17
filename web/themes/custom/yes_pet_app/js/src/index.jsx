@@ -91,6 +91,7 @@ if (rootElement) {
       .then((response) => {
         // Map the response data to field elements and set the state with the new fieldElements
         if (response.length > 0) {
+          console.log(response);
           // Map the response data to field elements and set the state with the new fieldElements
           this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
         }
