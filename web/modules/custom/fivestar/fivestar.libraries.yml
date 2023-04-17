@@ -20,6 +20,11 @@ fivestar.admin:
 
 # Widgets
 # Right now does not include RTL handling
+dogs:
+  css:
+    component:
+      widgets/dogs/dogs.css: {}
+
 basic:
   css:
     component:

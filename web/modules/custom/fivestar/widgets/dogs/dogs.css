@@ -1,0 +1,38 @@
+/* Static View-only Star Version */
+.fivestar-dogs div.fivestar-widget-static .star {
+  width: 37px;
+  height: 37px;
+  background: url(dogs.png) no-repeat 0 0;
+}
+
+.fivestar-dogs div.fivestar-widget-static .star span.on {
+  background: url(dogs.png) no-repeat 0 -74px;
+}
+
+.fivestar-dogs div.fivestar-widget-static .star span.off {
+  background: url(dogs.png) no-repeat 0 0;
+}
+
+/* Javascript Star Version */
+.fivestar-dogs div.fivestar-widget .cancel,
+.fivestar-dogs div.fivestar-widget .star {
+  width: 37px;
+  height: 37px;
+}
+.fivestar-dogs div.fivestar-widget .cancel,
+.fivestar-dogs div.fivestar-widget .cancel a {
+  background: url(heart_broken.png) no-repeat 0 0;
+}
+
+.fivestar-dogs div.fivestar-widget .star,
+.fivestar-dogs div.fivestar-widget .star a {
+  background: url(dogs.png) no-repeat 0 0;
+}
+
+.fivestar-dogs div.fivestar-widget div.on a {
+  background-position: 0 -74px;
+}
+.fivestar-dogs div.fivestar-widget div.hover a,
+.fivestar-dogs div.rating div a:hover {
+  background-position: 0 -74px;
+}
