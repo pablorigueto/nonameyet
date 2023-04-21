@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
 use Drupal\find_checkin\Haversine;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -127,10 +128,15 @@ class NearLocation extends ControllerBase {
 
         $field_address = $node->get('field_address')[0];
 
+        $field_type = $node->get('field_type')[0]->getValue()['value'];
+        
         $base_url = $this->getFirstImageToTeaser($field)->getUri();
         $field_image_location_address = str_replace("base:/", "", $base_url);
 
-        $field_rating = $node->get('field_rating')[0]->getValue()['rating'];
+        $field_rating = 10;
+        if ($node->get('field_rating')[0] != null) {
+          $field_rating = $node->get('field_rating')[0]->getValue()['rating'];
+        }
 
         $pathAlias = $this->getPathAlias($node->id());
 
@@ -145,7 +151,8 @@ class NearLocation extends ControllerBase {
             'city' => $field_address->locality,
             'state' => $field_address->administrative_area,
             'distance' => intval($result_distance),
-            'rating' => $field_rating
+            'rating' => $this->getHowMutchStars($field_rating),
+            'type' => $field_type,
           ];
         }
       }
@@ -213,4 +220,36 @@ class NearLocation extends ControllerBase {
 
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getHowMutchStars(int $field_rating): string {
+
+    switch ($field_rating) {
+      case ($field_rating >= 10 && $field_rating < 20):
+        return '0.5/5';
+      case ($field_rating >= 20 && $field_rating < 30):
+        return '1/5';
+      case ($field_rating >= 30 && $field_rating < 40):
+        return '1.5/5';
+      case ($field_rating >= 40 && $field_rating < 50):
+        return '2/5';
+      case ($field_rating >= 50 && $field_rating < 60):
+        return '2.5/5';
+      case ($field_rating >= 60 && $field_rating < 70):
+        return '3/5';
+      case ($field_rating >= 70 && $field_rating < 80):
+        return '3.5/5';
+      case ($field_rating >= 80 && $field_rating < 90):
+        return '4/5';
+      case ($field_rating >= 90 && $field_rating < 100):
+        return '4.5/5';
+      case ($field_rating == 100):
+        return '5/5';
+      default:
+        return '0/5';
+    }
+
+  }
+ 
 }

@@ -1,52 +1,172 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Popup from '../popup/Popup';
 
 function FieldElements(props) {
   const { data } = props;
-  
-  const fieldElements = data.map((item, index) => (
 
+  const [openRatingFor, setOpenRatingFor] = useState(null); // Add state for tracking Rating open popup
+  const [openKmFor, setOpenKmFor] = useState(null); // Add state for tracking KM open popup
+
+  const toggleRating = (index) => {
+    // Close open popup before opening a new one
+    if (openRatingFor === index) {
+      setOpenRatingFor(null);
+    } else {
+      setOpenRatingFor(index);
+    }
+  };
+
+  const toggleKm = (index) => {
+    // Close open popup before opening a new one
+    if (openKmFor === index) {
+      setOpenKmFor(null);
+    } else {
+      setOpenKmFor(index);
+    }
+  };
+
+  const fieldElements = data.map((item, index) => (
     <div
       className="main_content"
       key={index}
       style={{
         border: '0',
         padding: '0',
-        marginBottom: '50px',
+        marginBottom: '2rem',
         position: 'relative', // Set the position of the container to relative
       }}
     >
+      <div
+        className="score"
+        style={{
+          position: 'absolute',
+          right: '0',
+          padding: '0.5rem',
+          color: '#fff',
+          left: '0',
+          display: 'flex',
+          justifyContent: 'space-between',
+          cursor: 'pointer',
+        }}
+      >
+        <p 
+          type="text"
+          name="type"
+          style=
+            {{
+              margin: '0',
+              padding: '0 0.8rem',
+              display: 'flex',
+              alignItems: 'center',
+              background: 'aliceblue',
+              color: '#000',
+              fontSize: '0.8rem',
+              borderRadius: '2rem',
+            }}  
+        >{item.type}</p>
+
+        <img
+          src="sites/default/files/image/score/score.png"
+          alt="score"
+          style=
+            {{
+              background: '#ffffff59',
+              borderRadius: '50%',
+              padding: '0.45rem',
+            }}
+          onClick={() => toggleRating(index)}
+        />
+      </div>
 
       <a href={item.pathAlias}>
-        <img src={item.thumb} alt={item.alt} style={{width: '100%'}} />
+        <img
+          src={item.thumb}
+          alt={item.alt}
+          style={{
+            width: '100%',
+            height: '18.5rem',
+            borderRadius: '1rem',
+            boxShadow: 'rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 0.5rem',
+          }}
+        />
         <div className="text_fields" style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '0 1rem',
           position: 'absolute', // Set the position of the text fields to absolute
           bottom: '0', // Position the text fields at the bottom of the container
           left: '0', // Position the text fields at the left of the container
           right: '0', // Position the text fields at the right of the container
-          backgroundColor: 'rgba(0,0,0,0.5)', // Add a semi-transparent black background to the text fields
-          color: '#fff', // Set the color of the text fields to white
-          padding: '5px', // Add some padding to the text fields
+          backgroundColor: 'rgb(0 0 0 / 29%)', // Add a semi-transparent black background to the text fields
+          color: 'aliceblue', // Set the color of the text fields to white
           boxSizing: 'border-box', // Make sure the padding is included in the total width of the text fields
-          height: '50%',
+          height: '15%',
+          borderRadius: '0 0 1rem 1rem',
         }}>
-          <p type="text" name="title_field">{item.title}</p>
-          <p type="text" name="address_field">{item.address}</p>
-          <p type="text" name="number_field">{item.number}</p>
-          <p type="text" name="neighborhood_field">{item.neighborhood}</p>
-          <p type="text" name="city_field">{item.city}</p>
-          <p type="text" name="state_field">{item.state}</p>
-          <p type="text" name="distance_field">Aproximadamente: {item.distance}KM</p>
-          <p type="text" name="rating_field">Rating: {item.rating}</p>
+          
+          <p type="text" name="title_field"
+          style={{
+            marginTop: '0.19rem',
+            marginBottom: '0.3srem',
+            /* Set maximum height to one line */
+            maxHeight: '1.3em',
+            /* Hide any overflow beyond one line */
+            overflow: 'hidden',
+            /* Ensure text doesn't wrap to a second line */
+            whiteSpace: 'nowrap',
+            /* Add ellipsis to indicate truncated text */
+            textOverflow: 'ellipsis',
+            fontSize: '0.9rem',
+          }}
+          >{item.title}</p>
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}>
+          
+            <div style=
+            {{
+              background: 'url("sites/default/files/image/icons/gps.png") no-repeat',
+              backgroundSize: 'cover',
+              width: '1.8rem',
+              height: '2.5rem',
+              backgroundPosition: '0.4rem',
+              
+            }}
+            onClick={(event) => {
+              event.preventDefault();
+              toggleKm(index);
+            }}
+
+            ></div>
+          </div>
         </div>
       </a>
+
+      <Popup
+        index={index}
+        openPopupFor={openRatingFor}
+        togglePopup={setOpenRatingFor}
+      >
+        {/* Add the content for the rating popup here */}
+        {item.rating}
+      </Popup>
+
+      <Popup
+        index={index}
+        openPopupFor={openKmFor}
+        togglePopup={setOpenKmFor}
+      >
+        {/* Add the content for the km popup here */}
+        {item.distance}km
+      </Popup>
+
     </div>
   ));
 
-  return (
-    <div>
-      {fieldElements}
-    </div>
-  );
+  return <div>{fieldElements}</div>;
 }
 
 export default FieldElements;

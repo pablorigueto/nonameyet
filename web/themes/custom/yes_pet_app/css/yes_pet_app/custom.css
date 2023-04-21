@@ -36,3 +36,7 @@
   padding-top: 0;
 }
 
+/* To remove the container limit */
+/* .container {
+  --bs-gutter-x: unset;
+} */
