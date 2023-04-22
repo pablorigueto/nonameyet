@@ -70,8 +70,8 @@ function FieldElements(props) {
           alt="score"
           style=
             {{
-              background: '#ffffff59',
-              borderRadius: '50%',
+              // background: 'rgba(0, 0, 0, 0.15)',
+              // borderRadius: '50%',
               padding: '0.45rem',
             }}
           onClick={() => toggleRating(index)}
@@ -84,7 +84,7 @@ function FieldElements(props) {
           alt={item.alt}
           style={{
             width: '100%',
-            height: '18.5rem',
+            height: '15rem',
             borderRadius: '1rem',
             boxShadow: 'rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 0.5rem',
           }}
@@ -93,12 +93,12 @@ function FieldElements(props) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '0 1rem',
+          padding: '0 0.5rem',
           position: 'absolute', // Set the position of the text fields to absolute
           bottom: '0', // Position the text fields at the bottom of the container
           left: '0', // Position the text fields at the left of the container
           right: '0', // Position the text fields at the right of the container
-          backgroundColor: 'rgb(0 0 0 / 29%)', // Add a semi-transparent black background to the text fields
+          backgroundColor: 'rgb(0 0 0 / 15%)', // Add a semi-transparent black background to the text fields
           color: 'aliceblue', // Set the color of the text fields to white
           boxSizing: 'border-box', // Make sure the padding is included in the total width of the text fields
           height: '15%',
@@ -107,8 +107,7 @@ function FieldElements(props) {
           
           <p type="text" name="title_field"
           style={{
-            marginTop: '0.19rem',
-            marginBottom: '0.3srem',
+            margin: '0',
             /* Set maximum height to one line */
             maxHeight: '1.3em',
             /* Hide any overflow beyond one line */
@@ -121,19 +120,13 @@ function FieldElements(props) {
           }}
           >{item.title}</p>
 
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}>
+          <div>
           
             <div style=
             {{
-              background: 'url("sites/default/files/image/icons/gps.png") no-repeat',
-              backgroundSize: 'cover',
-              width: '1.8rem',
+              background: 'url("sites/default/files/image/icons/gps.png") 0px center / cover no-repeat',
+              width: '1.85rem',
               height: '2.5rem',
-              backgroundPosition: '0.4rem',
-              
             }}
             onClick={(event) => {
               event.preventDefault();

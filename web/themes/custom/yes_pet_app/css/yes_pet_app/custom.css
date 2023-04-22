@@ -1,7 +1,7 @@
 /* Align the rating and like */
 .group-rating {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 /* Remove label of vote and rating. */
@@ -36,7 +36,81 @@
   padding-top: 0;
 }
 
-/* To remove the container limit */
-/* .container {
-  --bs-gutter-x: unset;
-} */
+/* To limite the height on full view */
+.path-node.page-node-type-site-address .owl-stage-outer,
+.path-node.page-node-type-site-address .owl-stage {
+  height: 15rem;
+}
+
+/* Set style to full view on img carousel */
+.path-node.page-node-type-site-address
+.owl-carousel .owl-item img {
+  border-radius: 1rem;
+  height: 15rem;
+}
+
+/* Style to google maps full view */
+.path-node.page-node-type-site-address iframe {
+  border-radius: 1rem;
+  height: 15rem;
+  box-shadow: rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 0.5rem;
+}
+
+/* Put the arrow of owl-carousel on the middle of the image on full view */
+.path-node.page-node-type-site-address .owl-prev,
+.path-node.page-node-type-site-address .owl-next {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+}
+
+.path-node.page-node-type-site-address .owl-prev {
+  left: 0;
+}
+
+.path-node.page-node-type-site-address .owl-next {
+  right: 0;
+}
+
+/* Set size of arrows on full view */
+.path-node.page-node-type-site-address .owl-theme .owl-nav [class*=owl-] {
+  color: #fff;
+  font-size: 2rem;
+}
+
+/* Style to description on full view */
+.location__description {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.location__description p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Remove the search on full view */
+.path-node.page-node-type-site-address #search-block-form {
+  display: none;
+}
+
+/* Font size to gmaps on full view */
+.path-node.page-node-type-site-address .field--name-field-complete-address {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Subject on full view */
+.path-node.page-node-type-site-address textarea {
+  width: 100%;
+}
+
+/* Hidden the subject of comments */
+.path-node.page-node-type-site-address .field--name-subject {
+  display: none;
+}
+
+/* Hidden the explanation about comments */
+.path-node.page-node-type-site-address .field--name-comment-body .js-filter-wrapper{
+  display: none;
+}

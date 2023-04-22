@@ -15,7 +15,7 @@
 								items:1,
 								nav:true,
 								loop:true,
-								dots: true,
+								dots: false,
 								center: true,
 							}
 						},

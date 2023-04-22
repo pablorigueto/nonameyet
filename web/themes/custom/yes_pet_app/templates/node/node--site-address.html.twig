@@ -8,13 +8,17 @@
   {% endfor %}
 </div>
 
-{{ content.body }}
 
-{{ content.field_complete_address }}
 
 <div class="group-rating" id="group-rating">
   {{ content.field_rating }}
   {{ content.field_vote_up_and_field }}
 </div>
+
+<div class="location__description">
+{{ content.body }}
+</div>
+
+{{ content.field_complete_address }}
 
 {{ content.field_comments }}
