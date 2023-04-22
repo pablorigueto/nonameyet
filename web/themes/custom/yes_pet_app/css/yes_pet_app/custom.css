@@ -100,17 +100,68 @@
   margin: 0;
 }
 
-/* Subject on full view */
+/* Subject on full view full view */
 .path-node.page-node-type-site-address textarea {
   width: 100%;
 }
 
-/* Hidden the subject of comments */
+/* Hidden the subject of comments full view */
 .path-node.page-node-type-site-address .field--name-subject {
   display: none;
 }
 
-/* Hidden the explanation about comments */
-.path-node.page-node-type-site-address .field--name-comment-body .js-filter-wrapper{
+/* Hidden the explanation about comments full view */
+.path-node.page-node-type-site-address .field--name-comment-body .js-filter-wrapper {
   display: none;
 }
+
+/* Align comments and img full view */
+.path-node.page-node-type-site-address article.comment {
+  display: grid;
+  grid-template-columns: 6rem auto;
+  grid-gap: 0.5rem;
+  padding: 0.7rem 0;
+}
+
+/* Align edit/reply/delete full view */
+.path-node.page-node-type-site-address ul.comment__links {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
+  flex-direction: row-reverse;
+  justify-content: start;
+}
+
+/* Remove marker from li full view */
+.path-node.page-node-type-site-address li {
+  list-style: none;
+  font-size: 0.7rem;
+}
+
+/* Remove the underline from a full view */
+.path-node.page-node-type-site-address .comment__links a {
+  text-decoration: none;
+}
+
+/* Remove h3 from comment full view */
+.path-node.page-node-type-site-address .comment__content h3 {
+  display: none;
+}
+
+/* To picture full view */
+.path-node.page-node-type-site-address .comment__picture {
+  position: static;
+}
+
+/* To picture full view */
+.path-node.page-node-type-site-address .comment__picture img {
+  width: 100%;
+  height: 90px;
+}
+
+/* To reply comments */
+.indented, .show-hide-wrapper {
+  margin-inline-start: 1.5rem;
+}
+

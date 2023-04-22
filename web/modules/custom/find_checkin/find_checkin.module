@@ -5,6 +5,8 @@
  * Contains find_checkin.
  */
 
+use Drupal\comment\CommentInterface;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 
@@ -103,4 +105,3 @@ function find_checkin_form_alter(&$form, &$form_state, $form_id) {
   }
 
 }
-
