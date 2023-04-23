@@ -105,3 +105,13 @@ function find_checkin_form_alter(&$form, &$form_state, $form_id) {
   }
 
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_access() for comment entity type.
+ */
+function find_checkin_comment_access(CommentInterface $comment, $op, AccountInterface $account) {
+  if ($op == 'delete' && $comment->getOwnerId() == $account->id()) {
+    return AccessResult::allowedIfHasPermission($account, 'delete own comments');
+  }
+  return AccessResult::neutral();
+}
