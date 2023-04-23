@@ -144,8 +144,9 @@
   text-decoration: none;
 }
 
-/* Remove h3 from comment full view */
-.path-node.page-node-type-site-address .comment__content h3 {
+/* Remove h3 and Replies word from comment full view */
+.path-node.page-node-type-site-address .comment__content h3,
+.path-node.page-node-type-site-address .show-hide-wrapper  {
   display: none;
 }
 
@@ -161,7 +162,43 @@
 }
 
 /* To reply comments */
-.indented, .show-hide-wrapper {
+/* Add class only if the indented is not herself child. */
+.path-node.page-node-type-site-address .indented:not(.indented *),
+.path-node.page-node-type-site-address article + .parent-comment-info:not(.indented *) { /* To first reply */
+  /* add your styles here */
   margin-inline-start: 1.5rem;
+}
+
+/* Padding to each new comments. */
+.path-node.page-node-type-site-address article.comment--level-1 {
+  padding-top: 2rem;
+}
+
+.path-node.page-node-type-site-address .parent-comment-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+/* Set different style to user reply comment and limit the size */
+.path-node.page-node-type-site-address .username-info {
+  margin-left: 0.2rem;
+  font-weight: 600;
+  /* Hide any overflow beyond one line */
+  overflow: hidden;
+  /* Ensure text doesn't wrap to a second line */
+  white-space: nowrap;
+  /* Add ellipsis to indicate truncated text */
+  text-overflow: ellipsis;
+  max-width: 50%;
+}
+
+/* Set top to comments section */
+.path-node.page-node-type-site-address .comments__title {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
 }
 
