@@ -12,6 +12,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_page_attachments().
@@ -103,10 +104,26 @@ function find_checkin_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'comment_comment_form') {
     $form['comment_body']['widget'][0]['#format'] = 'plain_text';
     $form['comment_body']['widget'][0]['#allowed_formats'] = ['plain_text'];
-    $form['comment_body']['widget'][0]['#rows'] = 2;
+    $form['comment_body']['widget'][0]['#rows'] = 1;
     unset($form['actions']['preview']);
+
+    // This line enables the Enter key to add a new line in the comment field.
+    $form['comment_body']['widget'][0]['#input'] = TRUE;
+
+    // Each time that the user hits Enter one line is add.
+    $form['comment_body']['widget'][0]['#attributes']['onkeydown'] = 'if(event.keyCode==13){this.rows += 1;}';
+
+    // Add a validation function to check if the textarea is empty.
+    $form['#validate'][] = '_find_checkin_form_validate';
   }
 
+}
+
+function _find_checkin_form_validate($form, &$form_state) {
+  $comment_body = $form_state->getValue('comment_body')[0]['value'];
+  if (empty($comment_body)) {
+    $form_state->setErrorByName('comment_body', t('Please enter a comment before to post.'));
+  }
 }
 
 /**
@@ -123,9 +140,10 @@ function find_checkin_comment_access(CommentInterface $comment, $op, AccountInte
  * Implements hook_comment_view_alter to add the author's name on reply.
 */
 function find_checkin_comment_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
-  if ($entity->getEntityTypeId() == 'comment' && isset($build['#comment'])) {
-    $comment = $build['#comment'];
 
+  $comment = $build['#comment'];
+
+  if ($entity->getEntityTypeId() == 'comment' && isset($build['#comment'])) {
     // Check if this is a reply comment.
     if ($comment->getParentComment()) {
       // Get the parent comment.
@@ -146,4 +164,17 @@ function find_checkin_comment_view_alter(array &$build, EntityInterface $entity,
       $build['#prefix'];
     }
   }
+
+  // Check if the comment has been edited.
+  if ($comment->getChangedTime() != $comment->getCreatedTime()) {
+
+    // Create a DrupalDateTime object from the change timestamp of the comment.
+    $change_time = DrupalDateTime::createFromTimestamp($comment->getChangedTime());
+    // Format the change time into the desired pattern.
+    $formatted_time = $change_time->format('m/d/Y - H:i');
+
+    // Add an "EDIT" message to the comment body.
+    $build['comment_body'][0]['#prefix'] = '<div class="comment-edit">Modified: ' . $formatted_time . '</div>';
+  }
+
 }
