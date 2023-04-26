@@ -5,35 +5,44 @@
 }
 
 /* Remove label of vote and rating. */
-.group-rating .field__label, .group-rating .voted-how {
+.field--name-field-comments-vote .field__label, .vud-widget .voted-how {
   display: none;
 }
 
 /* Remove only text Points: */
-.group-rating .vote-current-score {
+.vote-current-score {
   font-size: 0;
 }
-.group-rating .vote-current-score strong {
+.vote-current-score strong {
   font-size: 16px; /* adjust the font size as needed */
 }
 
 /* Align text of votes */
-.group-rating .vote-current-score {
+.vote-current-score {
   text-align: center;
 }
 
 /* To align votes with thumbs icon */
-.group-rating .vud-widget-thumbs .up-score {
+.vud-widget-thumbs .up-score {
   padding: 0;
   border-right: unset;
 }
-.group-rating .vud-widget-thumbs .down-score {
+.vud-widget-thumbs .down-score {
   padding-left: 0.5rem;
 }
 
+.vud-widget-thumbs {
+  width: 5.2rem;
+}
+
 /* To move score close of thumbs */
-.group-rating .vote-current-score {
+.vote-current-score {
   padding-top: 0;
+}
+
+/* Hidden the label of rating */
+.field--type-fivestar .field__label{
+  display: none;
 }
 
 /* To limite the height on full view */
