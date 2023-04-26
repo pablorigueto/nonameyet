@@ -121,6 +121,11 @@ textarea {
   display: none;
 }
 
+/* Defines font size of comments full view */
+.comment__time, .comment-edit {
+  font-size: 0.7rem;
+}
+
 /* Style to put the submit button side of comment field */
 .comment-form {
   display: flex;
@@ -150,7 +155,7 @@ textarea {
 
 /* Add margin to distance the comment of links edit and etc */
 .comment__content ul.comment__links {
-  margin-top: 0.3rem;
+  margin-top: 0.1rem;
 }
 
 /* To style the submit */
@@ -175,15 +180,6 @@ article.comment {
   grid-template-columns: 6rem auto;
   grid-gap: 0.5rem;
   padding: 0.7rem 0;
-}
-
-/* Defines font size of comments full view */
-.comment__time, .comment-edit {
-  font-size: 0.7rem;
-}
-
-.comment-edit {
-  padding-bottom: 0.7rem;
 }
 
 /* Align edit/reply/delete full view */
@@ -232,17 +228,24 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   margin-inline-start: 1.5rem;
 }
 
+/* Remove the padding top from comment to keep the reply details close */
+.indented:not(.indented *) article {
+  padding-top: unset;
+}
+
 /* Padding to each new comments. */
 article.comment--level-1 {
   padding-top: 2rem;
 }
 
+/* Reply details styles */
 .parent-comment-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   font-size: 0.7rem;
+  padding-top: 0.5rem;
 }
 
 /* Set different style to user reply comment and limit the size */
