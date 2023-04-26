@@ -117,6 +117,7 @@ function FieldElements(props) {
             /* Add ellipsis to indicate truncated text */
             textOverflow: 'ellipsis',
             fontSize: '0.9rem',
+            color: '#fff',
           }}
           >{item.title}</p>
 

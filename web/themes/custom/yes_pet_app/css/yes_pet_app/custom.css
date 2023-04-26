@@ -1,7 +1,24 @@
+:root {
+	--border-color: #8f8f8f;
+	--box-shadow-color: #8a8a8a;
+	--dark-color: #000;
+	--main-text-color: #0c9fa6;
+	--white-color: #fff;
+}
+
+/* Start of my Custom codes */
+body {
+	font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+a, p {
+  color: #000;
+}
+
 /* Align the rating and like */
 .group-rating {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 /* Remove label of vote and rating. */
@@ -57,6 +74,12 @@
   height: 15rem;
 }
 
+/* Style border radius to carousel full view */
+.block__content .owl-carousel {
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 0.5rem;
+}
+
 /* Style to google maps full view */
 iframe {
   border-radius: 1rem;
@@ -81,15 +104,16 @@ iframe {
 }
 
 /* Set size of arrows on full view */
-.owl-theme .owl-nav [class*=owl-] {
+.block__content .owl-theme .owl-nav [class*=owl-] {
   color: #fff;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 100;
 }
 
 /* Style to description on full view */
 .location__description {
   text-align: center;
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 
 .location__description p {
@@ -107,6 +131,17 @@ iframe {
   font-size: 0.9rem;
   margin: 0;
 }
+
+.field--name-field-complete-address .field__label,
+.field--name-field-complete-address .simple-gmap-address {
+  display: none;
+}
+
+/* Set the font size to address bellow the gmaps */
+.field--name-field-complete-address .simple-gmap-address {
+  font-size: 0.7rem;
+}
+
 
 /* Subject on full view full view */
 textarea {
@@ -243,9 +278,9 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 /* Padding to each new comments. */
-article.comment--level-1 {
-  padding-top: 2rem;
-}
+/* article.comment--level-1 {
+  padding-top: 1rem;
+} */
 
 /* Reply details styles */
 .parent-comment-wrapper {
@@ -254,7 +289,6 @@ article.comment--level-1 {
   align-items: center;
   text-align: center;
   font-size: 0.7rem;
-  padding-top: 0.5rem;
 }
 
 /* Set different style to user reply comment and limit the size */
@@ -276,10 +310,3 @@ article.comment--level-1 {
   display: flex;
   justify-content: center;
 }
-
-/* Set the font size to address bellow the gmaps */
-
-.field--name-field-complete-address .simple-gmap-address {
-  font-size: 0.7rem;
-}
-
