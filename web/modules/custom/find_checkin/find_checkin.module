@@ -164,14 +164,14 @@ function find_checkin_comment_view_alter(array &$build, EntityInterface $entity,
       $build['#prefix'];
     }
   }
-
+ 
   // Check if the comment has been edited.
   if ($comment->getChangedTime() != $comment->getCreatedTime()) {
 
     // Create a DrupalDateTime object from the change timestamp of the comment.
     $change_time = DrupalDateTime::createFromTimestamp($comment->getChangedTime());
     // Format the change time into the desired pattern.
-    $formatted_time = $change_time->format('m/d/Y - H:i');
+    $formatted_time = $change_time->format('D, m/d/Y - H:i');
 
     // Add an "EDIT" message to the comment body.
     $build['comment_body'][0]['#prefix'] = '<div class="comment-edit">Modified: ' . $formatted_time . '</div>';
