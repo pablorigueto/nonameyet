@@ -94,43 +94,43 @@
 .vud-widget-thumbs .down.active {
   float: left;
   display: block;
-  width: 35px;
-  height: 37px;
+  width: 24px;
+  height: 25px;
   font-weight: bold;
   text-align: center;
   background: url(thumbs.png) 0 0 no-repeat;
 }
 
 .vud-widget-thumbs .up.active {
-  background-position: -152px -3px;
+  background-position: -93px 0;
 }
 
 .vud-widget-thumbs .down.active {
-  background-position: 0px -3px;
+  background-position: 3px 0;
 }
 
 .vud-widget-thumbs .up.inactive {
-  background-position: -115px -3px;
+  background-position: -70px 0;
 }
 
 .vud-widget-thumbs .up.active:hover {
-  background-position: -194px -3px;
+  background-position: -197px 0;
 }
 
 .vud-widget-thumbs .down.inactive {
-  background-position: -42px -3px;
+  background-position: -23px 0;
 }
 
 .vud-widget-thumbs .down.active:hover {
-  background-position: -42px -3px;
+  background-position: -23px 0;
 }
 
 .vud-widget-thumbs .up.inactive:hover {
-  background-position: -115px -3px;
+  background-position: -119px 0;
 }
 
 .vud-widget-thumbs .down.inactive:hover {
-  background-position: -42px -3px;
+  background-position: -23px 0;
 }
 
 /**
