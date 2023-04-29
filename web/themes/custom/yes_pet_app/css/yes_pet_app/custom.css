@@ -57,7 +57,7 @@ a, p {
   padding-top: 0;
 }
 
-/* Hidden the label of rating */
+/* Hiden the label of rating */
 .field--type-fivestar .field__label{
   display: none;
 }
@@ -146,21 +146,27 @@ iframe {
 /* Subject on full view full view */
 textarea {
   width: 100%;
-  padding: 0 1.5rem; /* to avoid hidden words on border */
+  padding: 0 1.5rem; /* to avoid Hiden words on border */
   min-height: 1.9rem;
+  box-shadow: rgba(0,0,0,0.15) 0.1rem 0.1rem 0.3rem;
 }
 
-/* Hidden the subject of comments full view */
+/* Hiden the subject of comments full view */
 .field--name-subject {
   display: none;
 }
 
-/* Hidden the explanation about comments full view */
+/* Hiden the explanation about comments full view */
 .field--name-comment-body .js-filter-wrapper {
   display: none;
 }
 
-/* Hidden the comment label */
+/* Hiden the count comments. */
+.comments__count {
+  display: none;
+}
+
+/* Hiden the comment label */
 .js-form-type-textarea label {
   display: none;
 }
@@ -183,7 +189,7 @@ textarea {
   margin-top: 0.22rem;
   border-radius: 2rem;
   border-color: #0000002b;
-  overflow: hidden;
+  overflow: Hiden;
 }
 
 /* When user try to post empty */
@@ -203,7 +209,7 @@ textarea {
 }
 
 /* To style the submit */
-.form-submit {
+.form-submit, #edit-cancel {
   border: unset;
   border-radius: 2rem;
   background: unset;
@@ -216,6 +222,8 @@ textarea {
   align-items: center;
   justify-content: center;
   padding-top: 0.2rem;
+  border: 1px solid #0000002b;
+  text-decoration: none;
 }
 
 /* Align comments and img full view */
@@ -296,7 +304,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   margin-left: 0.2rem;
   font-weight: 600;
   /* Hide any overflow beyond one line */
-  overflow: hidden;
+  overflow: Hiden;
   /* Ensure text doesn't wrap to a second line */
   white-space: nowrap;
   /* Add ellipsis to indicate truncated text */
@@ -306,7 +314,41 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 
 /* Set top to comments section */
 .comments__title {
-  margin-top: 2.5rem;
-  display: flex;
+  margin: 1.5rem 0;
   justify-content: center;
+}
+
+/*
+*
+* Delete comments form styles
+*
+*/
+
+.path-comment #edit-actions {
+  display: flex;
+  gap: 0.6rem;
+  padding: 1.6rem 0;
+}
+
+.path-comment #edit-submit, .path-comment #edit-cancel {
+  width: 50%;
+}
+
+.path-comment .comment-comment-delete-form,
+.path-comment .breadcrumb__link {
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.path-comment .breadcrumb__list li:first-child,
+.path-comment #block-yes-pet-app-primary-local-tasks {
+  display: none;
+}
+
+.path-comment #block-yes-pet-app-breadcrumbs nav.breadcrumb {
+  margin: 0;
+}
+
+.path-comment #block-yes-pet-app-breadcrumbs .breadcrumb__content ol {
+  padding: 0;
 }
