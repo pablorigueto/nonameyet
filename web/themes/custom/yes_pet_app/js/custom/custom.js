@@ -38,6 +38,38 @@
     }
   };
 
+  // Mobile menu behavior
+  Drupal.behaviors.mobileMenu = {
+    attach() {
+      if (!drupalSettings.mobileMenu) {
+
+        const mobileNavButton = document.querySelector('.mobile-nav-button');
+        const headerNav = document.getElementById('header-nav');
+        
+        mobileNavButton.addEventListener('click', function() {
+          if (headerNav.style.display === 'block') {
+            headerNav.style.display = 'none';
+          } 
+          else {
+            headerNav.style.display = 'block';
+          }
+        });
+
+        const closeMobileButton = document.querySelector('.close__mobile_menu');
+        
+        closeMobileButton.addEventListener('click', function() {
+          headerNav.style.display = 'none';  
+        });
+
+        // Set the flag to indicate that the behavior has been executed for this page.
+        drupalSettings.mobileMenu = true;
+      }
+    }
+  };
+
+
+
+
   // Returns current URL.
   function currentUrl() {
     return $(location).attr('href');

@@ -183,27 +183,34 @@ function find_checkin_comment_view_alter(array &$build, EntityInterface $entity,
 }
 
 function find_checkin_preprocess_page(&$variables) {
-  $current_path = \Drupal::service('path.current')->getPath();
-
-  $comment_start = str_starts_with($current_path, "/comment/reply/");
-  
-  if ($comment_start) {
+  if (!_find_checkin_comment_path()) {
     unset($variables['page']['breadcrumb']);
   }
 }
 
-function find_checkin_entity_load($entities, $entity_type_id) {
-
+// Check if is comment path.
+function _find_checkin_comment_path() {
   $current_path = \Drupal::service('path.current')->getPath();
-
+  
   $comment_start = str_starts_with($current_path, "/comment/");
   $comment_edit = str_ends_with($current_path, "/edit");
   $comment_delete = str_ends_with($current_path, "/delete");
 
-  if ($comment_start &&
-    ($comment_edit || $comment_delete) &&
-    $entity_type_id === 'comment')
-  {
+  if ($comment_start && ($comment_edit || $comment_delete)) {
+    return TRUE;
+  }
+
+  // $comment_start_reply = str_starts_with($current_path, "/comment/reply/");
+  // if ($comment_start_reply) {
+  //   return 'reply';
+  // }
+
+  return FALSE;
+}
+
+function find_checkin_entity_load($entities, $entity_type_id) {
+
+  if (_find_checkin_comment_path() && $entity_type_id === 'comment') {
 
     foreach ($entities as $comment_entity) {
       // Check if the comment has been edited.

@@ -74,13 +74,15 @@
                 <div class="mobile-buttons" data-drupal-selector="mobile-buttons">
                   <button class="mobile-nav-button" data-drupal-selector="mobile-nav-button" aria-label="{{ 'Main Menu'|t }}" aria-controls="header-nav" aria-expanded="false">
                     <span class="mobile-nav-button__label">{{ 'Menu'|t }}</span>
-                    <span class="mobile-nav-button__icon"></span>
                   </button>
-                </div>
 
-                <div id="header-nav" class="header-nav" data-drupal-selector="header-nav">
-                  {{ page.primary_menu }}
-                  {{ page.secondary_menu }}
+                  <div id="header-nav" class="header-nav" data-drupal-selector="header-nav">
+                  <div class="close__mobile_div">
+                    <div class="close__mobile_menu">X</div>
+                  </div>
+                    {{ page.primary_menu }}
+                    {{ page.secondary_menu }}
+                  </div>
                 </div>
               {% endif %}
             </div>

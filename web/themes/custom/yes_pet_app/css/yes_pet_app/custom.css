@@ -1,18 +1,24 @@
 :root {
-	--border-color: #8f8f8f;
-	--box-shadow-color: #8a8a8a;
-	--dark-color: #000;
-	--main-text-color: #0c9fa6;
-	--white-color: #fff;
+	--box-color: #00000080;
+  --box-color-light: #00000026;
+	--font-size: 0.9rem;
+  --font-size-mini: 0.7rem;
+  --background-color: #fff;
+  --font-color: #000;
 }
+
+@import url('../base/fonts.pcss.css');
 
 /* Start of my Custom codes */
-body {
-	font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+body, .path-home {
+	font-family: Roboto, sans-serif, arial;
+  background-color: var(--background-color);
 }
 
-a, p {
-  color: #000;
+a, p, .li, .comment__time, .comment-edit, .parent-comment-wrapper,
+.form-submit, .comment_edit, .comment-comment-delete-form, textarea,
+.comments__title {
+  color: var(--font-color);
 }
 
 /* Align the rating and like */
@@ -30,8 +36,9 @@ a, p {
 .vote-current-score {
   font-size: 0;
 }
+
 .vote-current-score strong {
-  font-size: 16px; /* adjust the font size as needed */
+  font-size: var(--font-size);
 }
 
 /* Align text of votes */
@@ -77,14 +84,14 @@ a, p {
 /* Style border radius to carousel full view */
 .block__content .owl-carousel {
   border-radius: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 0.5rem;
+  box-shadow: var(--box-color) 0.2rem 0.2rem 0.5rem;
 }
 
 /* Style to google maps full view */
 iframe {
   border-radius: 1rem;
   height: 15rem;
-  box-shadow: rgba(0, 0, 0, 0.5) 0.2rem 0.2rem 0.5rem;
+  box-shadow: var(--box-color) 0.2rem 0.2rem 0.5rem;
 }
 
 /* Put the arrow of owl-carousel on the middle of the image on full view */
@@ -105,9 +112,19 @@ iframe {
 
 /* Set size of arrows on full view */
 .block__content .owl-theme .owl-nav [class*=owl-] {
-  color: #fff;
+  color: #fcfcfc;
   font-size: 2.5rem;
+  font-family: serif;
   font-weight: 100;
+}
+
+.block__content .owl-theme .owl-nav [class*=owl-]:hover {
+  background: unset;
+  color: #8b8787;
+}
+
+.path-node .tabs-wrapper {
+  display: none;
 }
 
 /* Style to description on full view */
@@ -117,7 +134,7 @@ iframe {
 }
 
 .location__description p {
-  font-size: 0.9rem;
+  font-size: var(--font-size);
   margin: 0;
 }
 
@@ -128,7 +145,7 @@ iframe {
 
 /* Font size to gmaps on full view */
 .field--name-field-complete-address {
-  font-size: 0.9rem;
+  font-size: var(--font-size);
   margin: 0;
 }
 
@@ -139,7 +156,7 @@ iframe {
 
 /* Set the font size to address bellow the gmaps */
 .field--name-field-complete-address .simple-gmap-address {
-  font-size: 0.7rem;
+  font-size: var(--font-size-mini);
 }
 
 
@@ -148,7 +165,7 @@ textarea {
   width: 100%;
   padding: 0 1.5rem; /* to avoid Hiden words on border */
   min-height: 1.9rem;
-  box-shadow: rgba(0,0,0,0.15) 0.1rem 0.1rem 0.3rem;
+  box-shadow: var(--box-color-light) 0.1rem 0.1rem 0.3rem;
 }
 
 /* Hiden the subject of comments full view */
@@ -173,7 +190,7 @@ textarea {
 
 /* Defines font size of comments full view */
 .comment__time, .comment-edit {
-  font-size: 0.7rem;
+  font-size: var(--font-size-mini);
 }
 
 /* Style to put the submit button side of comment field */
@@ -188,8 +205,8 @@ textarea {
 .field--name-comment-body .js-text-full {
   margin-top: 0.22rem;
   border-radius: 2rem;
-  border-color: #0000002b;
-  overflow: Hiden;
+  border-color: var(--box-color-light);
+  overflow: hidden;
 }
 
 /* When user try to post empty */
@@ -200,7 +217,7 @@ textarea {
 /* Defines the font-size inside the comments */
 .field--name-comment-body p {
   margin-bottom: 0;
-  font-size: 0.9rem;
+  font-size: var(--font-size);
 }
 
 /* Add margin to distance the comment of links edit and etc */
@@ -213,16 +230,16 @@ textarea {
   border: unset;
   border-radius: 2rem;
   background: unset;
-  box-shadow: rgba(0, 0, 0, 0.15) 0.1rem 0.1rem 0.3rem;
+  box-shadow: var(--box-color-light) 0.1rem 0.1rem 0.3rem;
   min-height: 1.9rem;
   min-width: 3rem;
-  font-size: 0.7rem;
+  font-size: var(--font-size-mini);
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
   padding-top: 0.2rem;
-  border: 1px solid #0000002b;
+  border: 1px solid var(--box-color-light);
   text-decoration: none;
 }
 
@@ -247,7 +264,7 @@ ul.comment__links {
 /* Remove marker from li full view */
 li {
   list-style: none;
-  font-size: 0.7rem;
+  font-size: var(--font-size-mini);
 }
 
 /* Remove the underline from a full view */
@@ -296,7 +313,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 0.7rem;
+  font-size: var(--font-size-mini);
 }
 
 /* Set different style to user reply comment and limit the size */
@@ -318,6 +335,21 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   justify-content: center;
 }
 
+/* Set padding to commend to comments */
+.path-node .field__item p:first-of-type {
+  padding-top: 0.5rem;
+}
+
+.path-node .field__item p:last-of-type {
+  padding-bottom: 0.5rem;
+}
+
+.path-node .field__item p:only-of-type {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+
 /*
 *
 * Delete comments form styles
@@ -337,7 +369,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 .path-comment .comment-comment-delete-form,
 .path-comment .breadcrumb__link,
 .path-comment .comment_edit {
-  font-size: 0.9rem;
+  font-size: var(--font-size);
   text-decoration: none;
 }
 
@@ -352,5 +384,69 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 .path-comment #block-yes-pet-app-breadcrumbs .breadcrumb__content ol {
+  padding: 0;
+}
+
+/*
+*
+* To mobile menu. 
+*
+*/
+
+.site-branding__name {
+  display: none;
+}
+
+#header-nav {
+  display: none;
+  position: fixed;
+  transform: translateX(-100%);
+  transition: all 0.4s ease;
+  color: #fff;
+  z-index: 100;
+  background: rgba(0,0,0,0.9);
+  transform: translateX(0);
+  padding: 1rem;
+}
+
+.mobile__menu_visible {
+  display: block;
+}
+
+.close__mobile_menu {
+  /* position: absolute; */
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-family: var(--font-size);
+  font-size: 1.2rem;
+  border: 0.15rem solid var(--background-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close__mobile_div {
+  display: flex;
+  justify-content: end;
+}
+
+.menu--level-1 li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header-nav .menu--level-1 li {
+  padding: 1.5rem 2.5rem;
+}
+
+.menu--level-1 {
+  text-align: initial;
+  margin: 0;
   padding: 0;
 }
