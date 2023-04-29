@@ -37,6 +37,7 @@ owl-carousel-lib:
   js:
     js/owl/owl.carousel.min.js: {}
     js/custom/carousel.js: {}
+    js/custom/custom.js: {}
   dependencies:
     - core/drupal
     - core/drupal.ajax

@@ -335,13 +335,15 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 .path-comment .comment-comment-delete-form,
-.path-comment .breadcrumb__link {
+.path-comment .breadcrumb__link,
+.path-comment .comment_edit {
   font-size: 0.9rem;
   text-decoration: none;
 }
 
+
 .path-comment .breadcrumb__list li:first-child,
-.path-comment #block-yes-pet-app-primary-local-tasks {
+.path-comment #block-yes-pet-app-primary-local-tasks, .div-invisible {
   display: none;
 }
 

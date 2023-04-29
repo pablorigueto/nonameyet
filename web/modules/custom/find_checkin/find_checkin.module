@@ -182,131 +182,29 @@ function find_checkin_comment_view_alter(array &$build, EntityInterface $entity,
  
 }
 
+function find_checkin_preprocess_page(&$variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
 
-/**
- * Implements hook_preprocess_comment().
- */
-function find_checkin_preprocess_comment(&$variables) {
-  $comment = $variables['elements']['#comment'];
+  $comment_start = str_starts_with($current_path, "/comment/reply/");
   
-  // Check if this is a specific comment type and make changes.
-  //if ($comment->bundle() == 'comment') {
-    // Do something here.
-
-    // // Get the user ID of the comment author.
-    // $author_uid = $comment->getOwnerId();
-
-    // // Load the User entity for the comment author.
-    // $author = \Drupal\user\Entity\User::load($author_uid);
-
-    // // Check if the author is valid and get the author name.
-    // if ($author) {
-    //   $author_name = $author->getDisplayName();
-    // }
-
-  // Check if this is the comment edit page.
-  $route_match = \Drupal::routeMatch();
-  if ($route_match->getRouteName() == 'entity.comment.edit_form') {
-    // Get the comment ID from the URL parameters.
-    $comment_id = $route_match->getParameter('comment');
-
-    // Load the comment entity by ID.
-    $comment = \Drupal\comment\Entity\Comment::load($comment_id);
-
-    // Check if the comment entity is valid and add it to the page variables.
-    if ($comment) {
-      $variables['comment'] = $comment;
-    }
+  if ($comment_start) {
+    unset($variables['page']['breadcrumb']);
   }
-
-  //}
 }
-
-
-// /**
-//  * Implements hook_entity_load().
-//  */
-// function find_checkin_entity_load($entities, $entity_type_id) {
-//   if ($entity_type_id === 'comment') {
-
-//     $comment_storage = \Drupal::entityTypeManager()->getStorage('comment');
-//     $comment = $comment_storage->load(6);
-    
-//     if ($comment) {
-//       $revisions = $comment_storage->loadMultipleRevisions([$comment_id]);
-//       // Do something with the revisions, for example:
-//       foreach ($revisions as $revision) {
-//         $revision_id = $revision->getRevisionId();
-//         $revision_body = $revision->get('comment_body')->getValue()[0]['value'];
-//         // etc.
-//       }
-//     }
-//   }
-// }
-
-
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-// function find_checkin_form_comment_comment_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-
-//   if ($form_id === "comment_comment_form") {
-//     // Get the comment entity from the form state.
-//     $comment_entity = $form_state->getFormObject()->getEntity();
-    
-//     // Check if the entity is of the comment type.
-//     if ($comment_entity instanceof \Drupal\comment\CommentInterface) {
-//       // Do something with the comment entity.
-//       $comment_id = $comment_entity->id();
-
-//       $comment_body = $comment_entity->get('comment_body')->value;
-
-//       // Check if the comment has been edited.
-//       $changed_time = $comment_entity->getChangedTime();
-//       $created_time = $comment_entity->getCreatedTime();
-//       $is_edited = ($changed_time > $created_time);
-
-//       // Create a new div element and add the comment body to it.
-//       $new_div = [
-//         '#type' => 'html_tag',
-//         '#tag' => 'div',
-//         '#value' => $comment_body,
-//       ];
-
-//       // Add the new div element to the $form array.
-//       $form['new_div'] = $new_div;
-
-//     }
-//   }
-// }
-
-// function find_checkin_entity_load($entities, $entity_type_id) {
-
-//   $current_path = \Drupal::service('path.current')->getPath();
-
-//   if (strpos($current_path, '/comment/') !== false &&
-//     $entity_type_id === "comment")
-//   {
-//     // Extract the comment ID from the path.
-//     $comment_id = explode('/', $current_path)[2];
-
-//     $comment_storage = \Drupal::entityTypeManager()->getStorage('comment');
-//     $comment_entity = $comment_storage->loadByProperties(['cid' => $comment_id]);
-//     if (!empty($comment_entity)) {
-//       $comment_entity = reset($comment_entity);
-//       $comment_body = $comment_entity->get('comment_body')->value;
-//     }
-//   }
-// }
 
 function find_checkin_entity_load($entities, $entity_type_id) {
 
   $current_path = \Drupal::service('path.current')->getPath();
 
-  if (strpos($current_path, '/comment/') !== false &&
-    $entity_type_id === "comment")
+  $comment_start = str_starts_with($current_path, "/comment/");
+  $comment_edit = str_ends_with($current_path, "/edit");
+  $comment_delete = str_ends_with($current_path, "/delete");
+
+  if ($comment_start &&
+    ($comment_edit || $comment_delete) &&
+    $entity_type_id === 'comment')
   {
+
     foreach ($entities as $comment_entity) {
       // Check if the comment has been edited.
       $changed_time = $comment_entity->getChangedTime();
@@ -320,7 +218,10 @@ function find_checkin_entity_load($entities, $entity_type_id) {
         $comment_output = [
           '#type' => 'html_tag',
           '#tag' => 'div',
-          '#attributes' => ['class' => 'breadcrumb__item'],
+          '#attributes' => [
+            'class' => 'comment_edit',
+            'style' => 'visibility: hidden;'
+          ],
           '#value' => $comment_body,
         ];
         $comment_render = \Drupal::service('renderer')->renderRoot($comment_output);

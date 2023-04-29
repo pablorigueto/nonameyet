@@ -1,6 +1,6 @@
 /* Static View-only Star Version */
 .fivestar-dogs div.fivestar-widget-static .star {
-  width: 37px;
+  width: 48px;
   height: 37px;
   background: url(dogs.png) no-repeat 0 0;
 }
@@ -16,7 +16,7 @@
 /* Javascript Star Version */
 .fivestar-dogs div.fivestar-widget .cancel,
 .fivestar-dogs div.fivestar-widget .star {
-  width: 37px;
+  width: 48px;
   height: 37px;
 }
 .fivestar-dogs div.fivestar-widget .cancel,
