@@ -5,6 +5,7 @@ find-checkin-styling:
       js/sweetalert/sweetalert2.min.css: {}
   js:
     js/sweetalert/sweetalert2.all.min.js: {}
+    js/custom.js: {}
   dependencies:
     - core/drupal
     - core/drupal.ajax

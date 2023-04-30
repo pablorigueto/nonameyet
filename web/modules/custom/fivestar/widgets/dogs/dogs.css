@@ -36,3 +36,7 @@
 .fivestar-dogs div.rating div a:hover {
   background-position: 0 -74px;
 }
+
+.dark-theme-dogs {
+  background: url(dogs-dark.png) no-repeat 0 0;
+}

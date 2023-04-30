@@ -60,18 +60,29 @@
             <div class="container site-header__inner__container">
 
               <button class="btn-hamburger btn-toggle-menu" aria-label="Menu Hamburger">
-                <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {# <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 1H17" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                   <path d="M1 14.9087H17" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                   <path d="M1 8H17.0001" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
+                </svg> #}
+                <img id="menu-icon" src="{{ file_url('themes/custom/yes_pet_app/images/icons/hamburger-light.svg') }}" alt="menu">
               </button>
 
-              <a href="/">
-                <img src="{{ file_url('themes/custom/yes_pet_app/images/logo.png') }}" alt="Logo">
-              </a>
-              
+              <div class="reader__logo">
+                <a href="/">
+                  <img id="logo-icon" src="{{ file_url('themes/custom/yes_pet_app/images/logo.png') }}" alt="Logo">
+                </a>
+              </div>
+
               {{ page.header }}
+              
+              <div class="search__icon">
+                <img id="search-icon" src="{{ file_url('themes/custom/yes_pet_app/images/icons/search-light.svg') }}" alt="search-icon">
+              </div>
+
+              <div class="dark__theme">
+                <img id="theme-icon" src="{{ file_url('themes/custom/yes_pet_app/images/icons/light-theme.svg') }}" alt="dark-icon">
+              </div>       
 
               {% if page.primary_menu or page.secondary_menu %}
                 <div class="mobile-buttons" data-drupal-selector="mobile-buttons">
@@ -81,7 +92,7 @@
 
                   <div id="header-nav" class="header-nav" data-drupal-selector="header-nav">
                   <div class="close__mobile_div">
-                    <div class="close__mobile_menu">X</div>
+                    <div class="close__mobile_menu"></div>
                   </div>
                     {{ page.primary_menu }}
                     {{ page.secondary_menu }}

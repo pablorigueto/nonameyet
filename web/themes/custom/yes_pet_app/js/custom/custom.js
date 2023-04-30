@@ -67,7 +67,73 @@
     }
   };
 
+  // Search menu behavior
+  Drupal.behaviors.readerSearch = {
+    attach() {
+      if (!drupalSettings.readerSearch) {
 
+        const searchIcon = document.querySelector('.search__icon');
+        const navMenuSearch = document.getElementById('edit-keys');
+        
+        searchIcon.addEventListener('click', function() {
+          if (navMenuSearch.style.left === '3.2rem') {
+            navMenuSearch.style.left = '2000px';
+          } 
+          else {
+            navMenuSearch.style.left = '3.2rem';
+          }
+        });
+
+
+        // Set the flag to indicate that the behavior has been executed for this page.
+        drupalSettings.readerSearch = true;
+      }
+    }
+  };
+
+  // Theme change behavior
+  Drupal.behaviors.changeTheme = {
+    attach() {
+      if (!drupalSettings.changeTheme) {
+
+        const darkTheme = document.querySelector('.dark__theme');
+        const themeIcon = document.querySelector('#theme-icon');
+        const menuIcon = document.querySelector('#menu-icon');
+        const searchIcon = document.querySelector('#search-icon');
+
+        // const fiveStart = document.querySelector('.fivestar-dogs div.fivestar-widget .star');
+        // const fiveStartA = document.querySelector('.fivestar-dogs div.fivestar-widget .star a');        
+
+        const fiveStar = document.querySelector('.star');
+        console.log(fiveStar);
+        const fiveStarLinks = document.querySelectorAll('.fivestar-dogs div.fivestar-widget .star a');
+
+        darkTheme.addEventListener('click', () => {
+          if (themeIcon.src.includes('light-theme')) {
+            themeIcon.src = '/themes/custom/yes_pet_app/images/icons/inverted/theme-dark.png';
+            menuIcon.src = '/themes/custom/yes_pet_app/images/icons/inverted/harmburger-dark.png';
+            searchIcon.src = '/themes/custom/yes_pet_app/images/icons/inverted/search-dark.png';
+
+            fiveStar.classList.add('dark-theme-dogs');
+
+          }
+          else {
+            themeIcon.src = '/themes/custom/yes_pet_app/images/icons/light-theme.svg';
+            menuIcon.src = '/themes/custom/yes_pet_app/images/icons/hamburger-light.svg';
+            searchIcon.src = '/themes/custom/yes_pet_app/images/icons/search-light.svg';
+
+            fiveStar.classList.remove('dark-theme-dogs');
+
+          }
+        });
+
+        
+ 
+        // Set the flag to indicate that the behavior has been executed for this page.
+        drupalSettings.changeTheme = true;
+      }
+    }
+  };
 
 
   // Returns current URL.

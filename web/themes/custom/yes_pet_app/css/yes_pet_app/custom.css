@@ -415,21 +415,10 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 .close__mobile_menu {
-  /* position: absolute; */
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  font-family: var(--font-size);
-  font-size: 1.2rem;
-  border: 0.15rem solid var(--background-color);
-  border-radius: 50%;
-  cursor: pointer;
+  background: url(/themes/custom/yes_pet_app/images/icons/inverted/close.png) 0;
+  background-size: 2rem;
+  width: 2rem;
+  height: 1.5rem;
 }
 
 .close__mobile_div {
@@ -453,23 +442,56 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 .btn-hamburger {
+  display: flex;
+  justify-content: flex-start;
   background: transparent;
   border: unset;
 }
 
-.btn-hamburger svg {
-  margin-left: 0;
-  margin-right: 8px;
+.btn-hamburger img {
+  height: 2rem;
 }
 
-.btn-hamburger svg path {
-  transition: .3s;
+.reader__logo {
+  display: flex;
+  justify-content: center;
 }
 
-.btn-hamburger svg path {
-  stroke: #000;
+.search__icon {
+  display: flex;
+  justify-content: center;
+}
+
+.dark__theme {
+  display: flex;
+  justify-content: end;
 }
 
 .site-header__inner__container{
-  display: flex;
+  display: grid;
+  grid-template-columns: 12% 1fr 0 10% 10% 0;
+  align-items: center;
+  height: 3.5rem;
+  box-shadow: var(--box-color) 0 0 0.3rem;
+  margin-bottom: 3rem;
+}
+
+#search-block-form #edit-actions input {
+  display: none;
+}
+
+.search__icon img, .dark__theme img {
+  height: 1.8rem;
+}
+
+#edit-keys {
+  position: fixed;
+  top: 0.8rem;
+  left: 2000px;
+  transition: all 0.5s ease;
+  width: 64%;
+}
+
+.header-nav-overlay {
+  display: none;
 }
