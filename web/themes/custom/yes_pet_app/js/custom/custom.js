@@ -43,7 +43,7 @@
     attach() {
       if (!drupalSettings.mobileMenu) {
 
-        const mobileNavButton = document.querySelector('.mobile-nav-button');
+        const mobileNavButton = document.querySelector('.btn-hamburger');
         const headerNav = document.getElementById('header-nav');
         
         mobileNavButton.addEventListener('click', function() {

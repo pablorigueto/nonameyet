@@ -469,3 +469,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 .btn-hamburger svg path {
   stroke: #000;
 }
+
+.site-header__inner__container{
+  display: flex;
+}
