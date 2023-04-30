@@ -47,18 +47,18 @@
         const headerNav = document.getElementById('header-nav');
         
         mobileNavButton.addEventListener('click', function() {
-          if (headerNav.style.display === 'block') {
-            headerNav.style.display = 'none';
+          if (headerNav.style.left === '0px') {
+            headerNav.style.left = '-100%';
           } 
           else {
-            headerNav.style.display = 'block';
+            headerNav.style.left = '0px';
           }
         });
 
         const closeMobileButton = document.querySelector('.close__mobile_menu');
         
         closeMobileButton.addEventListener('click', function() {
-          headerNav.style.display = 'none';  
+          headerNav.style.left = '-100%';  
         });
 
         // Set the flag to indicate that the behavior has been executed for this page.

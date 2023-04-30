@@ -139,9 +139,9 @@ iframe {
 }
 
 /* Remove the search on full view */
-#search-block-form {
+/* #search-block-form {
   display: none;
-}
+} */
 
 /* Font size to gmaps on full view */
 .field--name-field-complete-address {
@@ -398,15 +398,16 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 #header-nav {
-  display: none;
+  left: -100%;
   position: fixed;
-  transform: translateX(-100%);
   transition: all 0.4s ease;
   color: #fff;
   z-index: 100;
-  background: rgba(0,0,0,0.9);
-  transform: translateX(0);
+  background: #000000e6;
   padding: 1rem;
+  height: 100%;
+  top: 0;
+  width: 100%;
 }
 
 .mobile__menu_visible {
@@ -449,4 +450,22 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   text-align: initial;
   margin: 0;
   padding: 0;
+}
+
+.btn-hamburger {
+  background: transparent;
+  border: unset;
+}
+
+.btn-hamburger svg {
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+.btn-hamburger svg path {
+  transition: .3s;
+}
+
+.btn-hamburger svg path {
+  stroke: #000;
 }
