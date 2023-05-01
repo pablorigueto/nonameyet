@@ -28,7 +28,7 @@
         voteScoreElements.forEach(function(element) {
           element.addEventListener('click', function(event) {
             event.preventDefault();
-            // console.log('test');
+
           });
         });
 
@@ -38,7 +38,7 @@
     }
   };
 
-  // Mobile menu behavior
+  // Mobile menu behavior.
   Drupal.behaviors.mobileMenu = {
     attach() {
       if (!drupalSettings.mobileMenu) {
@@ -67,7 +67,7 @@
     }
   };
 
-  // Search menu behavior
+  // Search menu behavior.
   Drupal.behaviors.readerSearch = {
     attach() {
       if (!drupalSettings.readerSearch) {
@@ -84,62 +84,125 @@
           }
         });
 
-
         // Set the flag to indicate that the behavior has been executed for this page.
         drupalSettings.readerSearch = true;
       }
     }
   };
 
-  // Theme change behavior
-  Drupal.behaviors.changeTheme = {
+  // Theme change color based on localStorage.
+  Drupal.behaviors.storageChangeTheme = {
     attach() {
-      if (!drupalSettings.changeTheme) {
-
-        const darkTheme = document.querySelector('.dark__theme');
-        const themeIcon = document.querySelector('#theme-icon');
-        const menuIcon = document.querySelector('#menu-icon');
-        const searchIcon = document.querySelector('#search-icon');
-
-        // const fiveStart = document.querySelector('.fivestar-dogs div.fivestar-widget .star');
-        // const fiveStartA = document.querySelector('.fivestar-dogs div.fivestar-widget .star a');        
-
-        const fiveStar = document.querySelector('.star');
-        console.log(fiveStar);
-        const fiveStarLinks = document.querySelectorAll('.fivestar-dogs div.fivestar-widget .star a');
-
-        darkTheme.addEventListener('click', () => {
-          if (themeIcon.src.includes('light-theme')) {
-            themeIcon.src = '/themes/custom/yes_pet_app/images/icons/inverted/theme-dark.png';
-            menuIcon.src = '/themes/custom/yes_pet_app/images/icons/inverted/harmburger-dark.png';
-            searchIcon.src = '/themes/custom/yes_pet_app/images/icons/inverted/search-dark.png';
-
-            fiveStar.classList.add('dark-theme-dogs');
-
-          }
-          else {
-            themeIcon.src = '/themes/custom/yes_pet_app/images/icons/light-theme.svg';
-            menuIcon.src = '/themes/custom/yes_pet_app/images/icons/hamburger-light.svg';
-            searchIcon.src = '/themes/custom/yes_pet_app/images/icons/search-light.svg';
-
-            fiveStar.classList.remove('dark-theme-dogs');
-
-          }
-        });
-
-        
- 
-        // Set the flag to indicate that the behavior has been executed for this page.
-        drupalSettings.changeTheme = true;
+      // $(document).ready(function () {
+      if (!drupalSettings.storageChangeTheme) {
+        // On page load, retrieve the current theme from localStorage
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          changeTheme(currentTheme);
+        }
+        drupalSettings.storageChangeTheme = true;
       }
+      // })
     }
   };
 
+  // Theme change color through root vars.
+  Drupal.behaviors.changeTheme = {
+    attach() {
+      $(document).ready(function () {
+        if (!drupalSettings.changeTheme) {
 
-  // Returns current URL.
-  function currentUrl() {
-    return $(location).attr('href');
+          // When user click on dark theme to change the theme.
+          const darkTheme = document.querySelector('.dark__theme');
+          darkTheme.addEventListener('click', () => {
+            // Get a reference to the root element
+            const root = document.documentElement;
+
+            // Get the background color of the body element
+            const bodyStyle = window.getComputedStyle(document.body);
+            const currentBackgroundColor = bodyStyle.backgroundColor;
+
+            // Change theme.
+            changeTheme(currentBackgroundColor);
+            // Toggle between the two themes based on the current background color
+            if (currentBackgroundColor === 'rgb(255, 255, 255)') {
+              // Store the current theme in localStorage
+              localStorage.setItem('theme', 'dark');
+             }
+              else {
+                // Store the current theme in localStorage
+                localStorage.setItem('theme', 'light');
+              }
+            });
+          // Set the flag to indicate that the behavior has been executed for this page.
+          drupalSettings.changeTheme = true;
+        }
+      })
+    }
+  };
+
+  function changeTheme(currentTheme) {
+    // If a theme is stored in localStorage, apply it
+    if (currentTheme === 'dark' || currentTheme === 'rgb(255, 255, 255)') {
+      const root = document.documentElement;
+
+      //changeIconTheme('rgb(255, 255, 255)');
+      root.style.setProperty('--box-color', '#000');
+      root.style.setProperty('--box-color-light', '#000');
+      root.style.setProperty('--border-color', '#0000');
+      root.style.setProperty('--border-light', '#fff');
+      root.style.setProperty('--background-color', '#353535');
+      root.style.setProperty('--font-color', '#fff');
+      root.style.setProperty('--background-textarea', '#262626');
+    }
+    else {
+      const root = document.documentElement;
+
+      //changeIconTheme('light');
+      root.style.setProperty('--box-color', '#00000080');
+      root.style.setProperty('--box-color-light', '#00000026');
+      root.style.setProperty('--border-color', '#00000026');
+      root.style.setProperty('--border-light', '#00000026');
+      root.style.setProperty('--background-color', '#fff');
+      root.style.setProperty('--font-color', '#000');
+      root.style.setProperty('--background-textarea', '#fff');
+    }
   }
+
+  // // Change thumbs and icons dogs theme.
+  // function changeIconTheme(currentBackgroundColor) {
+
+  //   const fiveStarS = document.querySelectorAll('.fivestar-dogs div.fivestar-widget .star');
+
+  //   // Current color white should be dark background.
+  //   if (currentBackgroundColor === 'rgb(255, 255, 255)') {
+  //     fiveStarS.forEach((anchor) => {
+  //       if (!anchor.classList.contains('on')) {
+  //         anchor.style.background = 'url(/modules/custom/fivestar/widgets/dogs/dogs-dark.png) no-repeat 0 0';
+  //         const childAnchors = anchor.querySelectorAll('a');
+  //         childAnchors.forEach((childAnchor) => {
+  //           childAnchor.style.background = 'url(/modules/custom/fivestar/widgets/dogs/dogs-dark.png) no-repeat 0 0';
+  //         });
+  //       }
+  //     });
+  //   }
+  //   else {
+  //     fiveStarS.forEach((anchor) => {
+  //       if (!anchor.classList.contains('on')) {
+  //         anchor.style.background = 'url(/modules/custom/fivestar/widgets/dogs/dogs.png) no-repeat 0 0';
+  //         const childAnchors = anchor.querySelectorAll('a');
+  //         childAnchors.forEach((childAnchor) => {
+  //           childAnchor.style.background = 'url(/modules/custom/fivestar/widgets/dogs/dogs.png) no-repeat 0 0';
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
+
+  // // Returns current URL.
+  // function currentUrl() {
+  //   return $(location).attr('href');
+  // }
 
 })(jQuery, Drupal);
 

@@ -1,23 +1,29 @@
-:root {
-	--box-color: #00000080;
-  --box-color-light: #00000026;
-	--font-size: 0.9rem;
-  --font-size-mini: 0.7rem;
-  --background-color: #fff;
-  --font-color: #000;
-}
-
 @import url('../base/fonts.pcss.css');
+
+:root {
+  --box-color: #000;
+  --box-color-light: #000;
+  --border-color: #0000;
+  --border-light: #fff;
+  --background-color: #353535;
+  --font-color: #fff;
+  --background-textarea: #262626;
+
+  --font-size: 0.9rem;
+  --font-size-mini: 0.7rem;
+  --transition-delay: 0.5s;
+}
 
 /* Start of my Custom codes */
 body, .path-home {
 	font-family: Roboto, sans-serif, arial;
   background-color: var(--background-color);
+  transition: var(--transition-delay);
 }
 
 a, p, .li, .comment__time, .comment-edit, .parent-comment-wrapper,
 .form-submit, .comment_edit, .comment-comment-delete-form, textarea,
-.comments__title {
+.comments__title, .material-symbols-outlined {
   color: var(--font-color);
 }
 
@@ -113,9 +119,8 @@ iframe {
 /* Set size of arrows on full view */
 .block__content .owl-theme .owl-nav [class*=owl-] {
   color: #fcfcfc;
-  font-size: 2.5rem;
-  font-family: serif;
-  font-weight: 100;
+  font-size: 2rem;
+  font-family: sans-serif;
 }
 
 .block__content .owl-theme .owl-nav [class*=owl-]:hover {
@@ -165,7 +170,14 @@ textarea {
   width: 100%;
   padding: 0 1.5rem; /* to avoid Hiden words on border */
   min-height: 1.9rem;
-  box-shadow: var(--box-color-light) 0.1rem 0.1rem 0.3rem;
+  /* box-shadow: var(--box-color-light) 0.1rem 0.1rem 0.3rem; */
+  background: var(--background-color);
+}
+
+.field--name-comment-body  textarea:focus {
+  background: var(--background-textarea);
+  outline: none;
+  border-color: var(--font-color);
 }
 
 /* Hiden the subject of comments full view */
@@ -205,7 +217,7 @@ textarea {
 .field--name-comment-body .js-text-full {
   margin-top: 0.22rem;
   border-radius: 2rem;
-  border-color: var(--box-color-light);
+  border-color: var(--border-light);
   overflow: hidden;
 }
 
@@ -239,7 +251,7 @@ textarea {
   align-items: center;
   justify-content: center;
   padding-top: 0.2rem;
-  border: 1px solid var(--box-color-light);
+  border: 1px solid var(--border-color);
   text-decoration: none;
 }
 
@@ -414,13 +426,6 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   display: block;
 }
 
-.close__mobile_menu {
-  background: url(/themes/custom/yes_pet_app/images/icons/inverted/close.png) 0;
-  background-size: 2rem;
-  width: 2rem;
-  height: 1.5rem;
-}
-
 .close__mobile_div {
   display: flex;
   justify-content: end;
@@ -486,12 +491,27 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 
 #edit-keys {
   position: fixed;
-  top: 0.8rem;
+  top: 0.9rem;
   left: 2000px;
   transition: all 0.5s ease;
-  width: 64%;
+  width: 63.5%;
+  border-radius: 2rem;
+  border: unset;
+  background: var(--background-color);
+  border: 1px solid var(--border-light);
+  z-index: 10;
+}
+
+#edit-keys:focus {
+  background: var(--background-textarea);
+  outline: none;
+  border-color: var(--font-color);
 }
 
 .header-nav-overlay {
   display: none;
+}
+
+.close__mobile_div .close__mobile_menu .material-symbols-outlined {
+  color: #fff;
 }
