@@ -169,6 +169,32 @@
     }
   }
 
+  // Copy address infos to clip board.
+  Drupal.behaviors.copyAddressToClipBoard = {
+    attach() {
+      $(document).ready(function () {
+        if (!drupalSettings.copyAddressToClipBoard) {
+
+          // Get the element with the class "simple-gmap-address"
+          const addressElement = document.querySelector('.simple-gmap-address');
+
+          // Add a click event listener to the element
+          addressElement.addEventListener('click', function() {
+            console.log(addressElement);
+            // Get the text inside the element
+            const addressText = addressElement.textContent.trim();
+            // Copy the text to the clipboard
+            navigator.clipboard.writeText(addressText);
+            alert('The text are copied!');
+          });
+
+          // Set the flag to indicate that the behavior has been executed for this page.
+          drupalSettings.copyAddressToClipBoard = true;
+        }
+      })
+    }
+  };
+
   // // Change thumbs and icons dogs theme.
   // function changeIconTheme(currentBackgroundColor) {
 

@@ -23,8 +23,18 @@ body, .path-home {
 
 a, p, .li, .comment__time, .comment-edit, .parent-comment-wrapper,
 .form-submit, .comment_edit, .comment-comment-delete-form, textarea,
-.comments__title, .material-symbols-outlined {
+.comments__title, .material-symbols-outlined, .range__div label, .range__km, .home-title {
   color: var(--font-color);
+}
+
+.range__div label, .range__km, .home-title {
+  font-family: Roboto, sans-serif, arial;
+}
+
+.home-title {
+  text-align: center;
+  text-align: center;
+  padding-bottom: 1.5rem;
 }
 
 /* Align the rating and like */
@@ -43,7 +53,7 @@ a, p, .li, .comment__time, .comment-edit, .parent-comment-wrapper,
   font-size: 0;
 }
 
-.vote-current-score strong {
+.vote-current-score strong, .range__div label, .range__km {
   font-size: var(--font-size);
 }
 
@@ -154,16 +164,24 @@ iframe {
   margin: 0;
 }
 
-.field--name-field-complete-address .field__label,
-.field--name-field-complete-address .simple-gmap-address {
+.field--name-field-complete-address .field__label {
   display: none;
 }
 
 /* Set the font size to address bellow the gmaps */
 .field--name-field-complete-address .simple-gmap-address {
   font-size: var(--font-size-mini);
+  padding: 0 1rem;
+  text-align: center;
 }
 
+.simple-gmap-address:after {
+  font-family: 'Material Symbols Outlined';
+  content: "\e173";
+  font-size: 1.2rem;
+  padding-left: 0.5rem;
+  color: var(--font-color);
+}
 
 /* Subject on full view full view */
 textarea {
@@ -345,6 +363,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 .comments__title {
   margin: 1.5rem 0;
   justify-content: center;
+  font-size: 1.25rem;
 }
 
 /* Set padding to commend to comments */
@@ -478,7 +497,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   align-items: center;
   height: 3.5rem;
   box-shadow: var(--box-color) 0 0 0.3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 #search-block-form #edit-actions input {

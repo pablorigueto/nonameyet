@@ -98,7 +98,7 @@ function FieldElements(props) {
           bottom: '0', // Position the text fields at the bottom of the container
           left: '0', // Position the text fields at the left of the container
           right: '0', // Position the text fields at the right of the container
-          backgroundColor: 'rgb(0 0 0 / 15%)', // Add a semi-transparent black background to the text fields
+          backgroundColor: 'rgb(0 0 0 / 25%)', // Add a semi-transparent black background to the text fields
           color: 'aliceblue', // Set the color of the text fields to white
           boxSizing: 'border-box', // Make sure the padding is included in the total width of the text fields
           height: '15%',

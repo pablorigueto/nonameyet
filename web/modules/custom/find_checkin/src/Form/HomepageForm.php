@@ -23,11 +23,21 @@ class HomepageForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
 
     $form = [
-      'intro_container' => [
+      'my_container' => [
         '#type' => 'container',
-        '#attributes' => [
-          'class' => 'intro-container',
-          'id' => 'content-main-react'
+        '#attributes' => ['class' => 'my-container-class'],
+        'my_title' => [
+          '#type' => 'html_tag',
+          '#tag' => 'h5',
+          '#value' => $this->t('Find places that pets are welcome!'),
+          '#attributes' => ['class' => ['home-title']],
+        ],
+        'intro_container' => [
+          '#type' => 'container',
+          '#attributes' => [
+            'class' => 'intro-container',
+            'id' => 'content-main-react'
+          ],
         ],
       ],
     ];

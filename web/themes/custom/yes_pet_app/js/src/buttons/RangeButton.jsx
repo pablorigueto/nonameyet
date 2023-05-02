@@ -12,7 +12,7 @@ const RangeButton = ({ range, onChange }) => {
         onChange={onChange}
         className="range__input"
       />
-      <div>{range} km</div>
+      <div class="range__km">{range} km</div>
     </div>
   );
 };
