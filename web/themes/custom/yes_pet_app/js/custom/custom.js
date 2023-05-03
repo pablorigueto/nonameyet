@@ -154,6 +154,9 @@
       root.style.setProperty('--background-color', '#353535');
       root.style.setProperty('--font-color', '#fff');
       root.style.setProperty('--background-textarea', '#262626');
+      root.style.setProperty('--font-stars-color', '#fff');
+      root.style.setProperty('--stars-color-1', '#fe53baa2');
+      root.style.setProperty('--stars-color-2', '#8e51eab4');
     }
     else {
       const root = document.documentElement;
@@ -164,8 +167,10 @@
       root.style.setProperty('--border-color', '#00000026');
       root.style.setProperty('--border-light', '#00000026');
       root.style.setProperty('--background-color', '#fff');
-      root.style.setProperty('--font-color', '#000');
+      root.style.setProperty('--font-color', '#353535');
       root.style.setProperty('--background-textarea', '#fff');
+      root.style.setProperty('--stars-color-1', 'unset');
+      root.style.setProperty('--stars-color-2', 'unset');
     }
   }
 

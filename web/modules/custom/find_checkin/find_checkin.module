@@ -108,6 +108,7 @@ function find_checkin_form_alter(&$form, &$form_state, $form_id) {
     $form['comment_body']['widget'][0]['#format'] = 'plain_text';
     $form['comment_body']['widget'][0]['#allowed_formats'] = ['plain_text'];
     $form['comment_body']['widget'][0]['#rows'] = 1;
+    $form['actions']['submit']['#value'] = t('Post');
     unset($form['actions']['preview']);
 
     // This line enables the Enter key to add a new line in the comment field.

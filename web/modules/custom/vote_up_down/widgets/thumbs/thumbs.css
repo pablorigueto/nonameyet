@@ -94,23 +94,23 @@
 .vud-widget-thumbs .down.active {
   float: left;
   display: block;
-  width: 24px;
-  height: 25px;
+  width: 28px;
+  height: 29px;
   font-weight: bold;
   text-align: center;
   background: url(thumbs.png) 0 0 no-repeat;
 }
 
 .vud-widget-thumbs .up.active {
-  background-position: -93px 0;
+  background-position: -120px 0;
 }
 
 .vud-widget-thumbs .down.active {
-  background-position: 3px 0;
+  background-position: -3px 0;
 }
 
 .vud-widget-thumbs .up.inactive {
-  background-position: -70px 0;
+  background-position: -152px 0; /*/*/
 }
 
 .vud-widget-thumbs .up.active:hover {
@@ -118,11 +118,11 @@
 }
 
 .vud-widget-thumbs .down.inactive {
-  background-position: -23px 0;
+  background-position: -34px 0;
 }
 
 .vud-widget-thumbs .down.active:hover {
-  background-position: -23px 0;
+  background-position: -34px 0;
 }
 
 .vud-widget-thumbs .up.inactive:hover {
@@ -130,7 +130,30 @@
 }
 
 .vud-widget-thumbs .down.inactive:hover {
-  background-position: -23px 0;
+  background-position: -34px 0;
+}
+
+.vud-widget-thumbs {
+  width: 4.3rem;
+}
+
+/* Align text of votes */
+.vote-current-score {
+  text-align: center;
+}
+
+/* To align votes with thumbs icon */
+.vud-widget-thumbs .up-score {
+  padding: 0;
+  border-right: unset;
+}
+.vud-widget-thumbs .down-score {
+  padding-left: 0.5rem;
+}
+
+/* To move score close of thumbs */
+.vote-current-score {
+  padding-top: 0;
 }
 
 /**

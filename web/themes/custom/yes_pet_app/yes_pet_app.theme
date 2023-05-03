@@ -50,7 +50,7 @@ function yes_pet_app_preprocess_html(&$variables) {
   ];
  
   // Translations to React JS of locale core module.
-  $variables['#attached']['drupalSettings']['increase_range_msg'] = t('No data found, increase the range');
+  $variables['#attached']['drupalSettings']['increase_range_msg'] = t('No data found :( increase the range');
   $variables['#attached']['drupalSettings']['enable_gps_msg'] = t('Please enable GPS to use this feature');
   $variables['#attached']['drupalSettings']['set_your_range_msg'] = t('Set your range');
 
