@@ -18,8 +18,10 @@ yespetapp-styling:
     theme:
       css/Bootstrap/bootstrap.min.css: {}
       css/yes_pet_app/custom.css: {}
+      css/sweetalert/sweetalert2.min.css: {}
   js:
     js/Bootstrap/bootstrap.min.js: {}
+    js/sweetalert/sweetalert2.all.min.js: {}
   dependencies:
     - core/jquery
     - core/drupal

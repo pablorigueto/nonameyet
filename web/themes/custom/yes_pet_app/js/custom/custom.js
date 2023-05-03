@@ -185,7 +185,30 @@
             const addressText = addressElement.textContent.trim();
             // Copy the text to the clipboard
             navigator.clipboard.writeText(addressText);
-            alert('The text are copied!');
+ 
+            let timerInterval
+            Swal.fire({
+              title: 'Copied!',
+              // html: 'I will close in <b></b> milliseconds.',
+              timer: 1000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Swal.getTimerLeft()
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+              }
+            })
+
           });
 
           // Set the flag to indicate that the behavior has been executed for this page.

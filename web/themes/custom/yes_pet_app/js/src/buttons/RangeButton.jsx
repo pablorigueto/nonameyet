@@ -3,7 +3,7 @@ import React from 'react';
 const RangeButton = ({ range, onChange }) => {
   return (
     <div className="range__div">
-      <label htmlFor="range__input">{ drupalSettings.set_your_range_msg }</label>
+      <label htmlFor="range__label" class="range__label">{ drupalSettings.set_your_range_msg }</label>
       <input
         type="range"
         min="0"
