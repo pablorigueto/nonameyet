@@ -66,6 +66,29 @@
                 </span>
               </button>
 
+              <nav class="navDropown">
+                <ul>
+                  <li class="dropdown">
+                    <a class="material-symbols-outlined text__deco_none">
+                      language
+                    </a>
+                    <ul class="dropdown-menu">
+                      <div class="selectLanguage">{{ 'Select an language'|t }}</div>
+                      <li>
+                        <img class="langImg" src="{{ file_url('themes/custom/yes_pet_app/images/pt-br.svg') }}">
+                        <a class="text__deco_none" langcode="pt-br" href="">{{ 'Portuguese'|t }}</a>
+                      </li>
+
+                      <li>
+                        <img class="langImg" src="{{ file_url('themes/custom/yes_pet_app/images/en-us.svg') }}">
+                        <a class="text__deco_none" langcode="en-us" href="">{{ 'English'|t }}</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+
+
               <div class="reader__logo">
                 <a href="/">
                   <img id="logo-icon" src="{{ file_url('themes/custom/yes_pet_app/images/logo.png') }}" alt="Logo">

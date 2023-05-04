@@ -182,76 +182,114 @@
 
           // Get the element with the class "simple-gmap-address"
           const addressElement = document.querySelector('.simple-gmap-address');
+          if (addressElement !== null) {
 
-          // Add a click event listener to the element
-          addressElement.addEventListener('click', function() {
-            console.log(addressElement);
-            // Get the text inside the element
-            const addressText = addressElement.textContent.trim();
-            // Copy the text to the clipboard
-            navigator.clipboard.writeText(addressText);
- 
-            let timerInterval
-            Swal.fire({
-              title: 'Copied!',
-              // html: 'I will close in <b></b> milliseconds.',
-              timer: 1000,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerLeft()
-                }, 100)
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              /* Read more about handling dismissals below */
-              if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
-              }
-            })
+            // Add a click event listener to the element
+            addressElement.addEventListener('click', function() {
+              console.log(addressElement);
+              // Get the text inside the element
+              const addressText = addressElement.textContent.trim();
+              // Copy the text to the clipboard
+              navigator.clipboard.writeText(addressText);
+  
+              let timerInterval
+              Swal.fire({
+                title: 'Copied!',
+                // html: 'I will close in <b></b> milliseconds.',
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading()
+                  const b = Swal.getHtmlContainer().querySelector('b')
+                  timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                  }, 100)
+                },
+                willClose: () => {
+                  clearInterval(timerInterval)
+                }
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  console.log('I was closed by the timer')
+                }
+              })
 
-          });
-
+            });
+          }
           // Set the flag to indicate that the behavior has been executed for this page.
           drupalSettings.copyAddressToClipBoard = true;
         }
       })
     }
   };
+ 
+  // Theme change color through root vars.
+  Drupal.behaviors.dropDown = {
+    attach() {
+      $(document).ready(function () {
+        if (!drupalSettings.dropDown) {
+ 
+          // Toggle the visibility of the dropdown menu when its link is clicked
+          const dropdownToggles = document.querySelectorAll('.dropdown > a');
+          dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+              e.preventDefault();
+              const dropdownMenu = this.nextElementSibling;
+              if (dropdownMenu.style.display === 'none' || !dropdownMenu.style.display) {
+                dropdownMenu.style.display = 'block';
+              } else {
+                dropdownMenu.style.display = 'none';
+              }
+            });
+          });
 
-  // // Change thumbs and icons dogs theme.
-  // function changeIconTheme(currentBackgroundColor) {
+          // Add active class to the clicked link and hide the dropdown menu
+          const links = document.querySelectorAll('.dropdown a');
+          links.forEach(link => {
+            link.addEventListener('click', function(event) {
+              event.preventDefault(); // prevent the default link behavior
+              const langcode = link.getAttribute('langcode'); // get the langcode attribute
 
-  //   const fiveStarS = document.querySelectorAll('.fivestar-dogs div.fivestar-widget .star');
+              // Get the current URL
+              const currentUrl = window.location.href;
 
-  //   // Current color white should be dark background.
-  //   if (currentBackgroundColor === 'rgb(255, 255, 255)') {
-  //     fiveStarS.forEach((anchor) => {
-  //       if (!anchor.classList.contains('on')) {
-  //         anchor.style.background = 'url(/modules/custom/fivestar/widgets/dogs/dogs-dark.png) no-repeat 0 0';
-  //         const childAnchors = anchor.querySelectorAll('a');
-  //         childAnchors.forEach((childAnchor) => {
-  //           childAnchor.style.background = 'url(/modules/custom/fivestar/widgets/dogs/dogs-dark.png) no-repeat 0 0';
-  //         });
-  //       }
-  //     });
-  //   }
-  //   else {
-  //     fiveStarS.forEach((anchor) => {
-  //       if (!anchor.classList.contains('on')) {
-  //         anchor.style.background = 'url(/modules/custom/fivestar/widgets/dogs/dogs.png) no-repeat 0 0';
-  //         const childAnchors = anchor.querySelectorAll('a');
-  //         childAnchors.forEach((childAnchor) => {
-  //           childAnchor.style.background = 'url(/modules/custom/fivestar/widgets/dogs/dogs.png) no-repeat 0 0';
-  //         });
-  //       }
-  //     });
-  //   }
-  // }
+              // Check if the URL contains the language code
+              if (currentUrl.includes(langcode)) {
+                return;
+              }
+
+              if (langcode == 'pt-br' || langcode == 'en-us' ) {
+                window.location.href = `/${langcode}/home`; // redirect to the language page using the langcode
+              }
+
+              // links.forEach(link => link.classList.remove('active'));
+              // this.classList.add('active');
+              // const dropdownMenu = this.closest('.dropdown-menu');
+              // if (dropdownMenu) {
+              //   dropdownMenu.style.display = 'none';
+              // }
+            });
+          });
+          
+          // Get all the links
+          // const links = document.querySelectorAll('.dropdown-menu a');
+
+          // // Add click event listener to each link
+          // links.forEach(link => {
+          //   link.addEventListener('click', (event) => {
+          //     event.preventDefault(); // prevent the default link behavior
+          //     const langcode = link.getAttribute('langcode'); // get the langcode attribute
+          //     window.location.href = `/${langcode}/page.html`; // redirect to the language page using the langcode
+          //   });
+          // });
+
+          // Set the flag to indicate that the behavior has been executed for this page.
+          drupalSettings.dropDown = true;
+        }
+      })
+    }
+  };
 
   // // Returns current URL.
   // function currentUrl() {

@@ -98,17 +98,16 @@ if (rootElement) {
         else {
           // If response is null, set the fieldElements state to a default text.
           this.setState({ isLoading: false, fieldElements: 
-          
-          
-            <button class="btn" type="button">
+
+            <button className="btn" type="button">
             <strong>{drupalSettings.increase_range_msg}</strong>
             <div id="container-stars">
               <div id="stars"></div>
             </div>
           
             <div id="glow">
-              <div class="circle"></div>
-              <div class="circle"></div>
+              <div className="circle"></div>
+              <div className="circle"></div>
             </div>
           </button>});
  

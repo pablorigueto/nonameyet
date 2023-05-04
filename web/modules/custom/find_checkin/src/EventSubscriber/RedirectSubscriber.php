@@ -26,13 +26,11 @@ class RedirectSubscriber implements EventSubscriberInterface {
   public function onRequest(RequestEvent $event) {
     $path = $event->getRequest()->getPathInfo();
 
-    if ($path !== '/') {
-      return;
+    if ($path == '/') {
+      $response = new TrustedRedirectResponse('/pt-br/home');
+      $event->setResponse($response);
+      $event->stopPropagation();
     }
- 
-    $response = new TrustedRedirectResponse('/home');
-    $event->setResponse($response);
-    $event->stopPropagation();
  
   }
 

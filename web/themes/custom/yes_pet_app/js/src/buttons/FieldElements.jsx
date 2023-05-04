@@ -66,7 +66,7 @@ function FieldElements(props) {
         >{item.type}</p>
 
         <img
-          src="sites/default/files/image/score/score.png"
+          src="/sites/default/files/image/score/score.png"
           alt="score"
           style=
             {{
@@ -125,7 +125,7 @@ function FieldElements(props) {
           
             <div style=
             {{
-              background: 'url("sites/default/files/image/icons/gps.png") 0px center / cover no-repeat',
+              background: 'url("/sites/default/files/image/icons/gps.png") 0px center / cover no-repeat',
               width: '1.85rem',
               height: '2.5rem',
             }}

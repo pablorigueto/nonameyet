@@ -24,7 +24,6 @@ function yes_pet_app_preprocess_menu(&$variables) {
   }
 }
 
-
 /**
  * Implements hook_preprocess_HOOK() for HTML document templates.
  *

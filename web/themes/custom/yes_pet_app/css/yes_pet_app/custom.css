@@ -15,6 +15,7 @@
   --font-size-mini: 0.7rem;
   --transition-delay: 0.5s;
   --font-family: Roboto,sans-serif,arial;
+  --range_update_value: 50;
 }
 
 /* Start of my Custom codes */
@@ -60,24 +61,8 @@ a, p, .li, .comment__time, .comment-edit, .parent-comment-wrapper,
   font-size: var(--font-size);
 }
 
-.range__div label, .range__km {
-  font-size: var(--font-size-16);
-}
-
-.range__km {
-  padding: 1rem;
-}
-
-.range__label {
-  padding-bottom: 1rem;
-}
-
-.range__div {
-  text-align: center;
-}
-
 /* Hiden the label of rating */
-.field--type-fivestar .field__label{
+.field--type-fivestar .field__label, .range__label{
   display: none;
 }
 
@@ -464,13 +449,20 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 
 .btn-hamburger {
   display: flex;
-  justify-content: flex-start;
+  justify-content: start;
   background: transparent;
   border: unset;
+  margin: 0;
+  padding: 0;
 }
 
 .btn-hamburger img {
   height: 2rem;
+}
+
+.navDropown {
+  display: flex;
+  justify-content: center;
 }
 
 .reader__logo {
@@ -490,7 +482,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 
 .site-header__inner__container{
   display: grid;
-  grid-template-columns: 12% 1fr 0 10% 10% 0;
+  grid-template-columns: 10% 10% 1fr 0 10% 10%;
   align-items: center;
   height: 3.5rem;
   box-shadow: var(--box-color) 0 0 0.3rem;
@@ -538,39 +530,94 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 * Range Button
 *
 */
-.range__input {
+ .range__input {
   -webkit-appearance: none;
   width: 100%;
-  height: 0.6rem;
-  border-radius: 5px;  
-  background: #d3d3d3;
-  outline: none;
-  /* opacity: 0.7; */
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-
+  border-radius: 2rem;
 }
 
 .range__input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%; 
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 10px solid #cac52e;
+  margin-top: -5px;
   background: #cac52e;
   cursor: pointer;
-  box-shadow: var(--box-color) 0.2rem 0.2rem 0.5rem;
+  box-shadow: var(--box-color) 0.1rem 0.1rem 1rem;
+  z-index: 999;
   /* box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1); */
 }
 
+.range__input::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #cac52e 0%, #cac52e calc(var(--range_update_value) * 0.24%),
+  #d3d3d3 calc(var(--range_update_value) * 0.24%), #d3d3d3 100%);
+  height: 0.6rem;
+  border-radius: 2rem;
+  /* z-index: 2; */
+}
+
+.range__input::-moz-range-track {
+  background: linear-gradient(to right, #cac52e 0%, #cac52e calc(var(--range_update_value) * 0.24%),
+  #d3d3d3 calc(var(--range_update_value) * 0.24%), #d3d3d3 100%);
+  height: 0.6rem;
+  border-radius: 2rem;
+  /* z-index: 2; */
+}
+
+
+.range__div label, .range__km {
+  font-size: var(--font-size-16);
+}
+
+/* .range__km {
+  padding: 1rem;
+} */
+
+.range__div {
+  text-align: center;
+  padding-bottom: 2.4rem;
+}
+
+/* For Webkit browsers (including Safari and Chrome) */
+.range__input::-webkit-progress-value {
+  background-color: #cac52e;
+}
+
+/* For Firefox */
+.range__input::-moz-range-progress {
+  background-color: #cac52e;
+}
+
 .range__input::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
+  border: 10px solid #cac52e;
+  margin-top: -5px;
   background: #cac52e;
   cursor: pointer;
-  box-shadow: var(--box-color) 0.2rem 0.2rem 0.5rem;
+  box-shadow: var(--box-color) 0.1rem 0.1rem 1rem;
+  z-index: 999;
   /* box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1); */
+}
+
+.range__input-container {
+  position: relative;
+}
+
+.range__km {
+  position: absolute;
+  top: -1.2em;
+  left: calc(var(--range_update_value) * 0.24%);
+  text-align: center;
+  transform: translateX(-20%);
+  font-size: var(--font-size-mini);
+  width: 30px;
 }
 
 /*
@@ -772,33 +819,147 @@ strong {
 
 .home__link:before,
 .my-account__link:before,
-.log-out__link:before {
+.log-out__link:before,
+.início__link:before,
+.minha-conta__link:before,
+.sair__link:before {
   font-family: 'Material Symbols Outlined';
   font-size: var(--font-size-16);
   color: #fff;
   padding-right: 0.5rem;
 }
 
-.home__link:before {
+.início__link:before, .home__link:before {
   content: "\ea44";
 }
 
-.my-account__link:before {
+.minha-conta__link:before, .my-account__link:before {
   content: "\f02e";
 }
 
-.log-out__link:before {
+.sair__link:before, .log-out__link:before {
   content: "\e9ba";
 }
 
 .home__link,
 .my-account__link,
-.log-out__link {
+.log-out__link,
+.início__link,
+.minha-conta__link,
+.sair__link {
   display: flex;
   justify-content: initial;
   align-items: flex-end;
 }
 
+/*
+*
+* 
+*
+*/
+
 #logo-icon {
-  width: 62px;
+  width: 73px;
+}
+
+/* Hide the X close icon */
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* Hide the X close icon for Firefox */
+input[type="search"]::-moz-search-cancel {
+  display: none;
+}
+
+.title__local {
+  text-align: center;
+  color: var(--font-color);
+  font-size: 1rem;
+  font-family: var(--font-family);
+  padding-bottom: 0.5rem;
+}
+
+
+/*
+*
+*
+*
+*
+*/
+/* nav {
+  background-color: #333;
+  color: #fff;
+  font-size: 18px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+li {
+ 
+  position: relative;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Dropdown menu styles */
+/* .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  padding: 10px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}   */
+
+.navDropown ul {
+  padding: 0;
+  margin: 0;
+}
+
+.navDropown .dropdown-menu {
+  background-color: var(--background-color);
+  color: var(--font-color);
+  font-family: var(--font-family);
+  padding: 0 1rem;
+  min-width: 12rem;
+  top: 2.47rem;
+}
+
+.navDropown .dropdown-menu li, 
+.navDropown .dropdown-menu .selectLanguage {
+  padding-bottom: 1rem;
+}
+
+.navDropown .dropdown-menu .selectLanguage {
+  padding-top: 0.5rem
+}
+
+.navDropown .dropdown-menu .langImg {
+  padding-right: 0.5rem;
+}
+
+.navDropown .text__deco_none {
+  text-decoration: none;
+}
+
+.navDropown .dropdown {
+  display: flex;
 }

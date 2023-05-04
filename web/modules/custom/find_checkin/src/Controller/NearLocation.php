@@ -131,7 +131,7 @@ class NearLocation extends ControllerBase {
         $field_type = $node->get('field_type')[0]->getValue()['value'];
         
         $base_url = $this->getFirstImageToTeaser($field)->getUri();
-        $field_image_location_address = str_replace("base:/", "", $base_url);
+        $field_image_location_address = str_replace("base:/", "/", $base_url);
 
         $field_rating = 10;
         if ($node->get('field_rating')[0] != null) {

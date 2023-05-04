@@ -1,3 +1,7 @@
+<div class="title__local" id="title__local">
+  {{ node.title.value }}
+</div>
+
 <div class="owl-carousel owl-theme">
   {% for item in content.field_image_location['#items'] %}
     {% set image_url = file_url(item.entity.uri.value) %}
