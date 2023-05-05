@@ -118,6 +118,12 @@ function find_checkin_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = '_find_checkin_form_validate';
   }
 
+  if ($form_id == 'vote') {
+    if (\Drupal::currentUser()->isAnonymous()) {
+      $form['#access'] = FALSE;
+    }
+  }
+
 }
 
 function _find_checkin_form_validate($form, &$form_state) {

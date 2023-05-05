@@ -16,6 +16,7 @@
   --transition-delay: 0.5s;
   --font-family: Roboto,sans-serif,arial;
   --range_update_value: 50;
+  --left-search: 555rem;
 }
 
 /* Start of my Custom codes */
@@ -23,6 +24,11 @@ body, .path-home {
 	font-family: var(--font-family);
   background-color: var(--background-color);
   transition: var(--transition-delay);
+}
+
+body {
+  max-width: 420px;
+  margin: 0 auto;
 }
 
 a, p, .li, .comment__time, .comment-edit, .parent-comment-wrapper,
@@ -478,6 +484,11 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 .dark__theme {
   display: flex;
   justify-content: end;
+  cursor: pointer;
+}
+
+.search__icon {
+  cursor: pointer;
 }
 
 .site-header__inner__container{
@@ -500,15 +511,15 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 #edit-keys {
   position: fixed;
   top: 0.9rem;
-  left: 2000px;
-  transition: all 0.5s ease;
-  width: 63.5%;
+  left: var(--left-search);
+  transition: all 0.3s ease;
+  width: 270px; /*63.5%;*/
   border-radius: 2rem;
-  border: unset;
   background: var(--background-color);
   border: 1px solid var(--border-light);
-  z-index: 10;
+  /* z-index: 10; */
   color: var(--font-color);
+  cursor: pointer;
 }
 
 #edit-keys:focus {
@@ -523,6 +534,10 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 
 .close__mobile_div .close__mobile_menu .material-symbols-outlined {
   color: #fff;
+}
+
+.close__mobile_div .close__mobile_menu {
+  cursor: pointer;
 }
 
 /*
@@ -567,7 +582,6 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   /* z-index: 2; */
 }
 
-
 .range__div label, .range__km {
   font-size: var(--font-size-16);
 }
@@ -578,7 +592,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 
 .range__div {
   text-align: center;
-  padding-bottom: 2.4rem;
+  padding-bottom: 2.5rem;
 }
 
 /* For Webkit browsers (including Safari and Chrome) */
@@ -822,7 +836,9 @@ strong {
 .log-out__link:before,
 .início__link:before,
 .minha-conta__link:before,
-.sair__link:before {
+.sair__link:before,
+.entrar__link:before,
+.log-in__link::before {
   font-family: 'Material Symbols Outlined';
   font-size: var(--font-size-16);
   color: #fff;
@@ -841,12 +857,18 @@ strong {
   content: "\e9ba";
 }
 
+.entrar__link:before, .log-in__link::before {
+  content: "\ea77";
+}
+
 .home__link,
 .my-account__link,
 .log-out__link,
 .início__link,
 .minha-conta__link,
-.sair__link {
+.sair__link,
+.entrar__link,
+.log-in__link {
   display: flex;
   justify-content: initial;
   align-items: flex-end;
@@ -941,6 +963,7 @@ a:hover {
   padding: 0 1rem;
   min-width: 12rem;
   top: 2.47rem;
+  z-index: 2;
 }
 
 .navDropown .dropdown-menu li, 
@@ -962,4 +985,5 @@ a:hover {
 
 .navDropown .dropdown {
   display: flex;
+  cursor: pointer;
 }

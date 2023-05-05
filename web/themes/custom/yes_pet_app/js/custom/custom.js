@@ -74,13 +74,29 @@
 
         const searchIcon = document.querySelector('.search__icon');
         const navMenuSearch = document.getElementById('edit-keys');
-        
+        const screenWidth = window.screen.width; 
+        const root = document.documentElement;
+ 
         searchIcon.addEventListener('click', function() {
-          if (navMenuSearch.style.left === '3.2rem') {
-            navMenuSearch.style.left = '2000px';
-          } 
+          
+        // Get the computed style of the #edit-keys element
+        let computedStyle = getComputedStyle(navMenuSearch);
+
+        // Get the value of the left property
+        let leftValue = computedStyle.getPropertyValue('left');
+
+          let halfScreenWidth = (screenWidth / 2) - 174;
+
+          if (screenWidth >= 450) {
+            halfScreenWidth = halfScreenWidth + 14;
+          }
+
+          if (leftValue === '8880px') {
+            
+            navMenuSearch.style.left = halfScreenWidth +'px';
+          }
           else {
-            navMenuSearch.style.left = '3.2rem';
+            navMenuSearch.style.left = '555rem';
           }
         });
 
@@ -115,8 +131,6 @@
           // When user click on dark theme to change the theme.
           const darkTheme = document.querySelector('.dark__theme');
           darkTheme.addEventListener('click', () => {
-            // Get a reference to the root element
-            const root = document.documentElement;
 
             // Get the background color of the body element
             const bodyStyle = window.getComputedStyle(document.body);
@@ -224,7 +238,7 @@
     }
   };
  
-  // Theme change color through root vars.
+  // Language switch.
   Drupal.behaviors.dropDown = {
     attach() {
       $(document).ready(function () {
@@ -245,7 +259,7 @@
           });
 
           // Add active class to the clicked link and hide the dropdown menu
-          const links = document.querySelectorAll('.dropdown a');
+          const links = document.querySelectorAll('.dropdown a, .dropdown img');
           links.forEach(link => {
             link.addEventListener('click', function(event) {
               event.preventDefault(); // prevent the default link behavior
@@ -290,6 +304,86 @@
       })
     }
   };
+
+  // Check the link of left menu.
+  Drupal.behaviors.leftMenuLink = {
+    attach() {
+      $(document).ready(function () {
+        if (!drupalSettings.leftMenuLink) {
+
+          const firstLink = document.querySelector('#block-yes-pet-app-main-menu .menu__link--level-1:first-child');
+          firstLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const hrefValue = firstLink.getAttribute('href');
+            const home = hrefValue + '/home';
+
+            // To get the path.
+            const url = new URL(window.location.href);
+            const path = url.pathname;
+
+            if (path !== home) {
+              window.location.href = home;
+            }
+
+          });
+          // Set the flag to indicate that the behavior has been executed for this page.
+          drupalSettings.leftMenuLink = true;
+        }
+      })
+    }
+  };
+
+  // Check the link of left menu.
+  Drupal.behaviors.logoRedirect = {
+    attach() {
+      $(document).ready(function () {
+        if (!drupalSettings.logoRedirect) {
+
+          const firstLink = document.querySelector('.reader__logo a');
+          firstLink.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // To get the path.
+            const url = new URL(window.location.href);
+            const path = url.pathname.split('/');
+            let lang = '/' + path[1] + '/home';
+
+            if (!url.pathname.endsWith("/home")) {
+              window.location.href = lang;
+            }
+
+          });
+          // Set the flag to indicate that the behavior has been executed for this page.
+          drupalSettings.logoRedirect = true;
+        }
+      })
+    }
+  };
+
+  // Returns device type.
+  function deviceType() {
+    // Get the user agent string
+    const userAgent = navigator.userAgent;
+    // Check if the user agent string contains any of the keywords for mobile devices
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+
+    // Check if the user agent string contains any of the keywords for tablet devices
+    var isTablet = /Tablet|iPad/i.test(userAgent);
+
+    // Print the device type based on the above checks
+    if (isMobile) {
+      console.log("Device is a mobile phone");
+    } else if (isTablet) {
+      console.log("Device is a tablet");
+    } else {
+      console.log("Device is a desktop or laptop computer");
+    }
+
+
+    return navigator.userAgent;
+  }
+
+// Check if the user agent string contains any of the keywords for mobile devices
 
   // // Returns current URL.
   // function currentUrl() {

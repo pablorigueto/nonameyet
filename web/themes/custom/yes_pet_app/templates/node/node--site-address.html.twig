@@ -12,9 +12,15 @@
   {% endfor %}
 </div>
 
-<div class="group-rating" id="group-rating">
-  {{ content.field_rating }}
-</div>
+{% if user.isAnonymous == FALSE %}
+  <div class="group-rating" id="group-rating">
+    {{ content.field_rating }}
+  </div>
+  {% else %}
+    <div class="not__logedin_rating" id="not__logedin_rating">
+      <a href="/user/login">{{"Login to vote"|t}}</a>
+    </div>
+{% endif %}
 
 <div class="location__description">
 {{ content.body }}
