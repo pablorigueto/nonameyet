@@ -466,11 +466,6 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   height: 2rem;
 }
 
-.navDropown {
-  display: flex;
-  justify-content: center;
-}
-
 .reader__logo {
   display: flex;
   justify-content: center;
@@ -900,90 +895,4 @@ input[type="search"]::-moz-search-cancel {
   font-size: 1rem;
   font-family: var(--font-family);
   padding-bottom: 0.5rem;
-}
-
-
-/*
-*
-*
-*
-*
-*/
-/* nav {
-  background-color: #333;
-  color: #fff;
-  font-size: 18px;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-li {
- 
-  position: relative;
-}
-
-a {
-  color: #fff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Dropdown menu styles */
-/* .dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #333;
-  padding: 10px;
-  z-index: 1;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}   */
-
-.navDropown ul {
-  padding: 0;
-  margin: 0;
-}
-
-.navDropown .dropdown-menu {
-  background-color: var(--background-color);
-  color: var(--font-color);
-  font-family: var(--font-family);
-  padding: 0 1rem;
-  min-width: 12rem;
-  top: 2.47rem;
-  z-index: 2;
-}
-
-.navDropown .dropdown-menu li, 
-.navDropown .dropdown-menu .selectLanguage {
-  padding-bottom: 1rem;
-}
-
-.navDropown .dropdown-menu .selectLanguage {
-  padding-top: 0.5rem
-}
-
-.navDropown .dropdown-menu .langImg {
-  padding-right: 0.5rem;
-}
-
-.navDropown .text__deco_none {
-  text-decoration: none;
-}
-
-.navDropown .dropdown {
-  display: flex;
-  cursor: pointer;
 }

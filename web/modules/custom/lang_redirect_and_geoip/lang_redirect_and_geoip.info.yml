@@ -1,0 +1,6 @@
+name: Language Redirect and GeoIP
+type: module
+description: Provides a auto redirect through the GeoIP.
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10
+version: '10.0.0'

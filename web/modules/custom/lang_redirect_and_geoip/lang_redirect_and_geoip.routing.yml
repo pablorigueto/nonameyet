@@ -1,0 +1,8 @@
+# lang_redirect_and_geoip.homepage_form:
+#   path: '/home'
+#   defaults:
+#     _form: '\Drupal\lang_redirect_and_geoip\Form\HomepageForm'
+#     _title: ''
+#   requirements:
+#     _permission: 'access content'
+    # _role: 'authenticated'

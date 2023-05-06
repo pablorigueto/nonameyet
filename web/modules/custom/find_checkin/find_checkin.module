@@ -204,11 +204,6 @@ function _find_checkin_comment_path() {
     return TRUE;
   }
 
-  // $comment_start_reply = str_starts_with($current_path, "/comment/reply/");
-  // if ($comment_start_reply) {
-  //   return 'reply';
-  // }
-
   return FALSE;
 }
 

@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Contains lang_redirect_and_geoip.
+ */
+use GeoIp2\Database\Reader;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implements hook_page_attachments().
+ */
+function lang_redirect_and_geoip_page_attachments(array &$attachments) {
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 'lang_redirect_and_geoip/lrag';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ */
+function lang_redirect_and_geoip_preprocess_html(&$variables) {
+
+ // Auto redirect to PT-BR if Country is Brazil.
+  // Check if the user has already been redirected before.
+  if (!isset($_COOKIE['geoip_redirected']) || $_COOKIE['geoip_redirected'] !== 'true') {
+
+    $ip_address = \Drupal::request()->getClientIp();
+
+    // If the IP address is a private address, get the public IP using an external service.
+    if (filter_var($ip_address, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === FALSE) {
+      $public_ip = file_get_contents('https://api.ipify.org');
+      $ip_address = $public_ip !== FALSE ? $public_ip : $ip_address;
+    }
+
+    $database_path = 'public://GeoLite2-City.mmdb';
+    $reader = new Reader($database_path);
+    $record = $reader->city($ip_address);
+
+    $country = $record->country->name;
+
+    if ($country === null) {
+      __lang_redirect_and_geoip_set_cookie('/pt-br/home');
+      return;
+    }
+
+    //$current_url = \Drupal::request()->getRequestUri();
+
+    if ($country == 'Brazil') { /*&& strpos($current_url, '/pt-br') === FALSE*/
+      $new_url = '/pt-br';
+      __lang_redirect_and_geoip_set_cookie($new_url);
+    }
+    else {
+      $new_url = '/en-us';
+      __lang_redirect_and_geoip_set_cookie($new_url);
+    }
+  }
+}
+
+// Set cookie to lang that we got through the IP.
+function __lang_redirect_and_geoip_set_cookie($new_url) {
+  $response = new RedirectResponse($new_url);
+  // Set a cookie to indicate that the redirect has been done 30 days.
+  setcookie('geoip_redirected', 'true', time() + 2592000, '/');
+  $response->send();
+  exit;
+}
