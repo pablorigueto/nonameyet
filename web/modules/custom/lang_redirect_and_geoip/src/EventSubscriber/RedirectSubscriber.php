@@ -7,6 +7,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Redirects to langcode if the path didn't have the / at the end.
@@ -14,54 +15,39 @@ use Drupal\Core\Language\LanguageManagerInterface;
 class RedirectSubscriber implements EventSubscriberInterface {
 
   /**
-   * The Entity Type Manager Interface.
-   *
-   * @var Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $languageManager;
-
-  public function __construct(LanguageManagerInterface $languageManager) {
-    $this->languageManager = $languageManager;
-  }
-
-  /**
    * {@inheritdoc}
-   */
+   */ 
+  public function onRequest(RequestEvent $event) {
+    $request = $event->getRequest();
+
+    // Redirect only on the homepage.
+    if ($request->getRequestUri() !== '/') {
+      return;
+    }
+
+    // Get the langcode from the cookie, or use 'en' as the default.
+    $langcode = $_COOKIE['geoip_langcode'];
+
+    if (!$langcode) {
+      return;
+    }
+
+    // Get the current URL without the base URL.
+    $url_path = $request->getPathInfo();
+
+    // Create the new URL with the correct langcode.
+    $new_url = $langcode . $url_path;
+
+    // Create a redirect response.
+    $response = new RedirectResponse($new_url, 301);
+
+    // Set the response on the event.
+    $event->setResponse($response);
+  }
+  
   public static function getSubscribedEvents() {
     $events[KernelEvents::REQUEST][] = ['onRequest'];
     return $events;
   }
 
-  /**
-   * Limit this solution only to homepage.
-   */
-  public function onRequest(RequestEvent $event) {
-    $path = $event->getRequest()->getPathInfo();
-    //$defaultLangcode = $this->languageManager->getDefaultLanguage()->getId();
-    //$currentLanguage = $this->getCurrentLanguage();
-
-    // Get all enabled languages.
-    $languages = $this->languageManager->getLanguages();
-
-    $pathRemovedFirstChar = substr($path, 1);
-
-    if (isset($languages[$pathRemovedFirstChar])) {
-      $response = new TrustedRedirectResponse($path . '/home');
-      $event->setResponse($response);
-      $event->stopPropagation();
-    }
- 
-  }
-
-  /**
-   * Example method that gets the current language.
-   */
-  public function getCurrentLanguage() {
-    // Get the current language object.
-    $currentLanguage = $this->languageManager->getCurrentLanguage('content');
-
-    // Get the language code.
-    return $currentLanguage->getId();
-
-  }
 }

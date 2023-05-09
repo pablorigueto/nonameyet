@@ -135,6 +135,14 @@
     {% endif %}
 
     <div id="main-wrapper" class="layout-main-wrapper layout-container">
+    {# Only on homepage (react js that gets all near location and create range button)  #}
+    {% if is_front %}
+      <div class="my-container-class">
+        <h5 class="home-title">{{ 'Find places that Pets are welcome!'|t }}</h5>
+        <div class="intro-container" id="content-main-react"></div>
+      </div>
+    {% endif %}
+
       <div id="main" class="layout-main">
         <div class="main-content">
           {{ page.hero }}
@@ -147,7 +155,6 @@
                 <main role="main" class="site-main">
                   {{ page.content_above }}
                   {{ page.content }}
-                  {# <div id="content-main-react"></div> #}
                 </main>
 
                 {{ page.sidebar }}
@@ -156,7 +163,6 @@
               <main role="main">
                 {{ page.content_above }}
                 {{ page.content }}
-                {# <div id="content-main-react"></div> #}
               </main>
             {% endif %}
             {{ page.content_below }}

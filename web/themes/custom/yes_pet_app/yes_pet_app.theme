@@ -69,3 +69,39 @@ function yes_pet_app_page_attachments_alter(array &$attachments) {
   $attachments['#attached']['library'][] = 'yes_pet_app/yespetapp-styling';
 
 }
+
+// function yes_pet_app_preprocess_page(&$variables) {
+//   $variables['#cache']['max-age'] = 0;
+//  // change the Theme Dark and White on Backend to avoid bad ux.
+//  $cookie_value = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : '';
+//  // }
+//  if ($cookie_value === 'light') { //light
+//    // Define the CSS variables for the light theme.
+//    $css = <<<CSS
+//      :root {
+//        --box-color: #00000080 !important;
+//        --box-color-light: #00000026 !important;
+//        --border-color: #00000026 !important;
+//        --border-light: #00000026 !important;
+//        --background-color: #fff !important;
+//        --font-color: #353535 !important;
+//        --background-textarea: #fff !important;
+//        --stars-color-1: unset !important;
+//        --stars-color-2: unset !important;
+//      }
+//    CSS;
+
+//  }
+
+//  // Attach the CSS to the page.
+//  $style = [
+//    '#type' => 'html_tag',
+//    '#tag' => 'style',
+//    '#value' => $css,
+//    '#attributes' => [
+//      'id' => 'styled-cache',
+//    ],
+//  ];
+//  $variables['#attached']['html_head'][] = [$style, 'yes_pet_app'];
+
+// }

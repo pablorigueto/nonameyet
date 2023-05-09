@@ -40,7 +40,7 @@ function lang_redirect_and_geoip_preprocess_html(&$variables) {
     $country = $record->country->name;
 
     if ($country === null) {
-      __lang_redirect_and_geoip_set_cookie('/pt-br/home');
+      __lang_redirect_and_geoip_set_cookie('/pt-br');
       return;
     }
 
@@ -62,6 +62,7 @@ function __lang_redirect_and_geoip_set_cookie($new_url) {
   $response = new RedirectResponse($new_url);
   // Set a cookie to indicate that the redirect has been done 30 days.
   setcookie('geoip_redirected', 'true', time() + 2592000, '/');
+  setcookie('geoip_langcode', $new_url, time() + 2592000, '/');
   $response->send();
   exit;
 }

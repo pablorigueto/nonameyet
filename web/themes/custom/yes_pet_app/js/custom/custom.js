@@ -142,10 +142,12 @@
             if (currentBackgroundColor === 'rgb(255, 255, 255)') {
               // Store the current theme in localStorage
               localStorage.setItem('theme', 'dark');
+              //document.cookie = "theme=dark";
              }
               else {
                 // Store the current theme in localStorage
                 localStorage.setItem('theme', 'light');
+                //document.cookie = "theme=light";
               }
             });
           // Set the flag to indicate that the behavior has been executed for this page.
@@ -156,6 +158,12 @@
   };
 
   function changeTheme(currentTheme) {
+
+    // // Remove an existing CSS.
+    // const styleElement = document.querySelector('#styled-cache');
+    // if (typeof styleElement !== 'undefined' && styleElement !== null) {
+    //   styleElement.remove();
+    // }
     // If a theme is stored in localStorage, apply it
     if (currentTheme === 'dark' || currentTheme === 'rgb(255, 255, 255)') {
       const root = document.documentElement;

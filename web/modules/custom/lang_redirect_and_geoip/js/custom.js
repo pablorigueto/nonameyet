@@ -36,7 +36,7 @@
               }
 
               if (langcode == 'pt-br' || langcode == 'en-us' ) {
-                window.location.href = `/${langcode}/home`; // redirect to the language page using the langcode
+                window.location.href = `/${langcode}`; // redirect to the language page using the langcode
               }
             });
           });
@@ -59,7 +59,7 @@
           firstLink.addEventListener('click', function(e) {
             e.preventDefault();
             const hrefValue = firstLink.getAttribute('href');
-            const home = hrefValue + '/home';
+            const home = hrefValue;
 
             // To get the path.
             const url = new URL(window.location.href);
@@ -90,11 +90,11 @@
             // To get the path.
             const url = new URL(window.location.href);
             const path = url.pathname.split('/');
-            let lang = '/' + path[1] + '/home';
-
-            if (!url.pathname.endsWith("/home")) {
-              window.location.href = lang;
-            }
+            let lang = '/' + path[1];
+            window.location.href = lang;
+            // if (!url.pathname.endsWith("/home")) {
+            //   window.location.href = lang;
+            // }
 
           });
           // Set the flag to indicate that the behavior has been executed for this page.
@@ -104,6 +104,28 @@
     }
   };
 
+  // Drupal.behaviors.homeRedirectLang = {
+  //   attach() {
+  //     if (!drupalSettings.homeRedirectLang && window.location.pathname === '/') {
+  //       const langcode = getCookie('geoip_langcode');
+  //       if (langcode) {
+  //         const redirectUrl = `${window.location.origin}/${decodeURIComponent(langcode)}`;
+  //         window.location.href = redirectUrl;
+  //       }
+  //       drupalSettings.homeRedirectLang = true;
+  //     }
+  //   }
+  // };
+  
+  // // Helper function to retrieve the value of a cookie.
+  // function getCookie(name) {
+  //   const value = "; " + document.cookie;
+  //   const parts = value.split("; " + name + "=");
+  //   if (parts.length === 2) {
+  //     return parts.pop().split(";").shift();
+  //   }
+  // }
+  
 
   
 })(jQuery, Drupal);
