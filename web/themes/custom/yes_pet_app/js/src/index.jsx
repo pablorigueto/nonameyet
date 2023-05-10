@@ -8,6 +8,18 @@ import { getLocation } from './location/LocationUtils';
 
 const rootElement = document.getElementById('content-main-react');
 
+const Loading = () => {
+  return (
+    <div className="loader">
+
+      <div className="loader"></div>
+
+    </div>
+
+
+  );
+};
+
 if (rootElement) {
 
   class AutoDom extends React.Component {
@@ -87,17 +99,24 @@ if (rootElement) {
     // A function to send location data to the backend API
     sendLocationDataToBackend = (latitude, longitude, range) => {
       this.setState({ isLoading: true, fieldElements: null }); // set isLoading and fieldElements state
+
       sendLocationDataToBackend(latitude, longitude, range)
       .then((response) => {
         // Map the response data to field elements and set the state with the new fieldElements
         if (response.length > 0) {
           console.log(response);
           // Map the response data to field elements and set the state with the new fieldElements
-          this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
+          //this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
+
+          setTimeout(() => {
+            this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
+          }, 3000); // add a delay of 3 seconds (3000 milliseconds) before setting isLoading to false
+
+
         }
         else {
           // If response is null, set the fieldElements state to a default text.
-          this.setState({ isLoading: false, fieldElements: 
+          this.setState({ isLoading: true, fieldElements: 
 
             <button className="btn" type="button">
             <strong>{drupalSettings.increase_range_msg}</strong>
@@ -130,22 +149,26 @@ if (rootElement) {
     };
 
     render() {
-      const { fieldElements, range, gpsDisabled, error, isLoading} = this.state;
-
+      const { fieldElements, range, gpsDisabled, error, isLoading } = this.state;
+    
       return (
         <div>
           <RangeButton range={range} onChange={this.handleRangeChange} />
-
-          {fieldElements}
-
+    
+          {isLoading ? (
+            <Loading />
+          ) : (
+            fieldElements
+          )}
+    
           {error && !isLoading && gpsDisabled ? (
-            <div id="gps-error">{ drupalSettings.enable_gps_msg }</div>
+            <div id="gps-error">{drupalSettings.enable_gps_msg}</div>
           ) : null}
-
         </div>
       );
     }
- 
+    
+
   }
 
   const root = createRoot(rootElement);

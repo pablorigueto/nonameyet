@@ -110,13 +110,13 @@ class NearLocation extends ControllerBase {
       foreach ($nodes as $node) {
 
         if ($node->bundle() != 'site_address') {
-            continue;
+          continue;
         }
 
-        // If the node didn't have translation, get the default language.
+        // If the node didn't have translation move to the next one.
         $field = $this->getTranslationField($node, $langcode);
         if ($field == false) {
-            $field = $node;
+          continue;
         }
 
         // Get the coordinates from each node.
@@ -251,5 +251,4 @@ class NearLocation extends ControllerBase {
     }
 
   }
- 
 }

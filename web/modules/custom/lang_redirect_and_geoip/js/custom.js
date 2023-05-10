@@ -36,7 +36,11 @@
               }
 
               if (langcode == 'pt-br' || langcode == 'en-us' ) {
-                window.location.href = `/${langcode}`; // redirect to the language page using the langcode
+                // Update the language code on cookie to avoid error.
+                update_cookie_language(langcode);
+
+                // redirect to the language page using the langcode.
+                window.location.href = `/${langcode}`;
               }
             });
           });
@@ -48,7 +52,23 @@
     }
   };
 
+  function update_cookie_language(langcode) {
+    // Set the new value of the cookie
+    document.cookie = "geoip_langcode=/"+langcode;
 
+    // Get the current date and time
+    var currentDate = new Date();
+
+    // Set the expiration time of the cookie to 30 days from the current date
+    var expirationDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+    // Convert the expiration time to UTC format
+    var expirationUTC = expirationDate.toUTCString();
+
+    // Set the expiration time of the cookie
+    document.cookie = "geoip_langcode=/"+langcode+"; expires=" + expirationUTC + "; path=/";
+  }
+ 
   // Check the link of left menu.
   Drupal.behaviors.leftMenuLink = {
     attach() {

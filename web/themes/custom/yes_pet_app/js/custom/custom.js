@@ -49,7 +49,7 @@
         mobileNavButton.addEventListener('click', function() {
           if (headerNav.style.left === '0px') {
             headerNav.style.left = '-100%';
-          } 
+          }
           else {
             headerNav.style.left = '0px';
           }
