@@ -586,6 +586,8 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 } */
 
 .range__div {
+  /* width: 87%;
+  margin: 0 auto; */
   text-align: center;
   padding-bottom: 2.5rem;
 }
@@ -896,73 +898,3 @@ input[type="search"]::-moz-search-cancel {
   font-family: var(--font-family);
   padding-bottom: 0.5rem;
 }
-
-.loading {
-  text-align: center;
-  color: var(--font-color);
-  font-size: 1rem;
-  font-family: var(--font-family);
-  justify-content: center;
-  align-items: center;
-}
-
- 
-
-.loader {
-  width: 48px;
-  height: 48px;
-  display: block;
-  margin: 20px auto;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.loader::after {
-  content: '';
-  width: 48px;
-  height: 48px;
-  left: 0;
-  bottom: 0;
-  position: absolute;
-  border-radius: 50% 50% 0;
-  border: 15px solid var(--font-color);
-  transform: rotate(45deg) translate(0, 0);
-  box-sizing: border-box;
-  animation: animMarker 0.4s ease-in-out infinite alternate;
-}
-
-.loader::before {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-  top: 150%;
-  width: 24px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.2);
-  animation: animShadow 0.4s ease-in-out infinite alternate;
-}
-
-@keyframes animMarker {
-  0% {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-
-  100% {
-    transform: rotate(45deg) translate(-5px, -5px);
-  }
-}
-
-@keyframes animShadow {
-  0% {
-    transform: scale(0.5);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-    

@@ -17,6 +17,7 @@ yespetapp-styling:
   css:
     theme:
       css/Bootstrap/bootstrap.min.css: {}
+      css/yes_pet_app/loading_dog.css: {}
       css/yes_pet_app/custom.css: {}
       css/sweetalert/sweetalert2.min.css: {}
   js:
