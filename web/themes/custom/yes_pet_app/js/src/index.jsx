@@ -145,8 +145,6 @@ if (rootElement) {
           setTimeout(() => {
             this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
           }, 3000); // add a delay of 3 seconds (3000 milliseconds) before setting isLoading to false
-
-
         }
         else {
           // If response is null, set the fieldElements state to a default text.
@@ -163,7 +161,6 @@ if (rootElement) {
               <div className="circle"></div>
             </div>
           </button>});
- 
         }
       });
     };
@@ -184,7 +181,7 @@ if (rootElement) {
 
     render() {
       const { fieldElements, range, gpsDisabled, error, isLoading } = this.state;
-    
+
       return (
         <div>
           <RangeButton range={range} onChange={this.handleRangeChange} />
@@ -201,7 +198,6 @@ if (rootElement) {
         </div>
       );
     }
-    
 
   }
 

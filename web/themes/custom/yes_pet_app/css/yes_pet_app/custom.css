@@ -581,9 +581,9 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   font-size: var(--font-size-16);
 }
 
-/* .range__km {
-  padding: 1rem;
-} */
+.main_content a {
+  position: unset;
+}
 
 .range__div {
   /* width: 87%;

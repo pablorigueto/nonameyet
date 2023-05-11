@@ -40,18 +40,18 @@ function lang_redirect_and_geoip_preprocess_html(&$variables) {
     $country = $record->country->name;
 
     if ($country === null) {
-      __lang_redirect_and_geoip_set_cookie('/pt-br');
+      __lang_redirect_and_geoip_set_cookie('/pt-br/');
       return;
     }
 
     //$current_url = \Drupal::request()->getRequestUri();
 
     if ($country == 'Brazil') { /*&& strpos($current_url, '/pt-br') === FALSE*/
-      $new_url = '/pt-br';
+      $new_url = '/pt-br/';
       __lang_redirect_and_geoip_set_cookie($new_url);
     }
     else {
-      $new_url = '/en-us';
+      $new_url = '/en-us/';
       __lang_redirect_and_geoip_set_cookie($new_url);
     }
   }

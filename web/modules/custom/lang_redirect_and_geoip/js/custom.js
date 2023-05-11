@@ -40,7 +40,7 @@
                 update_cookie_language(langcode);
 
                 // redirect to the language page using the langcode.
-                window.location.href = `/${langcode}`;
+                window.location.href = `/${langcode}/`;
               }
             });
           });

@@ -47,6 +47,7 @@ function FieldElements(props) {
           display: 'flex',
           justifyContent: 'space-between',
           cursor: 'pointer',
+          zIndex: '1',
         }}
       >
         <p 
