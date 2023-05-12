@@ -138,7 +138,6 @@ if (rootElement) {
       .then((response) => {
         // Map the response data to field elements and set the state with the new fieldElements
         if (response.length > 0) {
-          console.log(response);
           // Map the response data to field elements and set the state with the new fieldElements
           this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
 
@@ -148,7 +147,7 @@ if (rootElement) {
         }
         else {
           // If response is null, set the fieldElements state to a default text.
-          this.setState({ isLoading: true, fieldElements: 
+          this.setState({ isLoading: false, fieldElements: 
 
             <button className="btn" type="button">
             <strong>{drupalSettings.increase_range_msg}</strong>
