@@ -114,7 +114,7 @@
 }
 
 .vud-widget-thumbs .up.active:hover {
-  background-position: -197px 0;
+  background-position: -151px 0;
 }
 
 .vud-widget-thumbs .down.inactive {
@@ -125,9 +125,9 @@
   background-position: -34px 0;
 }
 
-.vud-widget-thumbs .up.inactive:hover {
+/* .vud-widget-thumbs .up.inactive:hover {
   background-position: -119px 0;
-}
+} */
 
 .vud-widget-thumbs .down.inactive:hover {
   background-position: -34px 0;

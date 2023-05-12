@@ -65,9 +65,15 @@ function yes_pet_app_page_attachments_alter(array &$attachments) {
     $attachments['#attached']['library'][$index] = 'yes_pet_app/react_app_dev';
   }
 
-  $attachments['#attached']['library'][] = 'yes_pet_app/owl-carousel-lib';
-  $attachments['#attached']['library'][] = 'yes_pet_app/yespetapp-styling';
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
 
+    $attachments['#attached']['library'][] = 'yes_pet_app/owl-carousel-lib';
+    $attachments['#attached']['library'][] = 'yes_pet_app/yespetapp-styling';
+
+    if (\Drupal::service('path.matcher')->isFrontPage()) {
+      $attachments['#attached']['library'][] = 'yes_pet_app/dog-loading';
+    }
+  }
 }
 
 // function yes_pet_app_preprocess_page(&$variables) {

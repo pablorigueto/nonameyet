@@ -54,7 +54,7 @@
 
   function update_cookie_language(langcode) {
     // Set the new value of the cookie
-    document.cookie = "geoip_langcode=/"+langcode;
+    document.cookie = "geoip_langcode=/"+langcode+"/";
 
     // Get the current date and time
     var currentDate = new Date();
@@ -66,7 +66,7 @@
     var expirationUTC = expirationDate.toUTCString();
 
     // Set the expiration time of the cookie
-    document.cookie = "geoip_langcode=/"+langcode+"; expires=" + expirationUTC + "; path=/";
+    document.cookie = "geoip_langcode=/"+langcode+"/; expires=" + expirationUTC + "; path=/";
   }
  
   // Check the link of left menu.
@@ -86,7 +86,7 @@
             const path = url.pathname;
 
             if (path !== home) {
-              window.location.href = home;
+              window.location.href = home + "/";
             }
 
           });
@@ -111,7 +111,7 @@
             const url = new URL(window.location.href);
             const path = url.pathname.split('/');
             let lang = '/' + path[1];
-            window.location.href = lang;
+            window.location.href = lang + "/";
             // if (!url.pathname.endsWith("/home")) {
             //   window.location.href = lang;
             // }

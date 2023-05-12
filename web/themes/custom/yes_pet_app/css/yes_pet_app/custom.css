@@ -898,3 +898,8 @@ input[type="search"]::-moz-search-cancel {
   font-family: var(--font-family);
   padding-bottom: 0.5rem;
 }
+
+
+.path-frontpage #main-wrapper {
+  padding: 0 0.75rem;
+}
