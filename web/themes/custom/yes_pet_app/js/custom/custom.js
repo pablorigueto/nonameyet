@@ -179,6 +179,10 @@
       root.style.setProperty('--font-stars-color', '#fff');
       root.style.setProperty('--stars-color-1', '#fe53baa2');
       root.style.setProperty('--stars-color-2', '#8e51eab4');
+
+      root.style.setProperty('--black-and-salmon', 'darksalmon');
+      root.style.setProperty('--black-and-white', '#000');
+      root.style.setProperty('--color-gray', '#EAEBEC');      
     }
     else {
       const root = document.documentElement;
@@ -193,6 +197,12 @@
       root.style.setProperty('--background-textarea', '#fff');
       root.style.setProperty('--stars-color-1', 'unset');
       root.style.setProperty('--stars-color-2', 'unset');
+
+      root.style.setProperty('--black-and-salmon', '#000');
+      root.style.setProperty('--black-and-white', '#fff');
+      root.style.setProperty('--color-gray', '#424242');
+ 
+
     }
   }
 

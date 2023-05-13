@@ -139,11 +139,11 @@ if (rootElement) {
         // Map the response data to field elements and set the state with the new fieldElements
         if (response.length > 0) {
           // Map the response data to field elements and set the state with the new fieldElements
-          this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
+//          this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
 
-          // setTimeout(() => {
-          //   this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
-          // }, 2223000); // add a delay of 3 seconds (3000 milliseconds) before setting isLoading to false
+          setTimeout(() => {
+            this.setState({ isLoading: false, fieldElements: <FieldElements data={response} /> });
+          }, 2223000); // add a delay of 3 seconds (3000 milliseconds) before setting isLoading to false
         }
         else {
           // If response is null, set the fieldElements state to a default text.
