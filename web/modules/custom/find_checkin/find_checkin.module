@@ -238,3 +238,8 @@ function find_checkin_entity_load($entities, $entity_type_id) {
     }
   }
 }
+
+function find_checkin_preprocess_node(&$variables) {
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['language_node'] = $language;
+}

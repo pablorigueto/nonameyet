@@ -162,6 +162,20 @@ iframe {
   text-align: center;
 }
 
+.not__logedin_rating {
+  font-size: var(--font-size-mini);
+  padding-top: 0.7rem;
+  text-align: center;
+}
+
+li.comment__links-item{
+  color: var(--font-color);
+}
+
+.not__logedin_rating a {
+  text-decoration: unset;
+}
+
 .simple-gmap-address:after {
   font-family: 'Material Symbols Outlined';
   content: "\e173";
@@ -893,4 +907,8 @@ input[type="search"]::-moz-search-cancel {
 
 .path-frontpage #main-wrapper {
   padding: 0 0.75rem;
+}
+
+.path-frontpage #edit-actions {
+  display: none;
 }

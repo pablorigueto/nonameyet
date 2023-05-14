@@ -5,8 +5,7 @@
  * Contains lang_redirect_and_geoip.
  */
 
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Url;
 use GeoIp2\Database\Reader;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -67,4 +66,17 @@ function __lang_redirect_and_geoip_set_cookie($new_url) {
   setcookie('geoip_langcode', $new_url, time() + 2592000);
   $response->send();
   exit;
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function lang_redirect_and_geoip_user_logout($account) {
+
+  $langcode = $_COOKIE['geoip_langcode'] ?? '/en-us/';
+
+  // Redirect the user to the homepage after logout.
+  $url = Url::fromUserInput($langcode);
+  $response = new RedirectResponse($url->toString());
+  $response->send();
 }

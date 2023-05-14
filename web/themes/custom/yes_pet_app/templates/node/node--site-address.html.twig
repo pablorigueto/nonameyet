@@ -18,12 +18,12 @@
   </div>
   {% else %}
     <div class="not__logedin_rating" id="not__logedin_rating">
-      <a href="/user/login">{{"Login to vote"|t}}</a>
+      <a href="/{{language_node}}/user/login">{{"Login to vote"|t}}</a>
     </div>
 {% endif %}
 
 <div class="location__description">
-{{ content.body }}
+  {{ content.body }}
 </div>
 
 {{ content.field_complete_address }}
