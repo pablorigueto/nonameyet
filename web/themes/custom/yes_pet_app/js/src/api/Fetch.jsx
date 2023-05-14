@@ -17,7 +17,5 @@ export const sendLocationDataToBackend = (latitude, longitude, range) => {
   })
   .then((response) => response.json())
   .catch((error) => {
-    // Handle error
-    console.log(error);
   });
 };

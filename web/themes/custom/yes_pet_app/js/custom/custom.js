@@ -75,8 +75,6 @@
         const searchIcon = document.querySelector('.search__icon');
         const navMenuSearch = document.getElementById('edit-keys');
         const screenWidth = window.screen.width; 
-        const root = document.documentElement;
- 
         searchIcon.addEventListener('click', function() {
           
         // Get the computed style of the #edit-keys element
@@ -220,7 +218,6 @@
 
             // Add a click event listener to the element
             addressElement.addEventListener('click', function() {
-              console.log(addressElement);
               // Get the text inside the element
               const addressText = addressElement.textContent.trim();
               // Copy the text to the clipboard
@@ -244,8 +241,8 @@
                 }
               }).then((result) => {
                 /* Read more about handling dismissals below */
+                //I was closed by the timer
                 if (result.dismiss === Swal.DismissReason.timer) {
-                  console.log('I was closed by the timer')
                 }
               })
 
