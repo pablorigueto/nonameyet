@@ -53,20 +53,26 @@
   };
 
   function update_cookie_language(langcode) {
+
+    // Delete any existing cookies with the name "geoip_langcode"
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      while (cookie.charAt(0) == ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf('geoip_langcode=') == 0) {
+        var cookieName = cookie.split('=')[0];
+        document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+      }
+    }
+
     // Set the new value of the cookie
-    document.cookie = "geoip_langcode=/"+langcode+"/";
-
-    // Get the current date and time
     var currentDate = new Date();
-
-    // Set the expiration time of the cookie to 30 days from the current date
     var expirationDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
-
-    // Convert the expiration time to UTC format
     var expirationUTC = expirationDate.toUTCString();
+    document.cookie = "geoip_langcode=/" + langcode + "/; expires=" + expirationUTC + "; path=/";
 
-    // Set the expiration time of the cookie
-    document.cookie = "geoip_langcode=/"+langcode+"/; expires=" + expirationUTC + "; path=/";
   }
  
   // Check the link of left menu.
@@ -124,28 +130,40 @@
     }
   };
 
-  // Drupal.behaviors.homeRedirectLang = {
-  //   attach() {
-  //     if (!drupalSettings.homeRedirectLang && window.location.pathname === '/') {
-  //       const langcode = getCookie('geoip_langcode');
-  //       if (langcode) {
-  //         const redirectUrl = `${window.location.origin}/${decodeURIComponent(langcode)}`;
-  //         window.location.href = redirectUrl;
-  //       }
-  //       drupalSettings.homeRedirectLang = true;
-  //     }
-  //   }
-  // };
+  // In the last case, if any redirect works when user try to access /,
+  // send him to home + language using javascript.
+  Drupal.behaviors.homeRedirectLang = {
+    attach() {
+      $(document).ready(function () {
+        if (!drupalSettings.homeRedirectLang && window.location.pathname === '/') {
+
+          const langcode = getCookie('geoip_langcode');
+          if (langcode) {
+            const redirectUrl = `${window.location.origin}/${decodeURIComponent(langcode)}`;
+            window.location.href = redirectUrl;
+          }
+          else {
+            window.location.href = '/en-us/';
+          }
+          drupalSettings.homeRedirectLang = true;
+        }
+      });
+    }
+  };
+
+  function getCookie(name) {
+    const cookieString = document.cookie;
+    const cookies = cookieString.split(';');
   
-  // // Helper function to retrieve the value of a cookie.
-  // function getCookie(name) {
-  //   const value = "; " + document.cookie;
-  //   const parts = value.split("; " + name + "=");
-  //   if (parts.length === 2) {
-  //     return parts.pop().split(";").shift();
-  //   }
-  // }
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(`${name}=`)) {
+        return decodeURIComponent(cookie.substring(name.length + 1));
+      }
+    }
   
+    return null;
+  }
 
   
 })(jQuery, Drupal);

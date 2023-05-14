@@ -690,15 +690,6 @@ strong {
   background: var(--stars-color-2);
 }
 
-.btn:hover #container-stars {
-  z-index: 1;
-  background-color: #212121;
-}
-
-.btn:hover {
-  transform: scale(1.1)
-}
-
 .btn:active {
   border: double 4px #FE53BB;
   background-origin: border-box;

@@ -100,7 +100,14 @@ class NearLocation extends ControllerBase {
           return false;
       }
 
-      $langcode = $this->currentLanguage();
+      $langcode = $_COOKIE['geoip_langcode'];
+      if (!$langcode) {
+        $langcode = $this->currentLanguage();
+      }
+      else {
+        $length = strlen($langcode);
+        $langcode = substr($langcode, 1, $length-2);
+      }
 
       // Calculate the distance in km.
       $radius = $currentRange;

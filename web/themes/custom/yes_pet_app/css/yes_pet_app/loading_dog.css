@@ -1,21 +1,11 @@
 
 :root {
   --dog-width: 100px;
-  /* --color-gray: #EAEBEC; */
-  
   --easing: ease-in-out;
   --black-and-salmon: darksalmon;
   --black-and-white: #000;
   --color-gray: #EAEBEC;
-}
-
-.loading {
-  /* text-align: center;
-  color: var(--font-color);
-  font-size: 1rem;
-  font-family: var(--font-family);
-  justify-content: center;
-  align-items: center; */
+  --body-before: #ffffff66;
 }
 
 .dog {
@@ -29,7 +19,7 @@
   border-radius: 50%;
   margin-top: 4rem;
   z-index: 0;
-  margin-left: 48%;
+  margin-left: 47%;
 }
 
 .ball:after {
@@ -42,7 +32,7 @@
   width: 100%;
   border-radius: 50%;
   box-shadow: inset 0 -8px 0 0 rgba(0, 0, 0, 0.2);
-  background: #6E64F0;
+  background: #cac52e;
   z-index: 1;
 }
 
@@ -113,10 +103,10 @@
 
 .dog-body {
   top: -50%;
-  animation: dog-body 200ms var(--easing) infinite alternate;
+  animation: dog-body 400ms var(--easing) infinite alternate;
 }
 
-.dog-body:before {
+/* .dog-body:before {
   content: '';
   position: absolute;
   bottom: 90%;
@@ -126,10 +116,10 @@
   border-top-left-radius: 100%;
   border-bottom-left-radius: 10%;
   border-top-right-radius: 10%;
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--body-before);
   transform-origin: right bottom;
-  animation: dog-tail-blur 200ms 33.3333333333ms ease-in-out infinite alternate both;
-}
+  animation: dog-tail-blur 400ms 33.33ms ease-in-out infinite alternate both;
+} */
 
 @keyframes dog-tail-blur {
   from {
@@ -155,7 +145,7 @@
 }
 
 .dog-head {
-  animation: dog-head 1800ms cubic-bezier(0.11, 0.79, 0, 0.99) infinite;
+  animation: dog-head 3000ms cubic-bezier(0.11, 0.79, 0, 0.99) infinite;
 }
 
 @keyframes dog-head {
@@ -172,7 +162,7 @@
 
 .dog-torso {
   top: -20%;
-  animation: dog-torso 200ms var(--easing) infinite alternate-reverse;
+  animation: dog-torso 400ms var(--easing) infinite alternate-reverse;
 }
 
 @keyframes dog-torso {
@@ -280,7 +270,7 @@
   left: calc(50% - 20px);
   z-index: -1;
   transform-origin: center top;
-  animation: dog-tongue-inner 100ms ease-in-out infinite alternate;
+  animation: dog-tongue 1800ms -50ms ease-in-out infinite; /*dog-tongue-inner 100ms ease-in-out infinite alternate;*/
 }
 
 @keyframes dog-tongue {
@@ -306,7 +296,7 @@
   height: 100%;
   border-radius: 40px;
   background: #FD3163;
-  animation: dog-tongue-inner 200ms 2s infinite alternate;
+  animation: dog-tongue-inner 150ms ease-in-out infinite alternate; /*dog-tongue-inner 200ms 2s infinite alternate;*/
 }
 
 @keyframes dog-tongue-inner {
@@ -318,12 +308,11 @@
   }
 }
 
-
 .dog-ears {
   width: 40%;
   top: 25%;
   left: 30%;
-  animation: dog-ears 1800ms 200ms / 2 ease infinite;
+  animation: dog-ears 1800ms 100ms ease infinite;
   
   @keyframes dog-ears {
     42.3%, 71.6% {
@@ -349,7 +338,7 @@
   height: 50px;
   width: 50px;
   background: var(--color-gray);
-  animation-duration: calc(400ms);
+  animation-duration: 400ms;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
   animation-fill-mode: both;
@@ -387,7 +376,7 @@
 
 .dog-tail .dog-tail {
   animation-name: dog-tail-segment;
-  animation-duration: 200ms;
+  animation-duration: 400ms;
   animation-timing-function: var(--easing);
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -403,7 +392,7 @@
 }
 .dog-body > .dog-tail {
   bottom: 90%;
-  animation: dog-tail 200ms var(--easing) infinite alternate;
+  animation: dog-tail 400ms var(--easing) infinite alternate;
 }
 
 @keyframes dog-tail {
@@ -433,19 +422,3 @@
   box-sizing: border-box;
   position: relative;
 }
-
-/* body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
-
-/* html, body {
-  background: var(--background-color);
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-} */
-

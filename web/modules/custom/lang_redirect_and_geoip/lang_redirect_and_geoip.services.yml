@@ -1,6 +1,6 @@
-services:
-  lang_redirect_and_geoip.event_subscriber:
-    class: Drupal\lang_redirect_and_geoip\EventSubscriber\RedirectSubscriber
-    arguments: ['@language_manager']
-    tags:
-      - { name: event_subscriber }
+# services:
+#   lang_redirect_and_geoip.event_subscriber:
+#     class: Drupal\lang_redirect_and_geoip\EventSubscriber\RedirectSubscriber
+#     arguments: ['@language_manager']
+#     tags:
+#       - { name: event_subscriber }

@@ -4,6 +4,9 @@
  * @file
  * Contains lang_redirect_and_geoip.
  */
+
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
 use GeoIp2\Database\Reader;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 

@@ -182,7 +182,9 @@
 
       root.style.setProperty('--black-and-salmon', 'darksalmon');
       root.style.setProperty('--black-and-white', '#000');
-      root.style.setProperty('--color-gray', '#EAEBEC');      
+      root.style.setProperty('--color-gray', '#EAEBEC');
+      root.style.setProperty('--body-before', '#ffffff66');
+
     }
     else {
       const root = document.documentElement;
@@ -201,7 +203,7 @@
       root.style.setProperty('--black-and-salmon', '#000');
       root.style.setProperty('--black-and-white', '#fff');
       root.style.setProperty('--color-gray', '#424242');
- 
+      root.style.setProperty('--body-before', '#b1acac66');
 
     }
   }
