@@ -74,7 +74,18 @@ function find_checkin_node_presave(NodeInterface $node) {
     $lat = $data[0]->lat;
     $lng = $data[0]->lon;
 
-    $node->get('field_coordinates')->value = $lat . ' , ' . $lng;    
+    $node->get('field_coordinates')->value = $lat . ' , ' . $lng;
+
+    // To get the phone and phone code from country.
+    $phone_number = $node->get('field_phone')[0]->getValue()['value'];
+    $phone_number = preg_replace('/[^0-9]/', '', $phone_number);
+
+    $controller = \Drupal::service('find_checkin.controller');
+    $country_code = $field_address->country_code;
+    $phone_code = $controller->getPhoneCode($country_code);
+
+    // Set phone and code country to use on whatsapp field.
+    $node->get('field_ph')->value = $phone_code . $phone_number;
 
   }
 }

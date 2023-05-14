@@ -255,6 +255,80 @@
     }
   };
 
+
+  // Set href whatsapp.
+  Drupal.behaviors.setHrefWhatsapp = {
+    attach() {
+      //$(document).ready(function () {
+        if (!drupalSettings.setHrefWhatsapp) {
+          const whatsIco = document.querySelector('.phone__group .whatsapp__ico');
+          
+          whatsIco.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const fieldValue = $('.field--name-field-ph .field__item').text();
+
+            window.open("https://wa.me/" + fieldValue, '_blank');;
+ 
+          });
+
+          // Set the flag to indicate that the behavior has been executed for this page.
+          drupalSettings.setHrefWhatsapp = true;
+        }
+      //})
+    }
+  };
+
+  // Copy address infos to clip board.
+  Drupal.behaviors.copyPhoneToClipBoard = {
+    attach() {
+      $(document).ready(function () {
+        if (!drupalSettings.copyPhoneToClipBoard) {
+
+          // Get the element with the class "simple-gmap-address"
+          const addressElement = document.querySelector('.phone__group .field--name-field-phone .field__item'); //whatsapp__link
+          if (addressElement !== null) {
+
+            // Add a click event listener to the element
+            addressElement.addEventListener('click', function() {
+              // Get the text inside the element
+              const addressText = addressElement.textContent.trim();
+              // Copy the text to the clipboard
+              navigator.clipboard.writeText(addressText);
+  
+              let timerInterval
+              Swal.fire({
+                title: 'Copied!',
+                // html: 'I will close in <b></b> milliseconds.',
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading()
+                  const b = Swal.getHtmlContainer().querySelector('b')
+                  timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                  }, 100)
+                },
+                willClose: () => {
+                  clearInterval(timerInterval)
+                }
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                //I was closed by the timer
+                if (result.dismiss === Swal.DismissReason.timer) {
+                }
+              })
+
+            });
+          }
+          // Set the flag to indicate that the behavior has been executed for this page.
+          drupalSettings.copyPhoneToClipBoard = true;
+        }
+      })
+    }
+  };
+
+
   // Returns device type.
   function deviceType() {
     // Get the user agent string

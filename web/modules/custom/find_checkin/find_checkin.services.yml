@@ -1,0 +1,4 @@
+services:
+  find_checkin.controller:
+    class: Drupal\find_checkin\Controller\CountryPhoneCode
+    arguments: ['@country_manager']
