@@ -60,23 +60,37 @@ function FieldElements(props) {
               display: 'flex',
               alignItems: 'center',
               background: 'aliceblue',
-              color: '#000',
+              color: '#222',
               fontSize: '0.8rem',
-              borderRadius: '2rem',
+              borderRadius: '1rem',
+              height: '45px',
+
             }}  
         >{item.type}</p>
-
-        <img
-          src="/sites/default/files/image/score/score.png"
-          alt="score"
+        <div className='score__parent'>
+          <img
+            src="/sites/default/files/image/score/star.png"
+            alt="score"
+            style=
+              {{
+                padding: '0.6rem 0.45rem',
+              }}
+            onClick={() => toggleRating(index)}
+          />
+        </div>
+        {/* <p
+          // src="/sites/default/files/image/score/score.png"
+          // alt="score"
+          className='star__home'
           style=
             {{
               // background: 'rgba(0, 0, 0, 0.15)',
               // borderRadius: '50%',
-              padding: '0.45rem',
+              //padding: '0.45rem',
             }}
           onClick={() => toggleRating(index)}
-        />
+        /> */}
+
       </div>
 
       <a href={item.pathAlias}>
@@ -146,7 +160,7 @@ function FieldElements(props) {
         togglePopup={setOpenRatingFor}
       >
         {/* Add the content for the rating popup here */}
-        {item.rating}
+        <span className="rating__homepage">{item.rating}/5</span>
       </Popup>
 
       <Popup
@@ -155,8 +169,9 @@ function FieldElements(props) {
         togglePopup={setOpenKmFor}
       >
         {/* Add the content for the km popup here */}
-        {item.distance}km
+        <span className="distance__homepage">{item.distance}km</span>
       </Popup>
+
 
     </div>
   ));

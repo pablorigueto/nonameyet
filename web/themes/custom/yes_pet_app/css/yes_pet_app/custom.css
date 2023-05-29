@@ -989,3 +989,29 @@ input[type="search"]::-moz-search-cancel {
   box-shadow: var(--box-color) 0.2rem 0.2rem 0.5rem;
   border-radius: 1rem;
 }
+
+.main_content .rating__homepage::before {
+  font-family: 'Material Symbols Outlined';
+  content: "\f0ec";
+  font-size: 1.2rem;
+  color: #ffd700;
+}
+
+.main_content .distance__homepage::before {
+  font-family: 'Material Symbols Outlined';
+  content: "\f6ea";
+  font-size: 1.2rem;
+  color: #3a3838;
+}
+
+/* .main_content .star__home::before {
+  font-family: 'Material Symbols Outlined';
+  content: "\e839";
+  font-size: 1.7rem;
+  color: #ffd700;
+} */
+
+.main_content .rating__homepage, .main_content .distance__homepage {
+  display: flex;
+  align-items: center;
+}
