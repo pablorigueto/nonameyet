@@ -33,6 +33,7 @@
         "drupal/pathauto": "^1.11",
         "drupal/rate": "^3.0",
         "drupal/simple_gmap": "3.1.x-dev@dev",
+        "drupal/vote": "^1.0@alpha",
         "drupal/votingapi": "^3.0@beta",
         "drush/drush": "^11.5",
         "geoip2/geoip2": "^2.13",
@@ -98,7 +99,10 @@
         "patches": {
             "drupal/core": {
                 "Fix autocomplete on form elements and solve AJAX noJS to vote up/down": "https://www.drupal.org/files/issues/2022-11-14/2670798-50.patch"
-            }
+            },
+            "drupal/vote": {
+                "Fix 10 issues": "https://www.drupal.org/files/issues/2023-05-28/3360475-6.patch"
+            }            
         }
     }
 }

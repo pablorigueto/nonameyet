@@ -14,7 +14,10 @@
 
 {% if user.isAnonymous == FALSE %}
   <div class="group-rating" id="group-rating">
-    {{ content.field_rating }}
+    {# {{ content.field_rating }} #}
+  
+    {{ content.vote_vote_field }}
+  
   </div>
   {% else %}
     <div class="not__logedin_rating" id="not__logedin_rating">

@@ -140,10 +140,11 @@ class NearLocation extends ControllerBase {
         $base_url = $this->getFirstImageToTeaser($field)->getUri();
         $field_image_location_address = str_replace("base:/", "/", $base_url);
 
-        $field_rating = 10;
-        if ($node->get('field_rating')[0] != null) {
-          $field_rating = $node->get('field_rating')[0]->getValue()['rating'];
-        }
+        // $field_rating = 10;
+        // if ($node->get('field_rating')[0] != null) {
+        //   $field_rating = $node->get('field_rating')[0]->getValue()['rating'];
+        // }
+        $test = $this->getAverageVotes($node);
 
         $pathAlias = $this->getPathAlias($node->id());
 
@@ -158,7 +159,7 @@ class NearLocation extends ControllerBase {
             'city' => $field_address->locality,
             'state' => $field_address->administrative_area,
             'distance' => intval($result_distance),
-            'rating' => $this->getHowMutchStars($field_rating),
+            'rating' => $this->getAverageVotes($node) ?? '',//$this->getHowMutchStars($field_rating),
             'type' => $field_type,
           ];
         }
@@ -186,8 +187,8 @@ class NearLocation extends ControllerBase {
     /**
      * {@inheritdoc}
      */
-    public function getStorageNode(): object {
-      return $this->entityTypeManager->getStorage('node');
+    public function getStorageNodeOrVote($storage_type): object {
+      return $this->entityTypeManager->getStorage($storage_type);
     }
 
     /**
@@ -195,7 +196,7 @@ class NearLocation extends ControllerBase {
      */
     public function getAllNodes(): array {
       // Load the nodes.
-      $node_storage = $this->getStorageNode();
+      $node_storage = $this->getStorageNodeOrVote('node');
       return $node_storage->loadByProperties(
         [
         'type' => 'site_address',
@@ -224,6 +225,33 @@ class NearLocation extends ControllerBase {
 
     // Get the URL of the image using the "createFileUrl()" method of the "file_url_generator" service.
     return \Drupal::service('file_url_generator')->generate($image_entity->getFileUri());
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getAverageVotes($node): mixed {
+
+    // Retrieve vote values for the current node.
+    $votes_storage = $this->getStorageNodeOrVote('vote');
+    $vote_values = $votes_storage->loadByProperties(['entity_id' => $node->id()]);
+    $votes = [];
+    foreach ($vote_values as $vote) {
+      $vote_main = $vote->get('type')[0]->getValue()['target_id'];
+      if ($vote_main == "main_rating") {
+        array_push($votes, $vote->getValue());
+      }
+    }
+
+    if (!$votes) {
+      return null;
+    }
+
+    $total = count($votes);
+    $sum = array_sum($votes);
+    $average = $sum / $total;
+    return number_format($average, 1);
 
   }
 

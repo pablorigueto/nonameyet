@@ -962,3 +962,30 @@ input[type="search"]::-moz-search-cancel {
 .path-user main .placeholder {
   color: var(--background-color);
 }
+
+.path-frontpage #main {
+  display: none;
+}
+
+.simple-gmap-address {
+  cursor: pointer;
+}
+
+.comment__meta .comment__author,
+.comment__meta .comment__time {
+  display: block;
+}
+
+.comment__meta .comment__author {
+  margin-bottom: 0;
+}
+
+.messages__container, #gps-error {
+  color: var(--font-color);
+  text-align: center;
+}
+
+.owl-drag {
+  box-shadow: var(--box-color) 0.2rem 0.2rem 0.5rem;
+  border-radius: 1rem;
+}

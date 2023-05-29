@@ -1,0 +1,167 @@
+.vjsr--widget--body tr .option:after {
+  font-family: 'Material Symbols Outlined';
+  content: "\f0ec";
+  font-size: 1rem;
+  color: #ffd700;
+}
+
+.group-rating .vjsr--condensed--widget--result:before {
+  font-family: 'Material Symbols Outlined';
+  content: "\f0ec";
+  font-size: 1.7rem;
+  color: #cbc541;
+  margin-top: -3.5px;
+  margin-right: 3.5px;
+}
+
+.group-rating .vjsr--condensed--widget--result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.group-rating .field__label {
+  display: none;
+}
+
+.group-rating .vjsr--condensed--widget {
+  display: grid;
+  grid-template-columns: 0 1fr;
+}
+
+.group-rating .vjsr--condensed--widget--result {
+  color: var(--font-color);
+}
+
+.group-rating .vjsr--popup .vjsr--popup--arrow {
+  /* transform: translate3d(180px, 0px, 0px) !important; */
+  left: -19px !important;
+}
+
+/* .group-rating .vjsr--popup {
+  transform: translate3d(-30px, 450.333px, 0px) !important;
+} */
+
+.group-rating .vjsr--modal {
+  width: 337px;
+  left: 10.5px;
+  max-width: 337px;
+  border-radius: 1rem;
+  background: var(--background-color);
+
+}
+
+table.vjsr--stats-table tr.vjsr--own-vote {
+  background-color: var(--background-textarea);
+}
+
+.group-rating .vjsr--popup--close {
+  right: 1px;
+}
+
+.group-rating .vjsr--widget-header--label:before {
+  font-family: 'Material Symbols Outlined';
+  content: "\f149"; /*"\e91d";*/
+  font-size: 1.5rem;
+  color: var(--font-color);
+  margin-top: -3.5px;
+  margin-right: 3.5px;
+}
+
+.group-rating .vjsr--widget-header--label:after {
+  font-family: 'Material Symbols Outlined';
+  content: "\f149"; /*"\e91d";*/
+  font-size: 1.5rem;
+  color: var(--font-color);
+  margin-top: -3.5px;
+  margin-left: 3.5px;
+  transform: scaleX(-1);
+}
+
+.group-rating .vjsr--widget-header--label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 14px;
+  color: var(--font-color);
+}
+
+.group-rating .result, .group-rating tr .option, table.vjsr--stats-table td, table.vjsr--stats-table th {
+  color: var(--font-color);
+}
+
+.group-rating .vjsr--modal--label {
+  visibility: hidden;
+  padding: 0;
+}
+
+.group-rating .vjsr--modal--footer {
+  justify-content: center !important;
+}
+
+.group-rating .btn-primary {
+  background: unset;
+  border-radius: 1rem;
+  border-color: var(--font-color);
+  width: 100%;
+  color: var(--font-color);
+}
+
+.group-rating .btn:disabled {
+  color: var(--font-color);
+  background: unset;
+  background-color: unset;
+  border-color: var(--font-color);
+}
+
+.group-rating .vjsr--stars--star svg {
+  color: #FFD700;
+}
+
+.group-rating .vjsr--summary.active {
+  background-color: #eeeeee14;
+  padding-bottom: 6px;
+}
+
+.group-rating .vjsr--summary.not-voted {
+  background-color: unset;
+  color: #FFD700;
+}
+
+.group-rating .vjsr--condensed--widgets .vjsr--icon--not-voted {
+  margin-top: 4px;
+  margin-left: -3px;
+  margin-right: unset;
+}
+
+.group-rating .vjsr--modal {
+  margin-left: -20px;
+  /* border: var(--vjsr-modal-border,.1px solid var(--font-color)); */
+  box-shadow: var(--box-color) 0.2rem 0.2rem 0.5rem;
+}
+
+.group-rating .vjsr--popup {
+  margin-right: -20px;
+}
+
+/* .group-rating .btn:first-child:active, .group-rating .btn:focus-visible {
+  color: #fff;
+  background: #000 !important;
+  background-color: #000 !important;
+  border: 1px solid var(--font-color) !important;
+} */
+
+.group-rating tfoot .result, tfoot .votes {
+  padding-top: 1rem !important;
+}
+
+.group-rating thead .result {
+  text-align: center !important;
+  padding-left: 10px;
+  padding-bottom: 1rem;
+}
+
+.group-rating tfoot .votes {
+  padding-left: 7px;
+}

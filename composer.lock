@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dcb7f532ba991f8e1991bf58f799bb7",
+    "content-hash": "0167943be360fe8488bd563a44dcc8a4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3501,6 +3501,27 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/token"
             }
+        },
+        {
+            "name": "drupal/vote",
+            "version": "1.0.0-alpha2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/vote.git",
+                "reference": "35a0004737ee6c3421ddb789ea813ff80e8ca806"
+            },
+            "require": {
+                "drupal/votingapi": "^3.0"
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Multi-functional voting widget.",
+            "homepage": "https://www.drupal.org/project/vote",
+            "support": {
+                "issues": "https://www.drupal.org/project/issues/vote",
+                "source": "http://cgit.drupalcode.org/vote"
+            },
+            "time": "2022-07-07T16:12:10+00:00"
         },
         {
             "name": "drupal/votingapi",
@@ -12634,6 +12655,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/simple_gmap": 20,
+        "drupal/vote": 15,
         "drupal/votingapi": 10
     },
     "prefer-stable": true,

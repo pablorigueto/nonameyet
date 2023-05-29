@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Contains vote_custom.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function vote_custom_page_attachments(array &$attachments) {
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 'vote_custom/vote-custom-styling';
+  }
+}
