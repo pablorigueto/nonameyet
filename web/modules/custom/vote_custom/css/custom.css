@@ -140,7 +140,7 @@ table.vjsr--stats-table tr.vjsr--own-vote {
 }
 
 .group-rating .vjsr--condensed--widgets .vjsr--icon--not-voted {
-  margin-top: 4px;
+  margin-top: 5px;
   margin-left: -3px;
   margin-right: unset;
 }
