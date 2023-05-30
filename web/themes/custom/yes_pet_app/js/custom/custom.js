@@ -255,78 +255,179 @@
     }
   };
 
-
-  // Set href whatsapp.
-  Drupal.behaviors.setHrefWhatsapp = {
-    attach() {
-      //$(document).ready(function () {
-        if (!drupalSettings.setHrefWhatsapp) {
-          const whatsIco = document.querySelector('.phone__group .whatsapp__ico');
+  // // Set href whatsapp.
+  // Drupal.behaviors.setHrefWhatsapp = {
+  //   attach() {
+  //     //$(document).ready(function () {
+  //       if (!drupalSettings.setHrefWhatsapp) {
+  //         const whatsIco = document.querySelector('.phone__group .whatsapp__ico');
           
-          whatsIco.addEventListener('click', function(e) {
-            e.preventDefault();
+  //         whatsIco.addEventListener('click', function(e) {
+  //           e.preventDefault();
 
-            const fieldValue = $('.field--name-field-ph .field__item').text();
+  //           const fieldValue = $('.field--name-field-ph .field__item').text();
 
-            window.open("https://wa.me/" + fieldValue, '_blank');;
+  //           window.open("https://wa.me/" + fieldValue, '_blank');;
  
-          });
+  //         });
 
-          // Set the flag to indicate that the behavior has been executed for this page.
-          drupalSettings.setHrefWhatsapp = true;
-        }
-      //})
+  //         // Set the flag to indicate that the behavior has been executed for this page.
+  //         drupalSettings.setHrefWhatsapp = true;
+  //       }
+  //     //})
+  //   }
+  // };
+
+  Drupal.behaviors.setHrefSocialMedia = {
+    attach() {
+      if (!drupalSettings.setHrefSocialMedia) {
+        const socialMediaIcons = document.querySelectorAll('.social__group span');
+        
+        socialMediaIcons.forEach(function(icon) {
+          icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const fieldValue = $(this).find('.ico__value').text();
+            const socialMedia = $(this).attr('class');
+            
+            let socialMediaURL;
+            switch (socialMedia) {
+              case 'whatsapp':
+                socialMediaURL = 'https://wa.me/' + fieldValue;
+                break;
+              case 'instagram':
+                socialMediaURL = 'https://www.instagram.com/' + fieldValue;
+                break;
+              case 'facebook':
+                socialMediaURL = 'https://www.facebook.com/' + fieldValue;
+                break;
+              case 'website':
+                newFieldValue = fieldValue;
+                if (!fieldValue.startsWith('https://') && !fieldValue.startsWith('http://')) {
+                  newFieldValue = 'https://' + fieldValue;
+                }
+                socialMediaURL = newFieldValue;
+                break;
+            }
+
+            window.open(socialMediaURL, '_blank');
+          });
+        });
+        
+        // Set the flag to indicate that the behavior has been executed for this page.
+        drupalSettings.setHrefSocialMedia = true;
+      }
     }
   };
 
-  // Copy address infos to clip board.
-  Drupal.behaviors.copyPhoneToClipBoard = {
+  function handleRedirect(e, path) {
+    e.preventDefault();
+  
+    const currentUrl = $(location).attr('href');
+    const splitedUrl = currentUrl.split('/');
+  
+    const languageCode = splitedUrl[3];
+    const redirectUrl = `/${languageCode}${path}?destination=/${splitedUrl[3]}/${splitedUrl[4]}`;
+  
+    // Open the URL in the same tab.
+    window.location.href = redirectUrl;
+  }
+  
+  Drupal.behaviors.redirectRegister = {
     attach() {
       $(document).ready(function () {
-        if (!drupalSettings.copyPhoneToClipBoard) {
-
-          // Get the element with the class "simple-gmap-address"
-          const addressElement = document.querySelector('.phone__group .field--name-field-phone .field__item'); //whatsapp__link
-          if (addressElement !== null) {
-
-            // Add a click event listener to the element
-            addressElement.addEventListener('click', function() {
-              // Get the text inside the element
-              const addressText = addressElement.textContent.trim();
-              // Copy the text to the clipboard
-              navigator.clipboard.writeText(addressText);
+        if (!drupalSettings.redirectRegister) {
+          const registerLink = document.querySelector('.comment__links-item a[href*="/user/register"]');
   
-              let timerInterval
-              Swal.fire({
-                title: 'Copied!',
-                // html: 'I will close in <b></b> milliseconds.',
-                timer: 1000,
-                timerProgressBar: true,
-                didOpen: () => {
-                  Swal.showLoading()
-                  const b = Swal.getHtmlContainer().querySelector('b')
-                  timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                  }, 100)
-                },
-                willClose: () => {
-                  clearInterval(timerInterval)
-                }
-              }).then((result) => {
-                /* Read more about handling dismissals below */
-                //I was closed by the timer
-                if (result.dismiss === Swal.DismissReason.timer) {
-                }
-              })
-
-            });
-          }
+          const handleMiddleMouseRedirect = function(e) {
+            if (e.button === 1) {
+              handleRedirect(e, '/user/register');
+            }
+          };
+  
+          registerLink.addEventListener('click', (e) => handleRedirect(e, '/user/register'));
+          registerLink.addEventListener('mousedown', handleMiddleMouseRedirect);
+  
           // Set the flag to indicate that the behavior has been executed for this page.
-          drupalSettings.copyPhoneToClipBoard = true;
+          drupalSettings.redirectRegister = true;
         }
-      })
+      });
     }
   };
+  
+  Drupal.behaviors.redirectToLogin = {
+    attach() {
+      $(document).ready(function () {
+        if (!drupalSettings.redirectToLogin) {
+          const loginLink = document.querySelector('.comment__links-item a[href*="/user/login"]');
+          const redirect = document.querySelector('.not__logedin_rating');
+  
+          const handleMiddleMouseRedirect = function(e) {
+            if (e.button === 1) {
+              handleRedirect(e, '/user/login');
+            }
+          };
+  
+          loginLink.addEventListener('click', (e) => handleRedirect(e, '/user/login'));
+          redirect.addEventListener('click', (e) => handleRedirect(e, '/user/login'));
+          loginLink.addEventListener('mousedown', handleMiddleMouseRedirect);
+          redirect.addEventListener('mousedown', handleMiddleMouseRedirect);
+  
+          // Set the flag to indicate that the behavior has been executed for this page.
+          drupalSettings.redirectToLogin = true;
+        }
+      });
+    }
+  };
+  
+  // // Copy address infos to clip board.
+  // Drupal.behaviors.copyPhoneToClipBoard = {
+  //   attach() {
+  //     $(document).ready(function () {
+  //       if (!drupalSettings.copyPhoneToClipBoard) {
+
+  //         // Get the element with the class "simple-gmap-address"
+  //         const addressElement = document.querySelector('.phone__group .field--name-field-phone .field__item'); //whatsapp__link
+  //         if (addressElement !== null) {
+
+  //           // Add a click event listener to the element
+  //           addressElement.addEventListener('click', function() {
+  //             // Get the text inside the element
+  //             const addressText = addressElement.textContent.trim();
+  //             // Copy the text to the clipboard
+  //             navigator.clipboard.writeText(addressText);
+  
+  //             let timerInterval
+  //             Swal.fire({
+  //               title: 'Copied!',
+  //               // html: 'I will close in <b></b> milliseconds.',
+  //               timer: 1000,
+  //               timerProgressBar: true,
+  //               didOpen: () => {
+  //                 Swal.showLoading()
+  //                 const b = Swal.getHtmlContainer().querySelector('b')
+  //                 timerInterval = setInterval(() => {
+  //                   b.textContent = Swal.getTimerLeft()
+  //                 }, 100)
+  //               },
+  //               willClose: () => {
+  //                 clearInterval(timerInterval)
+  //               }
+  //             }).then((result) => {
+  //               /* Read more about handling dismissals below */
+  //               //I was closed by the timer
+  //               if (result.dismiss === Swal.DismissReason.timer) {
+  //               }
+  //             })
+
+  //           });
+  //         }
+  //         // Set the flag to indicate that the behavior has been executed for this page.
+  //         drupalSettings.copyPhoneToClipBoard = true;
+  //       }
+  //     })
+  //   }
+  // };
 
 
   // Returns device type.
@@ -351,13 +452,6 @@
 
     return navigator.userAgent;
   }
-
-// Check if the user agent string contains any of the keywords for mobile devices
-
-  // // Returns current URL.
-  // function currentUrl() {
-  //   return $(location).attr('href');
-  // }
 
 })(jQuery, Drupal);
 

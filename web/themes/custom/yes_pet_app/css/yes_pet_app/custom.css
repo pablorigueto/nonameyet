@@ -901,7 +901,7 @@ input[type="search"]::-moz-search-cancel {
   color: var(--font-color);
   font-size: 1rem;
   font-family: var(--font-family);
-  padding-bottom: 0.5rem;
+  padding: 1rem 0;
 }
 
 .path-frontpage #main-wrapper {
@@ -940,11 +940,6 @@ input[type="search"]::-moz-search-cancel {
   font-size: var(--font-size);
   padding-left: 0.5rem;
   color: var(--font-color);
-  cursor: pointer;
-}
-
-.phone__group .whatsapp__ico {
-  padding-right: 0.5rem;
   cursor: pointer;
 }
 
@@ -1014,4 +1009,46 @@ input[type="search"]::-moz-search-cancel {
 .main_content .rating__homepage, .main_content .distance__homepage {
   display: flex;
   align-items: center;
+}
+
+.phone__group .whatsapp__ico {
+  padding-right: 0.5rem;
+  cursor: pointer;
+}
+
+.page-node-type-site-address .social__group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.social__group .instagram, .social__group .facebook, .social__group .website, .social__group .whatsapp {
+  content: "";
+  background-repeat: no-repeat;
+  height: 31.5px;
+  width: 31.5px;
+  border: 1.5px solid #545050;
+  cursor: pointer;
+}
+
+.social__group .whatsapp {
+  background-image: url('/sites/default/files/image/social/whatsapp_ico_black-30.png');
+}
+
+.social__group .instagram {
+  background-image: url('/sites/default/files/image/social/instagram_ico_black-30.png');
+}
+
+.social__group .facebook {
+  background-image: url('/sites/default/files/image/social/facebook_ico_black-30.png');
+}
+
+.social__group .website {
+  background-image: url('/sites/default/files/image/social/web_site_ico_black-30.png');
+}
+
+.ico__value {
+  display: none;
 }

@@ -21,11 +21,11 @@
   </div>
   {% else %}
     <div class="not__logedin_rating" id="not__logedin_rating">
-      <a href="/{{language_node}}/user/login">{{"Login to vote"|t}}</a>
+      <a href="#">{{"Login to rating this place"|t}}</a>
     </div>
 {% endif %}
 
-<div class="phone__group">
+{# <div class="phone__group">
 
   <div class="whatsapp__ico">
     <img class="whatsapp__link" src="{{ file_url('themes/custom/yes_pet_app/images/whatsappIconmini.png') }}">
@@ -35,8 +35,20 @@
 
   {{content.field_ph}}
 
+</div> #}
+
+<div class="social__group">
+
+  <span class="whatsapp"><div class="ico__value ico__whatsapp">{{ content.field_ph['#items'].0.value }}</div></span>
+
+  <span class="instagram"><div class="ico__value ico__instagram">{{ content.field_instagram['#items'].0.value }}</div></span>
+
+  <span class="facebook"><div class="ico__value ico__facebook">{{ content.field_facebook['#items'].0.value }}</div></span>
+
+  <span class="website"><div class="ico__value ico__website">{{ content.field_web_site['#items'].0.value }}</div></span>
 
 </div>
+
 
 <div class="location__description">
   {{ content.body }}
